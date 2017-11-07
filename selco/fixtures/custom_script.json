@@ -97,5 +97,23 @@
   "name": "Sales Order-Client", 
   "script": "/*To set naming series when branch is choosen for the first time */\ncur_frm.add_fetch(\"selco_branch\", \"sales_order_naming_series\", \"naming_series\"); \n\n/*To set naming series when the value in branch is changed*/\nfrappe.ui.form.on(\"Sales Order\", \"selco_branch\",\n    function(frm) {\ncur_frm.add_fetch(\"selco_branch\", \"sales_order_naming_series\", \"naming_series\");\n\nif ( cur_frm.doc.naming_series == null )\n{\nwindow.location.reload();\nmsgprint(\"Please set the correct naming series for the branch.\");\n       throw \"Not allowed\";\n}\n})", 
   "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Opportunity", 
+  "modified": "2017-11-07 16:53:27.235594", 
+  "name": "Opportunity-Client", 
+  "script": "/*To set naming series when branch is choosen for the first time */\ncur_frm.add_fetch(\"selco_branch\", \"opportunity_naming_series\", \"naming_series\"); \n\n/*To set naming series when the value in branch is changed*/\nfrappe.ui.form.on(\"Opportunity\", \"selco_branch\",\n    function(frm) {\ncur_frm.add_fetch(\"branch\", \"opportunity_naming_series\", \"naming_series\");\n\nif ( cur_frm.doc.naming_series == null )\n{\nwindow.location.reload();\nmsgprint(\"Please set the correct naming series for the branch.\");\n       throw \"Not allowed\";\n}\n})", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Quotation", 
+  "modified": "2017-11-07 17:07:27.624537", 
+  "name": "Quotation-Client", 
+  "script": "/*To set naming series when branch is choosen for the first time */\ncur_frm.add_fetch(\"selco_branch\", \"quotation_naming_series\", \"naming_series\"); \n\n/*To set naming series when the value in branch is changed*/\nfrappe.ui.form.on(\"Quotation\", \"selco_branch\",\n    function(frm) {\ncur_frm.add_fetch(\"selco_branch\", \"quotation_naming_series\", \"naming_series\");\n\nif ( cur_frm.doc.naming_series == null )\n{\nwindow.location.reload();\nmsgprint(\"Please set the correct naming series for the branch.\");\n       throw \"Not allowed\";\n}\n})", 
+  "script_type": "Client"
  }
 ]
