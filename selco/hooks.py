@@ -120,4 +120,4 @@ app_license = "MIT"
 # 	"frappe.desk.doctype.event.event.get_events": "selco.event.get_events"
 # }
 
-fixtures = ["Custom Script"]
+fixtures = ["Custom Script","Print Format"]
