@@ -1,0 +1,349 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Issue", 
+  "is_active": 1, 
+  "modified": "2017-11-18 13:02:09.384430", 
+  "name": "Complaint Management", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Drafted", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Open", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Assigned To CSE", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Attended By CSE - Still Open", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Escalated To SBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Complaint Closed By Branch", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO CSD Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Complaint Closed By CSD", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO CSD Manager", 
+    "doc_status": "2", 
+    "message": null, 
+    "state": "Complaint Cancelled", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO CSD Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Complaint Rejected By CSD", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Pre-Cancellation", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Senior Manager Energy Services", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Warranty Claim Format Raised - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Dispatch Pending From Godown", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Dispatched From Godown", 
+    "update_field": null, 
+    "update_value": null
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Confirm Complaint Details - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Open", 
+    "state": "Complaint Drafted"
+   }, 
+   {
+    "action": "Complaint Assigned To CSE - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Assigned To CSE", 
+    "state": "Complaint Open"
+   }, 
+   {
+    "action": "Complaint Attended By CSE - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Attended By CSE - Still Open", 
+    "state": "Complaint Assigned To CSE"
+   }, 
+   {
+    "action": "Complaint Escalated To SBM - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Escalated To SBM", 
+    "state": "Complaint Attended By CSE - Still Open"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Complaint Open"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Complaint Assigned To CSE"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Complaint Attended By CSE - Still Open"
+   }, 
+   {
+    "action": "Close Complaint By CSD - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Closed By CSD", 
+    "state": "Complaint Closed By Branch"
+   }, 
+   {
+    "action": "Complaint Escalated To SBM - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Escalated To SBM", 
+    "state": "Complaint Assigned To CSE"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Complaint Escalated To SBM"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Open"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Assigned To CSE"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Escalated To SBM"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Rejected By CSD", 
+    "state": "Complaint Closed By Branch"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Complaint Closed By CSD", 
+    "state": "Complaint Rejected By CSD"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Cancelled", 
+    "state": "Pre-Cancellation"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Complaint Open"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Cancelled", 
+    "state": "Complaint Closed By CSD"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Complaint Assigned To CSE"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Complaint Attended By CSE - Still Open"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Dispatch Pending From Godown"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Closed By CSD", 
+    "state": "Complaint Closed By CSD"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Complaint Closed By Branch"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Attended By CSE - Still Open"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Dispatch Pending From Godown"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "System Manager", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Dispatch Pending From Godown"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Complaint Escalated To SBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Closed By CSD", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Draft", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Open", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Close Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Closed By Branch", 
+    "state": "Dispatch Pending From Godown"
+   }, 
+   {
+    "action": "Close Complaint By CSD - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Closed By CSD", 
+    "state": "Dispatch Pending From Godown"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Dispatch Pending From Godown", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Open", 
+    "state": "Complaint Closed By Branch"
+   }
+  ], 
+  "workflow_name": "Complaint Management", 
+  "workflow_state_field": "workflow_state"
+ }
+]

@@ -11,6 +11,56 @@ app_color = "grey"
 app_email = "basawaraj@selco-india.com"
 app_license = "MIT"
 
+doc_events = {
+    "Issue": {
+         "before_insert":"selco.selco.selco_customizations.selco_issue_before_insert",
+         "validate": "selco.selco.selco_customizations.selco_issue_validate1"
+    }
+ }
+
+# scheduler_events = {
+#     "all": [
+#         "selco.tasks.all"
+#     ],
+#     "daily": [
+#         "selco.tasks.daily"
+#     ],
+#     "hourly": [
+#         "selco.tasks.hourly"
+#     ],
+#     "weekly": [
+#         "selco.tasks.weekly"
+#     ]
+#     "monthly": [
+#         "selco.tasks.monthly"
+#     ]
+# }
+"""
+scheduler_events = {
+    "daily": [
+        'selco.selco.doctype.selco_customizations.selco_customizations.send_birthday_wishes',
+        'selco.selco.doctype.selco_customizations.selco_customizations.send_po_reminder'
+    ],
+    "hourly": [
+        "selco.selco.doctype.selco_customizations.selco_customizations.service_call_info"
+    ],
+}
+"""
+# Testing
+# -------
+
+# before_tests = "selco.install.before_tests"
+
+# Overriding Whitelisted Methods
+# ------------------------------
+#
+# override_whitelisted_methods = {
+#     "frappe.desk.doctype.event.event.get_events": "selco.event.get_events"
+# }
+
+
+
+
 # Includes in <head>
 # ------------------
 
@@ -120,4 +170,5 @@ app_license = "MIT"
 # 	"frappe.desk.doctype.event.event.get_events": "selco.event.get_events"
 # }
 
-fixtures = ["Custom Script","Print Format"]
+
+fixtures = ["Custom Field", "Custom Script", "Property Setter", "Print Format", "Report", "Workflow", "Workflow State", "Workflow Action"]
