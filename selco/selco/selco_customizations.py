@@ -47,12 +47,17 @@ def selco_issue_before_insert(doc,method):
     doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_complaint_naming_series")
 
 @frappe.whitelist()
+def selco_warranty_claim_validate(doc,method):
+    doc.selco_senior_service_manager_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_manager_email_id")
+    doc.selco_godown_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_godown_email_id")
+
+@frappe.whitelist()
 def selco_issue_validate1(doc,method):
     if doc.workflow_state =="Complaint Open":
         if not doc.selco_customer_address:
             frappe.throw("Please Enter Customer Address")
     if doc.workflow_state =="Complaint Closed By Branch":
-        if not doc.selco_service_record_details:
+        if not doc.selco_service_record:
             frappe.throw(("Please Enter Service Record Details Before Closing the Complaint"))
         cur_date = now_datetime().date()
         doc.selco_complaint_closed_date = cur_date
@@ -74,6 +79,20 @@ def selco_warranty_claim_updates(doc,method):
         complaint.warranty_claim_number = doc.name
         complaint.save()"""
 
+@frappe.whitelist()
+def get_address_display(address_dict):
+	if not address_dict:
+		return
+
+	if not isinstance(address_dict, dict):
+		address_dict = frappe.db.get_value("Address", address_dict, "*", as_dict=True) or {}
+
+	name, template = get_address_templates(address_dict)
+
+	try:
+		return frappe.render_template(template, address_dict)
+	except TemplateSyntaxError:
+		frappe.throw(_("There is an error in your Address Template {0}").format(name))
 
 @frappe.whitelist()
 def selco_delivery_note_updates(doc,method):

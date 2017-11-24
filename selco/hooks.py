@@ -15,7 +15,11 @@ doc_events = {
     "Issue": {
          "before_insert":"selco.selco.selco_customizations.selco_issue_before_insert",
          "validate": "selco.selco.selco_customizations.selco_issue_validate1"
-    }
+    },
+    "Warranty Claim": {
+          "validate": "selco.selco.selco_customizations.selco_warranty_claim_validate"
+     }
+
  }
 
 # scheduler_events = {
@@ -171,4 +175,4 @@ scheduler_events = {
 # }
 
 
-fixtures = ["Custom Field", "Custom Script", "Property Setter", "Print Format", "Report", "Workflow", "Workflow State", "Workflow Action"]
+fixtures = ["Custom Field", "Custom Script", "Property Setter", "Print Format", "Report", "Workflow", "Workflow State", "Workflow Action","Issue"]

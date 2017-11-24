@@ -7,35 +7,6 @@
   "doctype": "Report", 
   "is_standard": "Yes", 
   "javascript": null, 
-  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
-  "letter_head": null, 
-  "modified": "2017-02-24 20:01:53.097456", 
-  "module": "Stock", 
-  "name": "Serial No Warranty Expiry", 
-  "query": null, 
-  "ref_doctype": "Serial No", 
-  "report_name": "Serial No Warranty Expiry", 
-  "report_type": "Report Builder", 
-  "roles": [
-   {
-    "role": "Item Manager"
-   }, 
-   {
-    "role": "Stock Manager"
-   }, 
-   {
-    "role": "Stock User"
-   }
-  ]
- }, 
- {
-  "add_total_row": 0, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
   "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.name\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warehouse\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"], [\"purchase_document_type\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"purchase_rate\", \"Serial No\"], [\"delivery_document_type\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"]]}", 
   "letter_head": null, 
   "modified": "2017-02-24 19:54:21.392265", 
@@ -73,6 +44,35 @@
   "query": null, 
   "ref_doctype": "Serial No", 
   "report_name": "Serial No Service Contract Expiry", 
+  "report_type": "Report Builder", 
+  "roles": [
+   {
+    "role": "Item Manager"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:01:53.097456", 
+  "module": "Stock", 
+  "name": "Serial No Warranty Expiry", 
+  "query": null, 
+  "ref_doctype": "Serial No", 
+  "report_name": "Serial No Warranty Expiry", 
   "report_type": "Report Builder", 
   "roles": [
    {
@@ -645,25 +645,6 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:03:01.035036", 
-  "module": "Schools", 
-  "name": "Absent Student Report", 
-  "query": null, 
-  "ref_doctype": "Student Attendance", 
-  "report_name": "Absent Student Report", 
-  "report_type": "Script Report", 
-  "roles": []
- }, 
- {
-  "add_total_row": 0, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
-  "json": null, 
-  "letter_head": null, 
   "modified": "2017-02-24 20:16:50.550242", 
   "module": "HR", 
   "name": "Monthly Attendance Sheet", 
@@ -682,6 +663,25 @@
     "role": "HR Manager"
    }
   ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:03:01.035036", 
+  "module": "Schools", 
+  "name": "Absent Student Report", 
+  "query": null, 
+  "ref_doctype": "Student Attendance", 
+  "report_name": "Absent Student Report", 
+  "report_type": "Script Report", 
+  "roles": []
  }, 
  {
   "add_total_row": 0, 
@@ -3009,6 +3009,1126 @@
    }, 
    {
     "role": "Accounts User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:10:01.912370", 
+  "module": "Support", 
+  "name": "Issue List All", 
+  "query": "SELECT selco_branch as \"Branch:Data:80\",name as \"Complaint ID:Link/Issue:150\", selco_complaint_received_date as \"Complaint Lodged On:Date:80\",selco_customer_id as \"Customer ID:Data:150\",selco_customer_full_name as \"Customer Name:Data:150\",selco_ics_date as \"ICS Date:Date:80\",selco_type_of_system as \"Type of System\",selco_customer_contact_number as \"Contact Number:Data:100\",owner as \"Created By:Data:200\"\nFROM `tabIssue`;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Issue List All", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:23:55.103428", 
+  "module": "SELCO", 
+  "name": "Open Complaint Details Including Warranty Claim Details-With Counter", 
+  "query": "SELECT selco_complaint_received_date as \"Date:Date:80\",name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:80\",selco_customer_id as \"Customer ID:Link/Customer:150\",selco_customer_full_name as \"Name:Data:130\",selco_customer_contact_number as \"Contact Number:Data:100\",\nselco_detail_address as \"Detail Address:Data:150\",\nDATEDIFF(NOW(),selco_complaint_received_date)AS \"Open Since Days:Int:60\",\nselco_description_of_complaint as \"Description Of Complaint:Data:150\",\nselco_branch_remarks AS \"Branch Remarks:Data:100\",\nworkflow_state as \"Status:Data:150\",selco_service_branch_email_id as \"Service Branch:Data:150\",owner as \"Created By:Data:200\"\n FROM `tabIssue`\nWHERE\n  workflow_state NOT IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\")\nORDER BY selco_complaint_received_date ASC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Open Complaint Details Including Warranty Claim Details-With Counter", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:25:32.947972", 
+  "module": "SELCO", 
+  "name": "Open Complaint Details - With Counter", 
+  "query": "SELECT selco_complaint_received_date as \"Date:Date:80\",name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:80\",selco_customer_id as \"Customer ID:Link/Customer:150\",selco_customer_full_name as \"Name:Data:130\",selco_customer_contact_number as \"Contact Number:Data:100\",\nselco_detail_address as \"Detail Address:Data:150\",\nDATEDIFF(NOW(),selco_complaint_received_date)AS \"Open Since Days:Int:80\",workflow_state as \"Status:Data:150\",selco_service_branch_email_id as \"Service Branch:Data:150\",selco_description_of_complaint as \"Description Of Complaint:250\",owner as \"Created By:Data:200\"\n FROM `tabIssue`\nWHERE\n  workflow_state NOT IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\",\"Warranty Claim Format Raised - WC\",\"Dispatch Pending From Godown\")\nORDER BY selco_complaint_received_date ASC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Open Complaint Details - With Counter", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:21:06.017506", 
+  "module": "SELCO", 
+  "name": "Cases Open For More Than 5 Days", 
+  "query": "SELECT selco_complaint_received_date as \"Complaint Lodged On:Date:100\",name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:100\",selco_customer_id as \"Customer ID:Link/Customer:150\",selco_customer_full_name as \"Customer Name:Data:150\",selco_customer_contact_number as \"Customer Contact Number:Data:100\",selco_description_of_complaint as \"Description Of The Complaint:Data:150\",\nselco_type_of_system as \"System Type:Data:100\",selco_capacity as \"Capacity:Data:100\",selco_service_branch_email_id\nas \"Service Branch Email ID:Data:100\",subject as \"Complaint Summary:Data:200\",selco_complaint_priority as \"Complaint Priority:Data:100\" FROM `tabIssue` WHERE selco_complaint_received_date<( CURDATE() - INTERVAL 5 DAY ) AND ( workflow_state NOT IN ( \"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\",\"Warranty Claim Format Raised - WC\",\"Dispatch Pending From Godown\") ) ORDER BY selco_complaint_received_date DESC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Cases Open For More Than 5 Days", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:15:39.102144", 
+  "module": "SELCO", 
+  "name": "Complaint registered and closed in the same day", 
+  "query": "SELECT name as \"Complaint ID:Link/Issue:160\",\nDATE(creation) as \"Date:Date:100\",\nselco_branch as \"Branch:Data:100\",\nselco_service_branch_email_id as \"Service Branch Email ID:Data:200\",\nMONTHNAME(creation) as \"Create in - Month:Data:150\"\nFROM tabIssue  where  CAST(creation AS DATE) = CAST(resolution_date AS DATE) ORDER BY creation DESC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint registered and closed in the same day", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:28:24.899786", 
+  "module": "SELCO", 
+  "name": "Open Complaint Details - Other than Warranty Claim", 
+  "query": "SELECT selco_complaint_received_date as \"Date:Date:80\",name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:80\",selco_customer_id as \"Customer ID:Link/Customer:150\",selco_customer_full_name as \"Name:Data:130\",selco_customer_contact_number as \"Contact Number:Data:100\",DATEDIFF(NOW(),selco_complaint_received_date)AS \"Open Since Days:Int:80\",workflow_state as \"Status:Data:150\",selco_service_branch_email_id as \"Service Branch:Data:150\",owner as \"Created By:Data:200\"\n FROM `tabIssue`\nWHERE\n  workflow_state NOT IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\",\"Warranty Claim Format Raised - WC\",\"Dispatch Pending From Godown\")\nORDER BY selco_complaint_received_date ASC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Open Complaint Details - Other than Warranty Claim", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:12:52.928554", 
+  "module": "SELCO", 
+  "name": "Closed Complaint Details - With Counter", 
+  "query": "SELECT selco_branch as \"Branch:Data:80\",selco_service_branch_email_id as \"Service Branch:Data:150\", name as \"Complaint ID:Link/Issue:150\",selco_service_record_number_1 as \"Service Record Number:Data:80\", selco_complaint_received_date as \"Complaint Lodged On:Date:80\", selco_complaint_closed_date as \"Complaint Closed Date:Date:80\", selco_customer_id as \"Customer ID:Data:150\",selco_customer_full_name as \"Customer Name:Data:150\",selco_customer_contact_number as \"Contact Number:Data:100\",DATEDIFF(selco_complaint_closed_date,selco_complaint_received_date)AS \"Closed In Days:Int:80\",owner as \"Created By:Data:200\"\nFROM `tabIssue`\nWHERE\n  workflow_state IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Rejected By CSD\") AND selco_complaint_closed_date IS NOT NULL AND  selco_complaint_closed_date>='2016-06-22'\nORDER BY selco_complaint_received_date ASC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Closed Complaint Details - With Counter", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 16:39:54.567864", 
+  "module": "SELCO", 
+  "name": "Summary Of Open Complaints", 
+  "query": "SELECT\n  workflow_state AS \"Complaint Status:Data:250\",\n  COUNT(*) AS \"Number Of Complaints:Data:150\"\nFROM\n  tabIssue\nWHERE\n  workflow_state NOT IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\")\nGROUP BY\n  workflow_state;\n\n\n", 
+  "ref_doctype": "Issue", 
+  "report_name": "Summary Of Open Complaints", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:08:09.840356", 
+  "module": "SELCO", 
+  "name": "Summary Of Open Complaints - Branchwise", 
+  "query": "SELECT\n  workflow_state AS \"Complaint Status:Data:250\",selco_branch AS \"Branch:Data:150\",\n  COUNT(*) AS \"Number Of Complaints:Data:150\"\nFROM\n  tabIssue\nWHERE\n  workflow_state NOT IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\",\"Complaint Cancelled\",\"Complaint Rejected By CSD\")\nGROUP BY\n  workflow_state,selco_branch\nORDER BY selco_branch;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Summary Of Open Complaints - Branchwise", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:07:22.439167", 
+  "module": "SELCO", 
+  "name": "Customer Details", 
+  "query": "SELECT * FROM tabCustomer WHERE selco_customer_contact_number=\"9535437959\";", 
+  "ref_doctype": "Issue", 
+  "report_name": "Customer Details ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:06:39.354201", 
+  "module": "SELCO", 
+  "name": "Complaint Register", 
+  "query": "SELECT name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:150\", selco_complaint_received_date as \"Date:Date:150\",selco_customer_full_name as \"Customer Name:Data:150\",selco_detail_address as \"Address:Data:200\", selco_customer_contact_number as \"Customer Contact Number:Data:150\", selco_description_of_complaint as \"Nature of complaint:Data:150\",owner as \"Created By:Data:100\",selco_complaint_handled_by_cse as \"Attended By:Data:200\",workflow_state as \"Status:Data:150\",selco_service_record_number_1 as \"Service Record Number:Data:200\",selco_service_record_date_1 as \"Service Record Date:Date:150\",selco_branch_remarks as \"Remarks:Data:200\" FROM `tabIssue`;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Register", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:01:17.628019", 
+  "module": "SELCO", 
+  "name": "Closed Complaint Details - Closed Without SR", 
+  "query": "SELECT selco_branch as \"Branch:Data:100\",selco_service_branch_email_id as \"Service Branch:Data:150\", name as \"Complaint ID:Link/Issue:150\",selco_service_record_number_1 as \"Service Record Number:Data:150\",selco_complaint_received_date as \"Complaint Lodged On:Date:100\" , selco_complaint_closed_date as \"Complaint Closed Date:Date:100\", selco_customer_id as \"Customer ID:Data:150\",selco_customer_full_name as \"Customer Name:Data:150\",DATEDIFF(selco_complaint_closed_date,selco_complaint_received_date)AS \"Closed In Days:Int:100\",owner as \"Created By:Data:200\"\nFROM `tabIssue`\nWHERE\n  workflow_state IN (\"Complaint Closed By Branch\",\"Complaint Closed By CSD\") AND selco_complaint_closed_date IS NOT NULL AND  selco_complaint_closed_date>='2016-06-22' AND selco_service_record_number_1 IS NULL ORDER BY selco_complaint_received_date ASC;", 
+  "ref_doctype": "Issue", 
+  "report_name": "Closed Complaint Details - Closed Without SR", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 18:27:41.777957", 
+  "module": "SELCO", 
+  "name": "1.Daily Complaint Received Report", 
+  "query": "SELECT selco_complaint_received_date as \"Complaint lodged on:Date:150\",name as \"Complaint ID:Link/Issue:150\",selco_branch as \"Branch:Data:100\",selco_customer_id as \"Customer ID:Link/Customer:150\",selco_customer_full_name as \"Customer Name:Data:150\",selco_customer_contact_number as \"Customer Contact Number:Data:150\",selco_type_of_system as \"System Type:Data:150\",selco_capacity as \"Capacity:Data:100\",subject as \"Complaint Summary:Data:200\",selco_complaint_priority as \"Complaint Priority:Data:100\",owner as \"Created By:Data:200\" FROM `tabIssue` WHERE creation>CURDATE();", 
+  "ref_doctype": "Issue", 
+  "report_name": "1.Daily Complaint Received Report", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 16:51:35.006866", 
+  "module": "SELCO", 
+  "name": "Complaints Lodged Today", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaints Lodged Today", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:50:05.724466", 
+  "module": "SELCO", 
+  "name": "Warranty Claim Dispatch Pending -All Godowns", 
+  "query": "select \n`tabWarranty Claim`.`name` as \"Warranty Claim No:Link/Warranty Claim:100\",\n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\",\n`tabWarranty Claim`.`selco_supplier` as \"Supplier:Link/Supplier:80\",\n`tabWarranty Claim`.`selco_godown_email_id` as \"Godown:Data:180\"\nFROM `tabWarranty Claim` \nWHERE complaint_date > \"2016-10-01\" AND workflow_state NOT IN (\"Dispatched From Godown\");", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Warranty Claim Dispatch Pending -All Godowns", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:51:29.293356", 
+  "module": "SELCO", 
+  "name": "Bangalore Godown Warranty Dispatch Pending - All Items", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_number` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE complaint_date > \"2016-10-01\" and selco_branch in (\"Chamarajanagara\",\"Chikkaballapura\",\"Chitradurga\",\"Hassan\",\"Kolar\",\"Kushalanagara\",\"Madurai\",\"Mandya\",\"Mysuru\",\"Ramanagara\",\"Tiptur\",\"Tumakuru\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Bangalore Godown Warranty Dispatch Pending - All Items ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:46:45.761722", 
+  "module": "SELCO", 
+  "name": "Manipal Godown Warranty Dispatch Pending - All Items", 
+  "query": "select\n`tabWarranty Claim`.`selco-customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE complaint_date > \"2016-10-01\" and selco_branch in (\"Belthangady\",\"Chikkamagaluru\",\"Hosanagar\",\"Karkala\",\"Kasaragod\",\"Kumta\",\"Kundapura\",\"Mangaluru\",\"Puttur\",\"Shivamogga\",\"Sullia\",\"Udupi\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Manipal Godown Warranty Dispatch Pending - All Items ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:51:01.918820", 
+  "module": "SELCO", 
+  "name": "Manipal Godown Warranty Dispatch Pending", 
+  "query": "select\n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_number` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group =(\"Modules\" or \"Batteries\") and complaint_date > \"2016-10-01\" and selco_branch in (\"Belthangady\",\"Chikkamagaluru\",\"Hosanagar\",\"Karkala\",\"Kasaragod\",\"Kumta\",\"Kundapura\",\"Mangaluru\",\"Puttur\",\"Shivamogga\",\"Sullia\",\"Udupi\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Manipal Godown Warranty Dispatch Pending ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:45:58.845401", 
+  "module": "SELCO", 
+  "name": "Dharwad Godown Warranty Dispatch Pending", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group =(\"Modules\" or \"Batteries\") and complaint_date > \"2016-10-01\" and selco_branch in (\"Bagalkote\",\"Bailhongal\",\"Ballari\",\"Belagavi\",\"Chikkodi\",\"Davanagere\",\"Dharwad\",\"Gadag\",\"Haveri\",\"Hubballi\",\"Kalaburagi\",\"Koppal\",\"Raichur\",\"Sindhanur\",\"Sirsi\",\"Solapur\",\"Vijayapura\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Dharwad Godown Warranty Dispatch Pending ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:47:13.428253", 
+  "module": "SELCO", 
+  "name": "Bangalore Godown Warranty Dispatch Pending - Batteries", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group in (\"Batteries\") and complaint_date > \"2016-10-01\" AND selco_branch in (\"Chamarajanagara\",\"Chikkaballapura\",\"Chitradurga\",\"Hassan\",\"Kolar\",\"Kushalanagara\",\"Madurai\",\"Mandya\",\"Mysuru\",\"Ramanagara\",\"Tiptur\",\"Tumakuru\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Bangalore Godown Warranty Dispatch Pending - Batteries ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:50:35.449884", 
+  "module": "SELCO", 
+  "name": "Dharwad Godown Warranty Dispatch Pending - Batteries", 
+  "query": "select\n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_number` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group in (\"Batteries\") and complaint_date > \"2016-10-01\" AND selco_branch in (\"Bagalkote\",\"Bailhongal\",\"Ballari\",\"Belagavi\",\"Chikkodi\",\"Davanagere\",\"Dharwad\",\"Gadag\",\"Haveri\",\"Hubballi\",\"Kalaburagi\",\"Koppal\",\"Raichur\",\"Sindhanur\",\"Sirsi\",\"Solapur\",\"Vijayapura\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Dharwad Godown Warranty Dispatch Pending - Batteries ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:47:48.161030", 
+  "module": "SELCO", 
+  "name": "Bangalore Godown Warranty Dispatch Pending", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group =(\"Modules\" or \"Batteries\") and complaint_date > \"2016-10-01\" and selco_branch in (\"Chamarajanagara\",\"Chikkaballapura\",\"Chitradurga\",\"Hassan\",\"Kolar\",\"Kushalanagara\",\"Madurai\",\"Mandya\",\"Mysuru\",\"Ramanagara\",\"Tiptur\",\"Tumakuru\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Bangalore Godown Warranty Dispatch Pending ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:39:43.436424", 
+  "module": "SELCO", 
+  "name": "Manipal Godown Warranty Dispatch Pending - Batteries", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_detailed_description_of_complaint` as \"Details of the Complaint:Data:180\",\n`tabWarranty Claim`.`name` as \"Warranty Claim Number:Link/Warranty Claim:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE item_group in (\"Batteries\") and selco_complaint_date > \"2016-10-01\" AND selco_branch in (\"Belthangady\",\"Chikkamagaluru\",\"Hosanagar\",\"Karkala\",\"Kasaragod\",\"Kumta\",\"Kundapura\",\"Mangaluru\",\"Puttur\",\"Shivamogga\",\"Sullia\",\"Udupi\") AND workflow_state NOT IN (\"Dispatched From Godown\");", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Manipal Godown Warranty Dispatch Pending - Batteries ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:48:08.656586", 
+  "module": "SELCO", 
+  "name": "Dharwad Godown Warranty Dispatch Pending - All Items", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_invoice_date` as \"Invoice Date:Date:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE complaint_date > \"2016-10-01\" and selco_branch in (\"Bagalkote\",\"Bailhongal\",\"Ballari\",\"Belagavi\",\"Chikkodi\",\"Davanagere\",\"Dharwad\",\"Gadag\",\"Haveri\",\"Hubballi\",\"Kalaburagi\",\"Koppal\",\"Raichur\",\"Sindhanur\",\"Sirsi\",\"Solapur\",\"Vijayapura\") AND workflow_state NOT IN (\"Dispatched From Godown\");\n\n\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Dharwad Godown Warranty Dispatch Pending - All Items ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:49:07.801706", 
+  "module": "SELCO", 
+  "name": "Palani Report 1", 
+  "query": "select \n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_detailed_description_of_complaint` as \"Details of the Complaint:Data:180\",\n`tabWarranty Claim`.`name` as \"Warranty Claim Number:Link/Warranty Claim:180\",\n`tabWarranty Claim`.`selco_godown_email_id` as \"Godown:Data:180\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE workflow_state=\"Warranty Claim Approved - WC\" AND complaint_date > \"2016-10-01\" AND selco_supplier\nNOT IN (\"Anand Electronics\",\"Anand Solar Systems\") AND item_group NOT IN (\"Batteries\",\"Water Heater Tanks Spare\");", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Palani Report 1 ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:41:50.821931", 
+  "module": "SELCO", 
+  "name": "Palani Report 2", 
+  "query": "select\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n `tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_detailed_description_of_complaint` as \"Details of the Complaint:Data:180\",\n`tabWarranty Claim`.`name` as \"Warranty Claim Number:Link/Warranty Claim:180\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE workflow_state=\"Warranty Claim Approved - WC\" AND complaint_date > \"2016-10-01\" AND item_group IN (\"Batteries\",\"Water Heater Tanks Spare\") AND selco_godown_email_id = \"bangalore_godown@selco-india.com\";\n", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "Palani Report 2", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-22 17:49:35.663274", 
+  "module": "SELCO", 
+  "name": "palani Report", 
+  "query": "select \n`tabWarranty Claim`.`selco_customer_full_name` as \"Customer Full Name:Data:100\",\n`tabWarranty Claim`.`selco_invoice_number` as \"Invoice Number:Data:80\",\n`tabWarranty Claim`.`selco_item_serial_no` as \"Item Serial Number:Link/Serial No:100\",\n`tabWarranty Claim`.`selco_item_code` as \"Item Code:Data:100\",\n`tabWarranty Claim`.`selco_item_name` as \"Item Name:Data:120\",\n`tabWarranty Claim`.`workflow_state` as \"Status:Data:180\",\n`tabWarranty Claim`.`selco_detailed_description_of_complaint` as \"Details of the Complaint:Data:180\",\n`tabWarranty Claim`.`name` as \"Warranty Claim Number:Link/Warranty Claim:180\",\n`tabWarranty Claim`.`selco_branch` as \"Branch:Data:100\",\n`tabWarranty Claim`.`item_group` as \"Item Group:Data:100\"\nFROM `tabWarranty Claim` \nWHERE workflow_state=\"Warranty Claim Approved - WC\" AND complaint_date > \"2016-10-01\";", 
+  "ref_doctype": "Warranty Claim", 
+  "report_name": "palani Report", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Maintenance User"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "eShala Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:42:29.875841", 
+  "module": "SELCO", 
+  "name": "Stock Ledger-SELCO", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Stock Ledger-SELCO", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:43:19.542986", 
+  "module": "SELCO", 
+  "name": "Stock Balance-SELCO", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Stock Balance-SELCO", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:41:07.696258", 
+  "module": "SELCO", 
+  "name": "CSE Service Calls", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "CSE Service Calls ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:41:42.331718", 
+  "module": "SELCO", 
+  "name": "Complaint Register - Service Branchwise", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Register - Service Branchwise ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:40:40.777226", 
+  "module": "SELCO", 
+  "name": "Complaint Rejected By CSD", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Rejected By CSD ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:39:57.319526", 
+  "module": "SELCO", 
+  "name": "Complaint Budget V2 With 2 Columns", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Budget V2 With 2 Columns ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 11:14:42.745865", 
+  "module": "SELCO", 
+  "name": "Complaint Budget V2", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Budget V2 ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-11-24 10:41:20.590770", 
+  "module": "SELCO", 
+  "name": "Complaint Budget - Service Branch Wise", 
+  "query": null, 
+  "ref_doctype": "Issue", 
+  "report_name": "Complaint Budget - Service Branch Wise ", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
    }
   ]
  }

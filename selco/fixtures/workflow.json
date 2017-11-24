@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2017-11-18 13:02:09.384430", 
+  "modified": "2017-11-20 15:06:55.292608", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -58,7 +58,7 @@
    }, 
    {
     "allow_edit": "SELCO CSD Manager", 
-    "doc_status": "1", 
+    "doc_status": "0", 
     "message": null, 
     "state": "Complaint Closed By CSD", 
     "update_field": null, 
@@ -66,7 +66,7 @@
    }, 
    {
     "allow_edit": "SELCO CSD Manager", 
-    "doc_status": "2", 
+    "doc_status": "0", 
     "message": null, 
     "state": "Complaint Cancelled", 
     "update_field": null, 
@@ -74,7 +74,7 @@
    }, 
    {
     "allow_edit": "SELCO CSD Manager", 
-    "doc_status": "1", 
+    "doc_status": "0", 
     "message": null, 
     "state": "Complaint Rejected By CSD", 
     "update_field": null, 
@@ -82,7 +82,7 @@
    }, 
    {
     "allow_edit": "System Manager", 
-    "doc_status": "1", 
+    "doc_status": "0", 
     "message": null, 
     "state": "Pre-Cancellation", 
     "update_field": null, 
@@ -344,6 +344,229 @@
    }
   ], 
   "workflow_name": "Complaint Management", 
+  "workflow_state_field": "workflow_state"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Warranty Claim", 
+  "is_active": 1, 
+  "modified": "2017-11-21 13:20:22.736910", 
+  "name": "Warranty Claim Approval Process", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "SELCO Service Basic", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Draft", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Service Basic", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Warranty Claim Format Raised - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Senior Manager Energy Services", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Warranty Claim Approved - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Warranty Claim Rejected - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Dispatched From Godown", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "2", 
+    "message": null, 
+    "state": "Cancelled - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Warranty Claim Rejected By Godown - WC", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO CSD Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Pre-Cancellation", 
+    "update_field": null, 
+    "update_value": null
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Warranty Claim Format Raised - WC", 
+    "state": "Draft"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Warranty Claim Approved - WC", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Reject", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Warranty Claim Rejected - WC", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "System Manager", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "System Manager", 
+    "next_state": "Warranty Claim Approved - WC", 
+    "state": "Warranty Claim Rejected - WC"
+   }, 
+   {
+    "action": "Received - WC", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Received - WC", 
+    "allowed": "SELCO Service Branch Office Administrator", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Warranty Claim Rejected By Godown - WC", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Cancelled - WC", 
+    "state": "Pre-Cancellation"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Draft", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Draft"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Warranty Claim Approved - WC", 
+    "state": "Dispatched From Godown"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "eShala Manager", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Request AGM Approval", 
+    "allowed": "System Manager", 
+    "next_state": "Warranty Claim Format Raised - WC", 
+    "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "System Manager", 
+    "next_state": "Warranty Claim Approved - WC", 
+    "state": "Warranty Claim Approved - WC"
+   }
+  ], 
+  "workflow_name": "Warranty Claim Approval Process", 
   "workflow_state_field": "workflow_state"
  }
 ]
