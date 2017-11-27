@@ -568,5 +568,406 @@
   ], 
   "workflow_name": "Warranty Claim Approval Process", 
   "workflow_state_field": "workflow_state"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Material Request", 
+  "is_active": 1, 
+  "modified": "2017-11-25 12:16:10.897899", 
+  "name": "IBM Approval Process", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Draft - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Approval Pending by SM - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Approval Pending by AGM - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Senior Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Approved - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Partially Dispatched From Godown - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Dispatched From Godown - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Rejected", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "2", 
+    "message": null, 
+    "state": "Cancelled - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "Projects Head", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Technically Approved - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Pre-Cancellation", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Rejected By Godown - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Content Dispatch Pending", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Content Dispatched", 
+    "update_field": null, 
+    "update_value": null
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "SELCO Senior Manager", 
+    "next_state": "Approved - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Request AGM Approval", 
+    "allowed": "SELCO Senior Manager", 
+    "next_state": "Approval Pending by AGM - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "Projects Head", 
+    "next_state": "Approved - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "Projects Head", 
+    "next_state": "Rejected", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "SELCO AGM", 
+    "next_state": "Approved - IBM", 
+    "state": "Approval Pending by AGM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO AGM", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Approval Pending by AGM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Senior Manager", 
+    "next_state": "Rejected", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Dispatched From Godown - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Dispatched Partially", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Partially Dispatched From Godown - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Dispatched From Godown - IBM", 
+    "state": "Partially Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "SELCO AGM", 
+    "next_state": "Approved - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Service Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Approve", 
+    "allowed": "SELCO Senior Manager Energy Services", 
+    "next_state": "Approved - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Partially Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Rejected"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Cancelled - IBM", 
+    "state": "Pre-Cancellation"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Projects Manager", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Reject", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Rejected By Godown - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected By Godown - IBM"
+   }, 
+   {
+    "action": "Request AGM Approval", 
+    "allowed": "Projects Head", 
+    "next_state": "Approval Pending by AGM - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Reject", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Rejected By Godown - IBM", 
+    "state": "Partially Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "Projects Head", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "Projects Head", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Service Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "Special Project Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Revise IBM", 
+    "allowed": "SELCO Branch Office Administrator", 
+    "next_state": "Draft - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Revise IBM", 
+    "allowed": "SELCO Service Branch Office Administrator", 
+    "next_state": "Draft - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "Projects Head", 
+    "next_state": "Draft - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "Projects Head", 
+    "next_state": "Approved - IBM", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Service Branch Office Administrator", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected By Godown - IBM"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO Logistics Executive", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Rejected By Godown - IBM"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO Logistics Executive", 
+    "next_state": "Cancelled - IBM", 
+    "state": "Pre-Cancellation"
+   }, 
+   {
+    "action": "Draft", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Draft - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Rejected", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Projects Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Projects Manager", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected"
+   }, 
+   {
+    "action": "Confirm", 
+    "allowed": "SELCO Projects Manager", 
+    "next_state": "Approval Pending by SM - IBM", 
+    "state": "Rejected By Godown - IBM"
+   }, 
+   {
+    "action": "Request Content", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Content Dispatch Pending", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Mission Executive", 
+    "next_state": "Content Dispatched", 
+    "state": "Content Dispatch Pending"
+   }, 
+   {
+    "action": "Dispatched Partially", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Partially Dispatched From Godown - IBM", 
+    "state": "Content Dispatched"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Dispatched From Godown - IBM", 
+    "state": "Content Dispatched"
+   }
+  ], 
+  "workflow_name": "IBM Approval Process", 
+  "workflow_state_field": "workflow_state"
  }
 ]

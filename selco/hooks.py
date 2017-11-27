@@ -18,7 +18,11 @@ doc_events = {
     },
     "Warranty Claim": {
           "validate": "selco.selco.selco_customizations.selco_warranty_claim_validate"
-     }
+    },
+    "Material Request": {
+           "validate":"selco.selco.selco_customizations.selco_material_request_validate",
+           "before_insert":"selco.selco.selco_customizations.selco_material_request_before_insert"
+    }
 
  }
 

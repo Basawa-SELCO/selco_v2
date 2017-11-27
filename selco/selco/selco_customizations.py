@@ -119,14 +119,14 @@ def selco_delivery_note_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_material_request_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.branch,"material_request_naming_series")
-    local_warehouse = frappe.db.get_value("Branch",doc.branch,"git_warehouse")
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"material_request_naming_series")
+    local_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"selco_git_warehouse")
     for d in doc.get('items'):
         if not d.warehouse:
-            d.warehouse = local_warehouse
+               d.warehouse = local_warehouse
 
 @frappe.whitelist()
-def selco_material_request_updates(doc,method):
+def selco_material_request_validate(doc,method):
     #frappe.msgprint("selco_material_request_updates")
     doc.items.sort(key=operator.attrgetter("item_code"), reverse=False)
 
@@ -135,18 +135,18 @@ def selco_material_request_updates(doc,method):
     if doc.workflow_state == "Partially Dispatched From Godown - IBM":
         flag = "N"
         for d in doc.get('items'):
-            if d.dispatched_quantity != 0:
+            if d.selco_dispatched_quantity != 0:
                 flag = "Y"
         for d in doc.get('items'):
             if flag != "Y":
                 d.dispatched_quantity = d.qty
     if doc.workflow_state == "Dispatched From Godown - IBM":
         for d in doc.get('items'):
-            d.dispatched_quantity = d.qty
-    doc.branch_credit_limit = frappe.db.get_value("Branch",doc.branch,"branch_credit_limit")
-    doc.selco_senior_sales_manager_email_id = frappe.db.get_value("Branch",doc.branch,"selco_senior_sales_manager_email_id")
-    doc.godown_email_id = frappe.db.get_value("Branch",doc.branch,"godown_email_id")
-    doc.agms_email_id = frappe.db.get_value("Branch",doc.branch,"agms_email_id")
+            d.selco_dispatched_quantity = d.qty
+    doc.selco_branch_credit_limit = frappe.db.get_value("Branch",doc.selco_branch,"selco_branch_credit_limit")
+    doc.selco_senior_sales_manager_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_senior_sales_manager_email_id")
+    doc.selco_godown_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_godown_email_id")
+    doc.selco_agms_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_agm_email_id")
     #End of Insert By Poorvi on 08-02-2017
 
 @frappe.whitelist()
