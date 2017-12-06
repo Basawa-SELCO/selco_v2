@@ -1,7 +1,7 @@
 {
  "allow_copy": 0, 
  "allow_guest_to_view": 0, 
- "allow_import": 0, 
+ "allow_import": 1, 
  "allow_rename": 0, 
  "autoname": "field:financing_institution_branch", 
  "beta": 0, 
@@ -85,7 +85,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2017-11-03 15:28:40.760953", 
+ "modified": "2017-11-29 10:06:45.520250", 
  "modified_by": "Administrator", 
  "module": "SELCO", 
  "name": "Financing Institution Branch", 

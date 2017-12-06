@@ -95,8 +95,8 @@ def get_address_display(address_dict):
 		frappe.throw(_("There is an error in your Address Template {0}").format(name))
 
 @frappe.whitelist()
-def selco_delivery_note_updates(doc,method):
-    selco_warehouse  = frappe.db.get_value("Branch",doc.branch,"selco_warehouse")
+def selco_delivery_note_validates(doc,method):
+    selco_warehouse  = frappe.db.get_value("Branch",doc.selco_branch,"selco_warehouse")
     selco_cost_center = frappe.db.get_value("Warehouse",selco_warehouse,"cost_center")
     for d in doc.get('items'):
         d.warehouse = selco_warehouse
@@ -108,8 +108,8 @@ def selco_delivery_note_before_insert(doc,method):
     if doc.is_return:
         doc.naming_series = "DC-RET/"
     else:
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"delivery_note_naming_series")
-    selco_warehouse  = frappe.db.get_value("Branch",doc.branch,"selco_warehouse")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"delivery_note_naming_series")
+    selco_warehouse  = frappe.db.get_value("Branch",doc.selco_branch,"selco_warehouse")
     selco_cost_center = frappe.db.get_value("Warehouse",selco_warehouse,"cost_center")
     for d in doc.get('items'):
         d.warehouse = selco_warehouse
@@ -160,11 +160,11 @@ def selco_material_approved_and_dispatched(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Warehouse",doc.godown,"mrn_naming_series")
+    doc.naming_series = frappe.db.get_value("Warehouse",doc.selco_godown,"mrn_naming_series")
 
 @frappe.whitelist()
-def selco_purchase_receipt_updates(doc,method):
-    selco_cost_center = frappe.db.get_value("Warehouse",doc.godown,"cost_center")
+def selco_purchase_receipt_validate(doc,method):
+    selco_cost_center = frappe.db.get_value("Warehouse",doc.selco_godown,"cost_center")
     for d in doc.get('items'):
         d.cost_center = selco_cost_center
     for d in doc.get('taxes'):
@@ -174,6 +174,7 @@ def selco_purchase_receipt_updates(doc,method):
     for item_selco in doc.items:
         if item_selco.purchase_order not in po_list:
             po_list.append(item_selco.purchase_order)
+
             po_list_date.append(frappe.utils.formatdate(frappe.db.get_value('Purchase Order', item_selco.purchase_order, 'transaction_date'),"dd-MM-yyyy"))
     doc.selco_list_of_po= ','.join([str(i) for i in po_list])
     doc.selco_list_of_po_date= ','.join([str(i) for i in po_list_date])
@@ -311,31 +312,31 @@ def get_items_from_rejection_in(selco_rej_in,selco_branch):
 
 @frappe.whitelist()
 def selco_customer_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.branch,"customer_naming_series")
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_naming_series")
 
 @frappe.whitelist()
-def selco_customer_updates(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.branch,"customer_naming_series")
-    if not ( doc.customer_contact_number or doc.landline_mobile_2 ):
+def selco_customer_validate(doc,method):
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_naming_series")
+    if not ( doc.selco_customer_contact_number or doc.selco_landline_mobile_2 ):
         frappe.throw("Enter either Customer Contact Number ( Mobile 1 ) or Mobile 2 / Landline")
-    if doc.customer_contact_number:
-        if len(doc.customer_contact_number) != 10:
+    if doc.selco_customer_contact_number:
+        if len(doc.selco_customer_contact_number) != 10:
             frappe.throw("Invalid Customer Contact Number ( Mobile 1 ) - Please enter exact 10 digits of mobile no ex : 9900038803")
-        selco_validate_if_customer_contact_number_exists(doc.customer_contact_number,doc.name)
-    if doc.landline_mobile_2:
-        selco_validate_if_customer_contact_number_exists(doc.landline_mobile_2,doc.name)
+        selco_validate_if_customer_contact_number_exists(doc.selco_customer_contact_number,doc.name)
+    if doc.selco_landline_mobile_2:
+        selco_validate_if_customer_contact_number_exists(doc.selco_landline_mobile_2,doc.name)
 
 def selco_validate_if_customer_contact_number_exists(contact_number,customer_id):
     #frappe.msgprint(frappe.session.user)
-    var4 = frappe.db.get_value("Customer", {"customer_contact_number": (contact_number)})
+    var4 = frappe.db.get_value("Customer", {"selco_customer_contact_number": (contact_number)})
     var5 = unicode(var4) or u''
-    var6 = frappe.db.get_value("Customer", {"customer_contact_number": (contact_number)}, "customer_name")
+    var6 = frappe.db.get_value("Customer", {"selco_customer_contact_number": (contact_number)}, "customer_name")
     if var5 != "None" and customer_id != var5:
         frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var5 + "\n Lead Name : " + var6)
 
-    var14 = frappe.db.get_value("Customer", {"landline_mobile_2": (contact_number)})
+    var14 = frappe.db.get_value("Customer", {"selco_landline_mobile_2": (contact_number)})
     var15 = unicode(var14) or u''
-    var16 = frappe.db.get_value("Customer", {"landline_mobile_2": (contact_number)}, "customer_name")
+    var16 = frappe.db.get_value("Customer", {"selco_landline_mobile_2": (contact_number)}, "customer_name")
     if var15 != "None" and customer_id != var15:
         frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var15 + "\n Lead Name : " + var16)
 
@@ -364,25 +365,25 @@ def selco_sales_invoice_validate(doc,method):
 
 def selco_payment_entry_before_insert(doc,method):
     if doc.payment_type == "Receive":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"receipt_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"receipt_naming_series")
         if doc.mode_of_payment == "Bank":
             if doc.amount_credited_to_platinum_account == 1:
                 doc.paid_to = frappe.db.get_value("Branch","Head Office","collection_account")
             else:
-                doc.paid_to = frappe.db.get_value("Branch",doc.branch,"collection_account")
+                doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account")
         elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.branch,"collection_account_cash")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account_cash")
     elif doc.payment_type == "Pay":
         if doc.mode_of_payment == "Bank":
-            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_naming_series")
-            doc.paid_from = frappe.db.get_value("Branch",doc.branch,"expenditure_account")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"bank_payment_naming_series")
+            doc.paid_from = frappe.db.get_value("Branch",doc.selco_branch,"expenditure_account")
 
-def selco_payment_entry_update(doc,method):
+def selco_payment_entry_validate(doc,method):
     if doc.payment_type == "Receive":
         if doc.mode_of_payment == "Bank":
-            doc.paid_to = frappe.db.get_value("Branch",doc.branch,"collection_account")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account")
         elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.branch,"collection_account_cash")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account_cash")
             frappe.msgprint("Cash Account is" + doc.paid_to)
     local_sum = 0
     local_sum = doc.paid_amount
@@ -395,35 +396,37 @@ def selco_payment_entry_before_delete(doc,method):
         frappe.throw("You cannot delete Payment Entries")
 
 def selco_journal_entry_before_insert(doc,method):
-    local_cost_center = frappe.db.get_value("Branch",doc.branch,"cost_center")
+
+    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"cost_center")
+
     for account in doc.accounts:
         account.cost_center = local_cost_center
     if doc.voucher_type == "Contra Entry":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"contra_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"contra_naming_series")
         """if doc.branch == "Head Office" and doc.transfer_type == "Branch Collectiion To Platinum":
             doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_collection")
         elif doc.branch == "Head Office" and doc.transfer_type == "Platinum To Branch Expenditure":
             doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_expenditure")"""
     if doc.voucher_type == "Cash Payment":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"cash_payment_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"cash_payment_naming_series")
     if doc.voucher_type == "Debit Note":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"debit_note_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"debit_note_naming_series")
     if doc.voucher_type == "Credit Note":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"credit_note_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"credit_note_naming_series")
     if doc.voucher_type == "Journal Entry":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"journal_entry_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"journal_entry_naming_series")
     if doc.voucher_type == "Write Off Entry":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"write_off_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"write_off_naming_series")
     if doc.voucher_type == "Bank Payment":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"bank_payment_naming_series")
     if doc.voucher_type == "Receipt":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"receipt_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"receipt_naming_series")
     if doc.voucher_type == "Commission Journal":
         doc.naming_series = frappe.db.get_value("Branch",doc.branch,"commission_journal_naming_series")
 
 @frappe.whitelist()
 def selco_journal_entry_validate(doc,method):
-    local_cost_center = frappe.db.get_value("Branch",doc.branch,"cost_center")
+    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"cost_center")
     if doc.use_different_cost_center == 1:
         local_cost_center = doc.alternative_cost_center
         frappe.msgprint(local_cost_center)
@@ -452,32 +455,32 @@ def clean_up(doc,method):
 
 @frappe.whitelist()
 def selco_lead_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.branch,"lead_naming_series")
-    if doc.project_enquiry == 1:
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"lead_naming_series")
+    if doc.selco_project_enquiry == 1:
         doc.naming_series = "ENQ/17-18/"
 
 @frappe.whitelist()
 def selco_lead_validate(doc,method):
-    if not ( doc.customer_contact_number or doc.customer_contact_number_landline ):
+    if not ( doc.selco_customer_contact_number__mobile_1 or doc.selco_customer_contact_number__mobile_2_landline ):
         frappe.throw("Enter either Customer Contact Number ( Mobile 1 ) or Mobile 2 / Landline")
-    if doc.customer_contact_number:
-        if len(doc.customer_contact_number) != 10:
+    if doc.selco_customer_contact_number__mobile_1 :
+        if len(doc.selco_customer_contact_number__mobile_1 ) != 10:
             frappe.throw("Invalid Customer Contact Number ( Mobile 1 ) - Please enter exact 10 digits of mobile no ex : 9900038803")
-        selco_validate_if_lead_contact_number_exists(doc.customer_contact_number,doc.name)
-    if doc.customer_contact_number_landline:
-        selco_validate_if_lead_contact_number_exists(doc.customer_contact_number_landline,doc.name)
+        selco_validate_if_lead_contact_number_exists(doc.selco_customer_contact_number__mobile_1 ,doc.name)
+    if doc.selco_customer_contact_number__mobile_2_landline:
+        selco_validate_if_lead_contact_number_exists(doc.selco_customer_contact_number__mobile_2_landline,doc.name)
 
 
 def selco_validate_if_lead_contact_number_exists(contact_number,lead_id):
-    var4 = frappe.db.get_value("Lead", {"customer_contact_number_landline": (contact_number)})
+    var4 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)})
     var5 = unicode(var4) or u''
-    var6 = frappe.db.get_value("Lead", {"customer_contact_number_landline": (contact_number)}, "lead_name")
+    var6 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)}, "lead_name")
     if var5 != "None" and lead_id != var5:
         frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var5 + "\n Lead Name : " + var6)
 
-    var14 = frappe.db.get_value("Lead", {"customer_contact_number": (contact_number)})
+    var14 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)})
     var15 = unicode(var14) or u''
-    var16 = frappe.db.get_value("Lead", {"customer_contact_number": (contact_number)}, "lead_name")
+    var16 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)}, "lead_name")
     if var15 != "None" and lead_id != var15:
         frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var15 + "\n Lead Name : " + var16)
 

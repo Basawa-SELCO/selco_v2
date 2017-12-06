@@ -22,8 +22,32 @@ doc_events = {
     "Material Request": {
            "validate":"selco.selco.selco_customizations.selco_material_request_validate",
            "before_insert":"selco.selco.selco_customizations.selco_material_request_before_insert"
-    }
+    },
+    "Purchase Receipt":{
+              "before_insert":"selco.selco.selco_customizations.selco_purchase_receipt_before_insert",
+              "validate":"selco.selco.selco_customizations.selco_purchase_receipt_validate"
+    },
+    "Payment Entry":{
+              "before_insert":"selco.selco.selco_customizations.selco_payment_entry_before_insert",
+              "validate":"selco.selco.selco_customizations.selco_payment_entry_validate"
+    },
+      "Lead":{
+            "before_insert":"selco.selco.selco_customizations.selco_lead_before_insert",
+            "validate":"selco.selco.selco_customizations.selco_lead_validate"
 
+      },
+      "Customer":{
+            "before_insert":"selco.selco.selco_customizations.selco_customer_before_insert",
+            "validate":"selco.selco.selco_customizations.selco_customer_validate"
+     },
+     "Journal Entry":{
+             "before_insert":"selco.selco.selco_customizations.selco_journal_entry_before_insert",
+             "validate":"selco.selco.selco_customizations.selco_journal_entry_validate"
+     },
+     "Delivery Note":{
+             "before_insert":"selco.selco.selco_customizations.selco_delivery_note_before_insert",
+             "validate":"selco.selco.selco_customizations.selco_delivery_note_validates"
+     }
  }
 
 # scheduler_events = {
