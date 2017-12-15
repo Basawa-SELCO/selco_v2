@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2017-11-20 15:06:55.292608", 
+  "modified": "2017-12-11 12:38:46.186667", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -968,6 +968,173 @@
    }
   ], 
   "workflow_name": "IBM Approval Process", 
+  "workflow_state_field": "workflow_state"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow", 
+  "document_type": "Purchase Order", 
+  "is_active": 1, 
+  "modified": "2017-11-27 16:43:16.343621", 
+  "name": "Purchase Order Approval Process", 
+  "override_status": 0, 
+  "states": [
+   {
+    "allow_edit": "SELCO Logistics Executive", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Draft - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Logistics Executive", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Logistics Manager Approval Pending - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Chief Manager Accounts & Finance", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Accounts Approval Pending - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO AGM", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "AGM Approval Pending - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Logistics Executive", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Approved By All - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "2", 
+    "message": null, 
+    "state": "Cancelled - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "1", 
+    "message": null, 
+    "state": "Pre Cancellation - PO", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Suspended for Now", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Old PO Kept on Hold", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "System Manager", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Logostics Mnaager Approval Pending - PO", 
+    "update_field": null, 
+    "update_value": null
+   }
+  ], 
+  "transitions": [
+   {
+    "action": "Confirm - PO", 
+    "allowed": "SELCO Logistics Basic", 
+    "next_state": "Logistics Manager Approval Pending - PO", 
+    "state": "Draft - PO"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "SELCO Logistics Manager", 
+    "next_state": "Accounts Approval Pending - PO", 
+    "state": "Logistics Manager Approval Pending - PO"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "SELCO Chief Manager Accounts & Finance", 
+    "next_state": "AGM Approval Pending - PO", 
+    "state": "Accounts Approval Pending - PO"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "SELCO Management", 
+    "next_state": "Approved By All - PO", 
+    "state": "AGM Approval Pending - PO"
+   }, 
+   {
+    "action": "Revise - PO", 
+    "allowed": "SELCO Logistics Executive", 
+    "next_state": "Draft - PO", 
+    "state": "Logistics Manager Approval Pending - PO"
+   }, 
+   {
+    "action": "Revise - PO", 
+    "allowed": "SELCO Chief Manager Accounts & Finance", 
+    "next_state": "Draft - PO", 
+    "state": "Accounts Approval Pending - PO"
+   }, 
+   {
+    "action": "Revise - PO", 
+    "allowed": "SELCO Management", 
+    "next_state": "Draft - PO", 
+    "state": "AGM Approval Pending - PO"
+   }, 
+   {
+    "action": "Cancel - PO", 
+    "allowed": "SELCO Logistics Executive", 
+    "next_state": "Cancelled - PO", 
+    "state": "Approved By All - PO"
+   }, 
+   {
+    "action": "Cancel - PO", 
+    "allowed": "System Manager", 
+    "next_state": "Pre Cancellation - PO", 
+    "state": "Draft - PO"
+   }, 
+   {
+    "action": "Cancel - PO", 
+    "allowed": "System Manager", 
+    "next_state": "Cancelled - PO", 
+    "state": "Pre Cancellation - PO"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "System Manager", 
+    "next_state": "Approved By All - PO", 
+    "state": "Old PO Kept on Hold"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "AGM Approval Pending - PO", 
+    "state": "Old PO Kept on Hold"
+   }
+  ], 
+  "workflow_name": "Purchase Order Approval Process", 
   "workflow_state_field": "workflow_state"
  }
 ]

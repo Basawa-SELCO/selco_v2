@@ -47,7 +47,25 @@ doc_events = {
      "Delivery Note":{
              "before_insert":"selco.selco.selco_customizations.selco_delivery_note_before_insert",
              "validate":"selco.selco.selco_customizations.selco_delivery_note_validates"
-     }
+     },
+     "Sales Invoice":{
+             "before_insert":"selco.selco.selco_customizations.selco_sales_invoice_before_insert",
+              "validate":"selco.selco.selco_customizations.selco_sales_invoice_validate"
+     },
+     "Purchase Invoice":{
+             "before_insert":"selco.selco.selco_customizations.selco_purchase_invoice_before_insert",
+             "validate":"selco.selco.selco_customizations.selco_purchase_invoice_validate"
+     },
+     "Stock Entry":{
+        "before_insert": "selco.selco.selco_customizations.selco_stock_entry_updates",
+         "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
+         "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
+         "on_submit": "selco.selco.selco_customizations.selco_stock_entry_on_submit_updates",
+         "on_cancel": "selco.selco.selco_customizationss.selco_stock_entry_on_cancel_updates"
+   },
+   "Address":{
+        "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
+   }
  }
 
 # scheduler_events = {
