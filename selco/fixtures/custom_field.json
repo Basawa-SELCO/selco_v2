@@ -15680,7 +15680,7 @@
   "modified": "2017-11-28 15:48:03.540128", 
   "name": "Purchase Receipt-selco_purchase_receipt_item_print", 
   "no_copy": 0, 
-  "options": "Purchase Receipt Item Print", 
+  "options": "Purchase Receipt Items Print", 
   "permlevel": 0, 
   "precision": "", 
   "print_hide": 0, 
