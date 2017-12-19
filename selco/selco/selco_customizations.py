@@ -409,7 +409,7 @@ def selco_payment_entry_before_delete(doc,method):
 
 def selco_journal_entry_before_insert(doc,method):
 
-    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"cost_center")
+    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"selco_cost_center")
 
     for account in doc.accounts:
         account.cost_center = local_cost_center
@@ -434,11 +434,11 @@ def selco_journal_entry_before_insert(doc,method):
     if doc.voucher_type == "Receipt":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"receipt_naming_series")
     if doc.voucher_type == "Commission Journal":
-        doc.naming_series = frappe.db.get_value("Branch",doc.branch,"commission_journal_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"commission_journal_naming_series")
 
 @frappe.whitelist()
 def selco_journal_entry_validate(doc,method):
-    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"cost_center")
+    local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"selco_cost_center")
     if doc.use_different_cost_center == 1:
         local_cost_center = doc.alternative_cost_center
         frappe.msgprint(local_cost_center)
