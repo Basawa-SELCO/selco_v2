@@ -65,15 +65,6 @@
  {
   "docstatus": 0, 
   "doctype": "Custom Script", 
-  "dt": "Customer", 
-  "modified": "2017-11-07 14:35:01.642889", 
-  "name": "Customer-Client", 
-  "script": "/*To set naming series when branch is choosen for the first time */\ncur_frm.add_fetch(\"selco_branch\", \"customer_naming_series\", \"naming_series\"); \n\n/*To set naming series when the value in branch is changed*/\nfrappe.ui.form.on(\"Lead\", \"selco_branch\",\n    function(frm) {\ncur_frm.add_fetch(\"selco_branch\", \"customer_naming_series\", \"naming_series\");\n\nif ( cur_frm.doc.naming_series == null )\n{\nwindow.location.reload();\nmsgprint(\"Please set the correct naming series for customers in branch record.\");\n       throw \"Not allowed\";\n}\n})", 
-  "script_type": "Client"
- }, 
- {
-  "docstatus": 0, 
-  "doctype": "Custom Script", 
   "dt": "Delivery Note", 
   "modified": "2017-12-05 14:51:18.863389", 
   "name": "Delivery Note-Client", 

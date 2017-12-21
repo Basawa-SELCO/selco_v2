@@ -7,35 +7,6 @@
   "doctype": "Report", 
   "is_standard": "Yes", 
   "javascript": null, 
-  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
-  "letter_head": null, 
-  "modified": "2017-02-24 20:01:53.097456", 
-  "module": "Stock", 
-  "name": "Serial No Warranty Expiry", 
-  "query": null, 
-  "ref_doctype": "Serial No", 
-  "report_name": "Serial No Warranty Expiry", 
-  "report_type": "Report Builder", 
-  "roles": [
-   {
-    "role": "Item Manager"
-   }, 
-   {
-    "role": "Stock Manager"
-   }, 
-   {
-    "role": "Stock User"
-   }
-  ]
- }, 
- {
-  "add_total_row": 0, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
   "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"amc_expiry_date\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
   "letter_head": null, 
   "modified": "2017-02-24 20:02:00.706889", 
@@ -73,6 +44,35 @@
   "query": null, 
   "ref_doctype": "Serial No", 
   "report_name": "Serial No Status", 
+  "report_type": "Report Builder", 
+  "roles": [
+   {
+    "role": "Item Manager"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:01:53.097456", 
+  "module": "Stock", 
+  "name": "Serial No Warranty Expiry", 
+  "query": null, 
+  "ref_doctype": "Serial No", 
+  "report_name": "Serial No Warranty Expiry", 
   "report_type": "Report Builder", 
   "roles": [
    {
@@ -148,38 +148,6 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:04:20.699195", 
-  "module": "Stock", 
-  "name": "Purchase Order Items To Be Received", 
-  "query": "select \n    `tabPurchase Order`.`name` as \"Purchase Order:Link/Purchase Order:120\",\n\t`tabPurchase Order`.`transaction_date` as \"Date:Date:100\",\n\t`tabPurchase Order Item`.`schedule_date` as \"Reqd by Date:Date:110\",\n\t`tabPurchase Order`.`supplier` as \"Supplier:Link/Supplier:120\",\n\t`tabPurchase Order`.`supplier_name` as \"Supplier Name::150\",\n\t`tabPurchase Order Item`.`project` as \"Project\",\n\t`tabPurchase Order Item`.item_code as \"Item Code:Link/Item:120\",\n\t`tabPurchase Order Item`.qty as \"Qty:Float:100\",\n\t`tabPurchase Order Item`.received_qty as \"Received Qty:Float:100\", \n\t(`tabPurchase Order Item`.qty - ifnull(`tabPurchase Order Item`.received_qty, 0)) as \"Qty to Receive:Float:100\",\n    `tabPurchase Order Item`.warehouse as \"Warehouse:Link/Warehouse:150\",\n\t`tabPurchase Order Item`.item_name as \"Item Name::150\",\n\t`tabPurchase Order Item`.description as \"Description::200\",\n    `tabPurchase Order Item`.brand as \"Brand::100\",\n\t`tabPurchase Order`.`company` as \"Company:Link/Company:\"\nfrom\n\t`tabPurchase Order`, `tabPurchase Order Item`\nwhere\n\t`tabPurchase Order Item`.`parent` = `tabPurchase Order`.`name`\n\tand `tabPurchase Order`.docstatus = 1\n\tand `tabPurchase Order`.status not in (\"Stopped\", \"Closed\")\n\tand ifnull(`tabPurchase Order Item`.received_qty, 0) < ifnull(`tabPurchase Order Item`.qty, 0)\norder by `tabPurchase Order`.transaction_date asc", 
-  "ref_doctype": "Purchase Receipt", 
-  "report_name": "Purchase Order Items To Be Received", 
-  "report_type": "Query Report", 
-  "roles": [
-   {
-    "role": "Stock Manager"
-   }, 
-   {
-    "role": "Stock User"
-   }, 
-   {
-    "role": "Purchase User"
-   }, 
-   {
-    "role": "Accounts User"
-   }
-  ]
- }, 
- {
-  "add_total_row": 1, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
-  "json": null, 
-  "letter_head": null, 
   "modified": "2017-11-06 13:05:38.965229", 
   "module": "Stock", 
   "name": "Ordered Items To Be Delivered", 
@@ -196,6 +164,38 @@
    }, 
    {
     "role": "Sales User"
+   }, 
+   {
+    "role": "Accounts User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:04:20.699195", 
+  "module": "Stock", 
+  "name": "Purchase Order Items To Be Received", 
+  "query": "select \n    `tabPurchase Order`.`name` as \"Purchase Order:Link/Purchase Order:120\",\n\t`tabPurchase Order`.`transaction_date` as \"Date:Date:100\",\n\t`tabPurchase Order Item`.`schedule_date` as \"Reqd by Date:Date:110\",\n\t`tabPurchase Order`.`supplier` as \"Supplier:Link/Supplier:120\",\n\t`tabPurchase Order`.`supplier_name` as \"Supplier Name::150\",\n\t`tabPurchase Order Item`.`project` as \"Project\",\n\t`tabPurchase Order Item`.item_code as \"Item Code:Link/Item:120\",\n\t`tabPurchase Order Item`.qty as \"Qty:Float:100\",\n\t`tabPurchase Order Item`.received_qty as \"Received Qty:Float:100\", \n\t(`tabPurchase Order Item`.qty - ifnull(`tabPurchase Order Item`.received_qty, 0)) as \"Qty to Receive:Float:100\",\n    `tabPurchase Order Item`.warehouse as \"Warehouse:Link/Warehouse:150\",\n\t`tabPurchase Order Item`.item_name as \"Item Name::150\",\n\t`tabPurchase Order Item`.description as \"Description::200\",\n    `tabPurchase Order Item`.brand as \"Brand::100\",\n\t`tabPurchase Order`.`company` as \"Company:Link/Company:\"\nfrom\n\t`tabPurchase Order`, `tabPurchase Order Item`\nwhere\n\t`tabPurchase Order Item`.`parent` = `tabPurchase Order`.`name`\n\tand `tabPurchase Order`.docstatus = 1\n\tand `tabPurchase Order`.status not in (\"Stopped\", \"Closed\")\n\tand ifnull(`tabPurchase Order Item`.received_qty, 0) < ifnull(`tabPurchase Order Item`.qty, 0)\norder by `tabPurchase Order`.transaction_date asc", 
+  "ref_doctype": "Purchase Receipt", 
+  "report_name": "Purchase Order Items To Be Received", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Purchase User"
    }, 
    {
     "role": "Accounts User"
@@ -319,19 +319,16 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:14:35.208989", 
-  "module": "Accounts", 
-  "name": "Sales Register", 
+  "modified": "2017-08-23 14:54:12.593140", 
+  "module": "Healthcare", 
+  "name": "Lab Test Report", 
   "query": null, 
-  "ref_doctype": "Sales Invoice", 
-  "report_name": "Sales Register", 
+  "ref_doctype": "Lab Test", 
+  "report_name": "Lab Test Report", 
   "report_type": "Script Report", 
   "roles": [
    {
-    "role": "Accounts Manager"
-   }, 
-   {
-    "role": "Accounts User"
+    "role": "System Manager"
    }
   ]
  }, 
@@ -345,16 +342,19 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-08-23 14:54:12.593140", 
-  "module": "Healthcare", 
-  "name": "Lab Test Report", 
+  "modified": "2017-02-24 20:14:35.208989", 
+  "module": "Accounts", 
+  "name": "Sales Register", 
   "query": null, 
-  "ref_doctype": "Lab Test", 
-  "report_name": "Lab Test Report", 
+  "ref_doctype": "Sales Invoice", 
+  "report_name": "Sales Register", 
   "report_type": "Script Report", 
   "roles": [
    {
-    "role": "System Manager"
+    "role": "Accounts Manager"
+   }, 
+   {
+    "role": "Accounts User"
    }
   ]
  }, 
@@ -645,24 +645,14 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:16:50.550242", 
-  "module": "HR", 
-  "name": "Monthly Attendance Sheet", 
+  "modified": "2017-02-24 20:03:01.035036", 
+  "module": "Schools", 
+  "name": "Absent Student Report", 
   "query": null, 
-  "ref_doctype": "Attendance", 
-  "report_name": "Monthly Attendance Sheet", 
+  "ref_doctype": "Student Attendance", 
+  "report_name": "Absent Student Report", 
   "report_type": "Script Report", 
-  "roles": [
-   {
-    "role": "System Manager"
-   }, 
-   {
-    "role": "HR User"
-   }, 
-   {
-    "role": "HR Manager"
-   }
-  ]
+  "roles": []
  }, 
  {
   "add_total_row": 0, 
@@ -693,14 +683,24 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:03:01.035036", 
-  "module": "Schools", 
-  "name": "Absent Student Report", 
+  "modified": "2017-02-24 20:16:50.550242", 
+  "module": "HR", 
+  "name": "Monthly Attendance Sheet", 
   "query": null, 
-  "ref_doctype": "Student Attendance", 
-  "report_name": "Absent Student Report", 
+  "ref_doctype": "Attendance", 
+  "report_name": "Monthly Attendance Sheet", 
   "report_type": "Script Report", 
-  "roles": []
+  "roles": [
+   {
+    "role": "System Manager"
+   }, 
+   {
+    "role": "HR User"
+   }, 
+   {
+    "role": "HR Manager"
+   }
+  ]
  }, 
  {
   "add_total_row": 1, 
@@ -5127,6 +5127,47 @@
    }, 
    {
     "role": "Stock Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-21 15:51:27.868881", 
+  "module": "SELCO", 
+  "name": "List Of POs To Be Approved By Ops", 
+  "query": "SELECT \nname as \"ID:Data:100\",\ntransaction_date as \"Date:Date:150\",\nsupplier as \"Supplier:Link/Supplier:100\",\ngrand_total as \"Grand total:currency:100\"\nFROM  `tabPurchase Order`  \nwhere workflow_state in (\"AGM Approval Pending - PO\");", 
+  "ref_doctype": "Purchase Order", 
+  "report_name": "List Of POs To Be Approved By Ops", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Purchase Manager"
+   }, 
+   {
+    "role": "Purchase User"
+   }, 
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "SELCO Chief Manager Accounts & Finance"
+   }, 
+   {
+    "role": "SELCO Logistics Basic"
+   }, 
+   {
+    "role": "SELCO Logistics Manager"
+   }, 
+   {
+    "role": "SELCO Management"
    }
   ]
  }
