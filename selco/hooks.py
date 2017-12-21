@@ -221,4 +221,4 @@ scheduler_events = {
 # }
 
 
-fixtures = ["Custom Field", "Custom Script", "Property Setter", "Print Format", "Report", "Workflow", "Workflow State", "Workflow Action"]
+fixtures = ["Custom Field", "Custom Script", "Property Setter", "Print Format", "Report", "Workflow", "Role","Workflow State", "Workflow Action"]

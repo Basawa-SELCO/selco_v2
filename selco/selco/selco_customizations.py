@@ -324,11 +324,10 @@ def get_items_from_rejection_in(selco_rej_in,selco_branch):
 
 @frappe.whitelist()
 def selco_customer_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_naming_series")
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_customer_naming_series")
 
 @frappe.whitelist()
 def selco_customer_validate(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_naming_series")
     if not ( doc.selco_customer_contact_number or doc.selco_landline_mobile_2 ):
         frappe.throw("Enter either Customer Contact Number ( Mobile 1 ) or Mobile 2 / Landline")
     if doc.selco_customer_contact_number:

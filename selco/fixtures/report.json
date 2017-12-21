@@ -7,6 +7,35 @@
   "doctype": "Report", 
   "is_standard": "Yes", 
   "javascript": null, 
+  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:01:53.097456", 
+  "module": "Stock", 
+  "name": "Serial No Warranty Expiry", 
+  "query": null, 
+  "ref_doctype": "Serial No", 
+  "report_name": "Serial No Warranty Expiry", 
+  "report_type": "Report Builder", 
+  "roles": [
+   {
+    "role": "Item Manager"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
   "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"amc_expiry_date\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
   "letter_head": null, 
   "modified": "2017-02-24 20:02:00.706889", 
@@ -44,35 +73,6 @@
   "query": null, 
   "ref_doctype": "Serial No", 
   "report_name": "Serial No Status", 
-  "report_type": "Report Builder", 
-  "roles": [
-   {
-    "role": "Item Manager"
-   }, 
-   {
-    "role": "Stock Manager"
-   }, 
-   {
-    "role": "Stock User"
-   }
-  ]
- }, 
- {
-  "add_total_row": 0, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
-  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}", 
-  "letter_head": null, 
-  "modified": "2017-02-24 20:01:53.097456", 
-  "module": "Stock", 
-  "name": "Serial No Warranty Expiry", 
-  "query": null, 
-  "ref_doctype": "Serial No", 
-  "report_name": "Serial No Warranty Expiry", 
   "report_type": "Report Builder", 
   "roles": [
    {
@@ -319,29 +319,6 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-08-23 14:54:12.593140", 
-  "module": "Healthcare", 
-  "name": "Lab Test Report", 
-  "query": null, 
-  "ref_doctype": "Lab Test", 
-  "report_name": "Lab Test Report", 
-  "report_type": "Script Report", 
-  "roles": [
-   {
-    "role": "System Manager"
-   }
-  ]
- }, 
- {
-  "add_total_row": 1, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
-  "json": null, 
-  "letter_head": null, 
   "modified": "2017-02-24 20:14:35.208989", 
   "module": "Accounts", 
   "name": "Sales Register", 
@@ -355,6 +332,29 @@
    }, 
    {
     "role": "Accounts User"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 1, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-08-23 14:54:12.593140", 
+  "module": "Healthcare", 
+  "name": "Lab Test Report", 
+  "query": null, 
+  "ref_doctype": "Lab Test", 
+  "report_name": "Lab Test Report", 
+  "report_type": "Script Report", 
+  "roles": [
+   {
+    "role": "System Manager"
    }
   ]
  }, 
@@ -645,25 +645,6 @@
   "javascript": null, 
   "json": null, 
   "letter_head": null, 
-  "modified": "2017-02-24 20:03:01.035036", 
-  "module": "Schools", 
-  "name": "Absent Student Report", 
-  "query": null, 
-  "ref_doctype": "Student Attendance", 
-  "report_name": "Absent Student Report", 
-  "report_type": "Script Report", 
-  "roles": []
- }, 
- {
-  "add_total_row": 0, 
-  "apply_user_permissions": 1, 
-  "disabled": 0, 
-  "docstatus": 0, 
-  "doctype": "Report", 
-  "is_standard": "Yes", 
-  "javascript": null, 
-  "json": null, 
-  "letter_head": null, 
   "modified": "2017-02-24 20:16:50.550242", 
   "module": "HR", 
   "name": "Monthly Attendance Sheet", 
@@ -699,6 +680,25 @@
   "query": null, 
   "ref_doctype": "Student Attendance", 
   "report_name": "Student Monthly Attendance Sheet", 
+  "report_type": "Script Report", 
+  "roles": []
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "Yes", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-02-24 20:03:01.035036", 
+  "module": "Schools", 
+  "name": "Absent Student Report", 
+  "query": null, 
+  "ref_doctype": "Student Attendance", 
+  "report_name": "Absent Student Report", 
   "report_type": "Script Report", 
   "roles": []
  }, 
@@ -4908,6 +4908,225 @@
    }, 
    {
     "role": "SELCO Management"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 15:22:26.175758", 
+  "module": "SELCO", 
+  "name": "Supplier With Address", 
+  "query": "SELECT \nsupplier as \"Supplier ID:Link/Supplier:100\",\nsupplier_name as \"Supplier Name:Data:100\",\nCONCAT(COALESCE(address_line1,' '),' ',COALESCE(address_line2,''),' ',COALESCE(city,''),' ',COALESCE(selco_district,''),' ',COALESCE(state,''),' ',COALESCE(pincode,'')) as \"Supplier Address:Data:100\"\nFROM tabAddress WHERE supplier NOT LIKE \"\";\n\n\n", 
+  "ref_doctype": "Supplier", 
+  "report_name": "Supplier With Address ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Purchase User"
+   }, 
+   {
+    "role": "Purchase Manager"
+   }, 
+   {
+    "role": "Purchase Master Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Accounts User"
+   }, 
+   {
+    "role": "Accounts Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 15:25:02.705825", 
+  "module": "SELCO", 
+  "name": "Supplier Addresses and Contacts", 
+  "query": "SELECT\n    `tabSupplier`.name as \"Supplier:Link/Supplier:120\",\n\t`tabSupplier`.supplier_name as \"Supplier Name::120\",\n\t`tabSupplier`.supplier_type as \"Supplier Type:Link/Supplier Type:120\",\n\tconcat_ws(', ', \n\t\ttrim(',' from `tabAddress`.address_line1), \n\t\ttrim(',' from tabAddress.address_line2), \n\t\ttabAddress.state, tabAddress.pincode, tabAddress.country\n\t) as 'Address::180',\n    concat_ws(', ', `tabContact`.first_name, `tabContact`.last_name) as \"Contact Name::180\",\n\t`tabContact`.phone as \"Phone\",\n\t`tabContact`.mobile_no as \"Mobile No\",\n\t`tabContact`.email_id as \"Email Id::120\",\n\t`tabContact`.is_primary_contact as \"Is Primary Contact::120\"\nFROM\n\t`tabSupplier`\n\tleft join `tabAddress` on (\n\t\t`tabAddress`.supplier=`tabSupplier`.name\n\t)\n\tleft join `tabContact` on (\n\t\t`tabContact`.supplier=`tabSupplier`.name\n\t)\nWHERE\n\t`tabSupplier`.docstatus<2\nORDER BY\n\t`tabSupplier`.name asc", 
+  "ref_doctype": "Supplier", 
+  "report_name": "Supplier Addresses and Contacts", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Purchase User"
+   }, 
+   {
+    "role": "Purchase Manager"
+   }, 
+   {
+    "role": "Purchase Master Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Accounts User"
+   }, 
+   {
+    "role": "Accounts Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 15:43:32.757811", 
+  "module": "Selling", 
+  "name": "Customer Addresses And Contacts", 
+  "query": "SELECT\n\t`tabCustomer`.name as \"Customer ID:Link/Customer\",\n\t`tabCustomer`.customer_name as \"Customer Name\",\n\t`tabCustomer`.customer_group as \"Customer Group:Link/Customer Group\",\n\t`tabAddress`.address_line1 as \"Address Line 1\",\n\t`tabAddress`.address_line2 as \"Address Line 2\",\n\t`tabAddress`.city as \"City\",\n\t`tabAddress`.state as \"State\",\n\t`tabAddress`.pincode as \"Postal Code\",\n\t`tabAddress`.country as \"Country\",\n\t`tabAddress`.is_primary_address as \"Is Primary Address:Check\", \n\t`tabContact`.first_name as \"First Name\",\n\t`tabContact`.last_name as \"Last Name\",\n\t`tabContact`.phone as \"Phone\",\n\t`tabContact`.mobile_no as \"Mobile No\",\n\t`tabContact`.email_id as \"Email Id\",\n\t`tabContact`.is_primary_contact as \"Is Primary Contact:Check\"\nFROM\n\t`tabCustomer`\n\tleft join `tabAddress` on (\n\t\t`tabAddress`.customer=`tabCustomer`.name\n\t)\n\tleft join `tabContact` on (\n\t\t`tabContact`.customer=`tabCustomer`.name\n\t)\nWHERE\n\t`tabCustomer`.docstatus<2\nORDER BY\n\t`tabCustomer`.name asc", 
+  "ref_doctype": "Customer", 
+  "report_name": "Customer Addresses And Contacts", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Sales User"
+   }, 
+   {
+    "role": "Sales Manager"
+   }, 
+   {
+    "role": "Sales Master Manager"
+   }, 
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Stock Manager"
+   }, 
+   {
+    "role": "Accounts User"
+   }, 
+   {
+    "role": "Accounts Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 16:12:57.812789", 
+  "module": "SELCO", 
+  "name": "Requested Items To Be Transferred - SELCO Custom", 
+  "query": "select \n    mr.name as \"Material Request:Link/Material Request:120\",\n\tmr.transaction_date as \"Date:Date:100\",\n\tmr_item.item_code as \"Item Code:Link/Item:120\",\n\tmr_item.qty as \"Qty:Float:100\",\n\tmr_item.ordered_qty as \"Transferred Qty:Float:100\", \n\t(mr_item.qty - ifnull(mr_item.ordered_qty, 0)) as \"Qty to Transfer:Float:100\",\n\tmr_item.item_name as \"Item Name::150\",\n\tmr_item.description as \"Description::200\",\n\tmr.company as \"Company:Link/Company:\"\nfrom\n\t`tabMaterial Request` mr, `tabMaterial Request Item` mr_item\nwhere\n\tmr_item.parent = mr.name\n\tand mr.material_request_type = \"Material Transfer\"\n\tand mr.docstatus = 1\n\tand mr.status != \"Stopped\"\n\tand ifnull(mr_item.ordered_qty, 0) < ifnull(mr_item.qty, 0)\norder by mr.transaction_date asc", 
+  "ref_doctype": "Stock Entry", 
+  "report_name": "Requested Items To Be Transferred - SELCO Custom ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Manufacturing User"
+   }, 
+   {
+    "role": "Manufacturing Manager"
+   }, 
+   {
+    "role": "Stock Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 16:17:32.026190", 
+  "module": "SELCO", 
+  "name": "Pending Rejection Out To Customer", 
+  "query": "SELECT\nA.name as \"Rejection In ID :Link/Stock Entry:150\",\nA.posting_date as \"Date:Date:80\",\nA.selco_supplier_or_customer as \"Supplier Or Customer:Link/DocType:80\",\nB.item_code as \"Item Code:Link/Item:80\",\nB.item_name as \"Item Name:Data:100\",\nB.qty as \"In Qty:Int:60\",\nB.reference_rej_in_or_rej_quantity as \"Out Qty:Int:60\",\nB.qty - B.reference_rej_in_or_rej_quantity as \"Pending Qty:Int:100\"\nfrom `tabStock Entry` A  JOIN`tabStock Entry Detail` B ON A.name = B.parent AND selco_branch = %(selco_branch)s AND  A.selco_type_of_stock_entry\nIN(\"Rejection In\") AND A.selco_supplier_or_customer IN(\"Customer\") AND B.qty-B.reference_rej_in_or_rej_quantity > 0 ;\n\n", 
+  "ref_doctype": "Stock Entry", 
+  "report_name": "Pending Rejection Out To Customer", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Manufacturing User"
+   }, 
+   {
+    "role": "Manufacturing Manager"
+   }, 
+   {
+    "role": "Stock Manager"
+   }
+  ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": null, 
+  "modified": "2017-12-19 16:20:10.444107", 
+  "module": "Stock", 
+  "name": "Pending Rejection In From Supplier", 
+  "query": "SELECT\nA.name as \"Rejection In ID :Link/Stock Entry:150\",\nA.posting_date as \"Date:Date:80\",\nA.selco_supplier_or_customer as \"Supplier Or Customer:Link/DocType:80\",\nB.item_code as \"Item Code:Link/Item:80\",\nB.item_name as \"Item Name:Data:100\",\nB.qty as \"In Qty:Int:60\",\nB.reference_rej_in_or_rej_quantity as \"Out Qty:Int:60\",\nB.qty - B.reference_rej_in_or_rej_quantity as \"Pending Qty:Int:100\"\nfrom `tabStock Entry` A  JOIN`tabStock Entry Detail` B ON A.name = B.parent AND selco_branch = %(selco_branch)s AND  A.selco_type_of_stock_entry\nIN(\"Rejection Out\") AND A.selco_supplier_or_customer IN(\"Supplier\") AND B.qty-B.reference_rej_in_or_rej_quantity > 0 ;\n\n", 
+  "ref_doctype": "Stock Entry", 
+  "report_name": "Pending Rejection In From Supplier ", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Stock User"
+   }, 
+   {
+    "role": "Manufacturing User"
+   }, 
+   {
+    "role": "Manufacturing Manager"
+   }, 
+   {
+    "role": "Stock Manager"
    }
   ]
  }
