@@ -65,7 +65,11 @@ doc_events = {
    },
    "Address":{
         "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
-   }
+   },
+    "Purchase Order":{
+            "before_insert":"selco.selco.selco_customizations.selco_purchase_order_before_insert",
+             "validate": "selco.selco.selco_customizations.selco_purchase_order_validate"
+  }
  }
 
 # scheduler_events = {
