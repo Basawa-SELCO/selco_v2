@@ -11,6 +11,7 @@ from erpnext.accounts.party import get_party_account, get_due_date
 from datetime import datetime
 from datetime import timedelta
 
+
 class SelcoCustomizations(Document):
     pass
 
@@ -81,18 +82,18 @@ def selco_warranty_claim_updates(doc,method):
 
 @frappe.whitelist()
 def get_address_display(address_dict):
-	if not address_dict:
-		return
+    if not address_dict:
+        return
 
-	if not isinstance(address_dict, dict):
-		address_dict = frappe.db.get_value("Address", address_dict, "*", as_dict=True) or {}
+    if not isinstance(address_dict, dict):
+        address_dict = frappe.db.get_value("Address", address_dict, "*", as_dict=True) or {}
 
-	name, template = get_address_templates(address_dict)
+    name, template = get_address_templates(address_dict)
 
-	try:
-		return frappe.render_template(template, address_dict)
-	except TemplateSyntaxError:
-		frappe.throw(_("There is an error in your Address Template {0}").format(name))
+    try:
+        return frappe.render_template(template, address_dict)
+    except TemplateSyntaxError:
+        frappe.throw(_("There is an error in your Address Template {0}").format(name))
 
 @frappe.whitelist()
 def selco_delivery_note_validates(doc,method):
@@ -179,6 +180,15 @@ def selco_purchase_order_validate(doc,method):
     doc.selco_godown_email = frappe.db.get_value("Branch",local_branch,"selco_branch_email_id")
     doc.selco_godown_address = frappe.db.get_value("Branch",local_branch,"selco_address")
     doc.selco_godown_address_details = get_address_display(doc.selco_godown_address)
+    advance_local = doc.base_rounded_total * (float(doc.selco_advance_percentage_1) / 100)
+    advance_local = round(advance_local)
+    balance_local = doc.base_rounded_total - advance_local
+    doc.selco_advance_details_currency=advance_local
+    doc.selco_balance_details_currency=balance_local
+
+    for d in doc.get('items'):
+        d.warehouse == doc.selco_godown
+
 
 
 @frappe.whitelist()
