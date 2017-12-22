@@ -170,15 +170,15 @@ def selco_purchase_order_before_insert(doc,method):
 
     local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
     doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_po_naming_series")
-    doc.selco_godown_email = frappe.db.get_value("Branch",local_branch,"selco_branch_email_id")
 
 
 @frappe.whitelist()
 def selco_purchase_order_validate(doc,method):
     from frappe.contacts.doctype.address.address import get_address_display
+    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    doc.selco_godown_email = frappe.db.get_value("Branch",local_branch,"selco_branch_email_id")
     doc.selco_godown_address = frappe.db.get_value("Branch",local_branch,"selco_address")
     doc.selco_godown_address_details = get_address_display(doc.selco_godown_address)
-
 
 
 @frappe.whitelist()
@@ -514,11 +514,12 @@ def selco_validate_if_lead_contact_number_exists(contact_number,lead_id):
 @frappe.whitelist()
 def selco_address_before_insert(doc,method):
     if doc.selco_customer_link:
-        temp_name = frappe.get_value("Customer",doc.customer,"customer_name")
+        temp_name = frappe.get_value("Customer",doc.selco_customer_link,"customer_name")
         doc.address_title = doc.selco_customer_link + " - " + temp_name
         doc.name = doc.selco_customer_link + " - " + temp_name + " - "
     if doc.selco_customer_link:
-        doc.links[0].link_name=doc.selco_customer_link
+        doc.append("links",{"link_doctype":"Customer","link_name":doc.selco_customer_link})
+        #doc.links[0].link_name=doc.selco_customer_link
 
 
 @frappe.whitelist()
