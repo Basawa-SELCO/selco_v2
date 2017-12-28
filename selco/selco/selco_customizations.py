@@ -164,13 +164,14 @@ def selco_material_approved_and_dispatched(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Warehouse",doc.selco_godown,"mrn_naming_series")
+    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_mrn_naming_series")
 
 @frappe.whitelist()
 def selco_purchase_order_before_insert(doc,method):
-
     local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
     doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_po_naming_series")
+
 
 
 @frappe.whitelist()
@@ -193,7 +194,8 @@ def selco_purchase_order_validate(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_validate(doc,method):
-    selco_cost_center = frappe.db.get_value("Warehouse",doc.selco_godown,"cost_center")
+    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    selco_cost_center = frappe.db.get_value("Branch",local_branch,"selco_cost_center")
     for d in doc.get('items'):
         d.cost_center = selco_cost_center
     for d in doc.get('taxes'):
@@ -206,7 +208,7 @@ def selco_purchase_receipt_validate(doc,method):
 
             po_list_date.append(frappe.utils.formatdate(frappe.db.get_value('Purchase Order', item_selco.purchase_order, 'transaction_date'),"dd-MM-yyyy"))
     doc.selco_list_of_po= ','.join([str(i) for i in po_list])
-    frappe.msgprint(doc.selco_list_of_po)
+
     doc.selco_list_of_po_date= ','.join([str(i) for i in po_list_date])
     #End of Insert By basawaraj On 7th september for printing the list of PO when PR is done by importing items from multiple PO
 
