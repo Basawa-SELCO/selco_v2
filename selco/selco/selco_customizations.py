@@ -188,7 +188,7 @@ def selco_purchase_order_validate(doc,method):
     doc.selco_balance_details_currency=balance_local
 
     for d in doc.get('items'):
-        d.warehouse == doc.selco_godown
+        d.warehouse = doc.selco_godown
 
 
 
@@ -196,25 +196,52 @@ def selco_purchase_order_validate(doc,method):
 def selco_purchase_receipt_validate(doc,method):
     local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
     selco_cost_center = frappe.db.get_value("Branch",local_branch,"selco_cost_center")
+
     for d in doc.get('items'):
         d.cost_center = selco_cost_center
+        d.warehouse = doc.selco_godown
     for d in doc.get('taxes'):
         d.cost_center = selco_cost_center
-    po_list = []
-    po_list_date = []
-    for item_selco in doc.items:
-        if item_selco.purchase_order not in po_list:
-            po_list.append(item_selco.purchase_order)
 
-            po_list_date.append(frappe.utils.formatdate(frappe.db.get_value('Purchase Order', item_selco.purchase_order, 'transaction_date'),"dd-MM-yyyy"))
-    doc.selco_list_of_po= ','.join([str(i) for i in po_list])
 
-    doc.selco_list_of_po_date= ','.join([str(i) for i in po_list_date])
-    #End of Insert By basawaraj On 7th september for printing the list of PO when PR is done by importing items from multiple PO
+    for r in doc.get('selco_purchase_receipt_item_print'):
+        doc.get('selco_purchase_receipt_item_print').remove(r)
 
-@frappe.whitelist()
-def test_before_save(doc,method):
-    pass #frappe.msgprint("Before Save")
+    flag=0
+    row = doc.append('selco_purchase_receipt_item_print', {})
+    row.selco_item_code = doc.items[0].item_code
+    row.selco_item_name = doc.items[0].item_name
+    row.selco_received_quantity = doc.items[0].received_qty
+    row.selco_accepted_quantity = doc.items[0].qty
+    row.selco_rejected_quantity = doc.items[0].rejected_qty
+    row.selco_rate = doc.items[0].rate
+
+
+
+    for i,row in enumerate(doc.get('items')):
+        if (i != 0):
+            for j,row in enumerate(doc.get('selco_purchase_receipt_item_print')):
+
+                """if (doc.items[i].item_code == doc.selco_purchase_receipt_item_print[j].selco_item_code and doc.items[i].item_name == doc.selco_purchase_receipt_item_print[j].selco_item_name):
+                   flag=1
+                   doc.selco_purchase_receipt_item_print[j].selco_received_quantity = doc.selco_purchase_receipt_item_print[j].selco_received_quantity+doc.items[i].received_qty
+                   doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity = doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity+doc.items[i].qty
+                   doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity = doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity+doc.items[i].rejected_qty
+                 """
+                if(flag!= 1):
+                   r = doc.append('selco_purchase_receipt_item_print', {})
+                   r.selco_item_code = doc.items[i].item_code
+                   r.selco_item_name = doc.items[i].item_name
+                   r.selco_received_quantity = doc.items[i].received_qty
+                   r.selco_accepted_quantity = doc.items[i].qty
+                   r.selco_rejected_quantity = doc.items[i].rejected_qty
+                   r.selco_rate = doc.items[i].rate
+                   frappe.msgprint(str(flag))
+                   flag=0
+
+
+
+
 
 @frappe.whitelist()
 def selco_stock_entry_updates(doc,method):
