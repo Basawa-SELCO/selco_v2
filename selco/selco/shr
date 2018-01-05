@@ -1,0 +1,19 @@
+"""flag=0
+     row = doc.append('selco_purchase_receipt_item_print', {})
+     row.selco_item_code = doc.items[0].item_code
+     row.selco_item_name = doc.items[0].item_name
+     row.selco_received_quantity = doc.items[0].received_qty
+     row.selco_accepted_quantity = doc.items[0].qty
+     row.selco_rejected_quantity = doc.items[0].rejected_qty
+     row.selco_rate = doc.items[0].rate"""
+
+     if(flag != 1):
+                 r = doc.append('selco_purchase_receipt_item_print', {})
+                 r.selco_item_code = doc.items[i].item_code
+                 r.selco_item_name = doc.items[i].item_name
+                 r.selco_received_quantity = doc.items[i].received_qty
+                 r.selco_accepted_quantity = doc.items[i].qty
+                 r.selco_rejected_quantity = doc.items[i].rejected_qty
+                 r.selco_rate = doc.items[i].rate
+                 frappe.msgprint(doc.items[i].item_code)
+                 flag=0

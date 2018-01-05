@@ -234,6 +234,22 @@ def selco_purchase_receipt_validate(doc,method):
                r.selco_rate = doc.items[i].rate
                #frappe.msgprint(str(flag))
             flag=0
+    po_list = []
+    po_list_date = []
+    for item_selco in doc.items:
+        if item_selco.purchase_order not in po_list:
+            po_list.append(item_selco.purchase_order)
+            po_list_date.append(frappe.utils.formatdate(frappe.db.get_value('Purchase Order', item_selco.purchase_order, 'transaction_date'),"dd-MM-yyyy"))
+    doc.selco_list_of_po= ','.join([str(i) for i in po_list])
+    doc.selco_list_of_po_date= ','.join([str(i) for i in po_list_date])
+    #End of Insert By basawaraj On 7th september for printing the list of PO when PR is done by importing items from multiple PO
+    if doc.selco_type_of_purchase == "Normal":
+        for d in doc.get('items'):
+            if not d.purchase_order :
+                frappe.throw("Purchase Order Is Mandatory")
+
+
+
 
 
 @frappe.whitelist()
