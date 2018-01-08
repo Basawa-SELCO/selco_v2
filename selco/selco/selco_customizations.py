@@ -440,25 +440,25 @@ def selco_sales_invoice_validate(doc,method):
 
 def selco_payment_entry_before_insert(doc,method):
     if doc.payment_type == "Receive":
-        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"receipt_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
         if doc.mode_of_payment == "Bank":
             if doc.amount_credited_to_platinum_account == 1:
-                doc.paid_to = frappe.db.get_value("Branch","Head Office","collection_account")
+                doc.paid_to = frappe.db.get_value("Branch","Head Office","selco_collection_account")
             else:
-                doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account")
+                doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
         elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account_cash")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
     elif doc.payment_type == "Pay":
         if doc.mode_of_payment == "Bank":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"bank_payment_naming_series")
-            doc.paid_from = frappe.db.get_value("Branch",doc.selco_branch,"expenditure_account")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bank_payment_naming_series")
+            doc.paid_from = frappe.db.get_value("Branch",doc.selco_branch,"selco_expenditure_account")
 
 def selco_payment_entry_validate(doc,method):
     if doc.payment_type == "Receive":
         if doc.mode_of_payment == "Bank":
-            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
         elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"collection_account_cash")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
             frappe.msgprint("Cash Account is" + doc.paid_to)
     local_sum = 0
     local_sum = doc.paid_amount
@@ -512,13 +512,16 @@ def selco_journal_entry_validate(doc,method):
 def selco_purchase_invoice_before_insert(doc,method):
     if doc.is_return == 1:
         doc.naming_series = "DN/HO/16-17/"
-    doc.naming_series = frappe.db.get_value("Warehouse",doc.selco_godown,"purchase_invoice_naming_series")
+    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_purchase_invoice_naming_series")
+
+
 
 @frappe.whitelist()
 def selco_purchase_invoice_validate(doc,method):
     #doc.posting_date = doc.supplier_invoice_date
-    doc.bill_no = doc.supplier_invoice_number
-    doc.due_date = get_due_date(doc.supplier_invoice_date, "Supplier", doc.supplier, doc.company)
+    doc.bill_no = doc.selco_supplier_invoice_number
+    doc.due_date = get_due_date(doc.selco_supplier_invoice_date, "Supplier", doc.supplier, doc.company)
 
 @frappe.whitelist()
 def clean_up(doc,method):
@@ -706,29 +709,31 @@ def cleanup_se():
         dc.cancel()
         dc.delete()"""
 @frappe.whitelist()
-def selco_create_customer(branch,customer_group,customer_name,customer_contact_number,landline_mobile_2,gender,electrification_status):
+def selco_create_customer(selco_branch,customer_group,customer_name,selco_customer_contact_number,selco_landline_mobile_2,selco_gender,selco_electrification_status):
     local_cust = frappe.new_doc("Customer")
-    local_cust.branch = branch
+    local_cust.selco_branch = selco_branch
     local_cust.customer_group = customer_group
     local_cust.customer_name = customer_name
-    local_cust.customer_contact_number = customer_contact_number
-    local_cust.landline_mobile_2 = landline_mobile_2
-    local_cust.gender = gender
-    local_cust.electrification_status = electrification_status
+    local_cust.selco_customer_contact_number = selco_customer_contact_number
+    local_cust.selco_landline_mobile_2 = selco_landline_mobile_2
+    local_cust.selco_gender = selco_gender
+    local_cust.selco_electrification_status = selco_electrification_status
     local_cust.insert()
     return local_cust.name,local_cust.customer_name
 @frappe.whitelist()
-def selco_add_new_address(branch,address_type,address_line1,address_line2,city,district,country,customer):
-    from erpnext.utilities.doctype.address.address import get_address_display
+def selco_add_new_address(selco_branch,address_type,address_line1,address_line2,city,selco_district,country,customer,address_title):
+    from frappe.contacts.doctype.address.address import get_address_display
     local_address = frappe.new_doc("Address")
-    local_address.branch = branch
+    local_address.selco_branch = selco_branch
     local_address.address_type = address_type
     local_address.address_line1 = address_line1
     local_address_line2 = address_line2
     local_address.city = city
-    local_address.district = district
+    local_address.selco_district = selco_district
     local_address.country = country
     local_address.customer = customer
+
+    local_address.address_title= address_title
     local_address.insert()
     return local_address.name,str(get_address_display(local_address.name))
 
