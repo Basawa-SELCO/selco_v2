@@ -418,15 +418,18 @@ def selco_validate_if_customer_contact_number_exists(contact_number,customer_id)
 
 @frappe.whitelist()
 def selco_sales_invoice_before_insert(doc,method):
+
+    doc.selco_customer_contact_number = frappe.db.get_value("Customer",doc.customer,"selco_customer_contact_number")
+    doc.selco_customer_tin_number = frappe.db.get_value("Customer",doc.customer,"selco_customer_tin_number")
     if doc.is_return == 1:
-        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"credit_note_naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_credit_note_naming_series")
     else:
         if doc.type_of_invoice == "System Sales Invoice" or doc.selco_type_of_invoice == "Spare Sales Invoice":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"sales_invoice_naming_series")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_sales_invoice_naming_series")
         elif doc.type_of_invoice == "Service Bill":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"service_bill_naming_series")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_bill_naming_series")
         elif doc.type_of_invoice == "Bill of Sale":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"bill_of_sales_naming_series")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bill_of_sales_naming_series")
 
 @frappe.whitelist()
 def selco_sales_invoice_validate(doc,method):
@@ -437,7 +440,10 @@ def selco_sales_invoice_validate(doc,method):
         d.income_account = doc.selco_sales_account
     for d in doc.get('taxes'):
         d.cost_center = selco_cost_center
-
+    for i,c in enumerate(doc.get('taxes')):
+        if doc.taxes[i].account_head == "Discount Karnataka 14.5% - SELCO":
+           if doc.taxes[i].tax_amount>0:
+              doc.taxes[i].tax_amount = doc.taxes[i].tax_amount * -1
 def selco_payment_entry_before_insert(doc,method):
     if doc.payment_type == "Receive":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
