@@ -9,14 +9,14 @@ from frappe.model.document import Document
 class BankPayment(Document):
 	def before_insert(self):
 		frappe.msgprint('jkl')
-		self.naming_series = frappe.db.get_value("Branch",self.selco_branch,"bank_payment_naming_series")
+		self.naming_series = frappe.db.get_value("Branch",self.selco_branch,"selco_bank_payment_naming_series")
 
 	def on_submit(self):
 		je = frappe.new_doc('Journal Entry')
 		frappe.msgprint('jkl')
 		je.selco_branch = self.selco_branch
 		je.name = "J" + self.name
-		je.naming_series = "J" + frappe.db.get_value("Branch",self.selco_branch,"bank_payment_naming_series")
+		je.naming_series = "J" +str(frappe.db.get_value("Branch",self.selco_branch,"selco_bank_payment_naming_series"))
 		je.voucher_type = self.voucher_type
 		je.posting_date = self.posting_date
 		je.company = self.company
