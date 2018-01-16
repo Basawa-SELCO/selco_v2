@@ -45,7 +45,7 @@ def month_service_person_unique(doc,method):
 
 @frappe.whitelist()
 def selco_issue_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"customer_complaint_naming_series")
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_customer_complaint_naming_series")
 
 @frappe.whitelist()
 def selco_warranty_claim_validate(doc,method):
@@ -526,8 +526,9 @@ def selco_purchase_invoice_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_invoice_validate(doc,method):
-    doc.posting_date=doc.selco_supplier_invoice_date
-    
+    from erpnext.accounts.party import get_due_date
+    doc.due_date = get_due_date(doc.selco_supplier_invoice_date,"Supplier",doc.supplier)
+    #doc
     #doc.bill_no = doc.selco_supplier_invoice_number
     #doc.due_date = get_due_date(doc.selco_supplier_invoice_date, "Supplier", doc.supplier, doc.company)"
 
