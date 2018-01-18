@@ -509,9 +509,8 @@ def selco_journal_entry_before_insert(doc,method):
 @frappe.whitelist()
 def selco_journal_entry_validate(doc,method):
     local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"selco_cost_center")
-    if doc.use_different_cost_center == 1:
-        local_cost_center = doc.alternative_cost_center
-        frappe.msgprint(local_cost_center)
+    if doc.selco_use_different_cost_center == 1:
+        local_cost_center = doc.selco_alternative_cost_center
     for account in doc.accounts:
         account.cost_center = local_cost_center
 
