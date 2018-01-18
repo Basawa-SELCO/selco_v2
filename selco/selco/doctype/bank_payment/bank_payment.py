@@ -8,21 +8,28 @@ from frappe.model.document import Document
 
 class BankPayment(Document):
 	def before_insert(self):
-		frappe.msgprint('jkl')
 		self.naming_series = frappe.db.get_value("Branch",self.selco_branch,"selco_bank_payment_naming_series")
 
 	def on_submit(self):
 		je = frappe.new_doc('Journal Entry')
-		frappe.msgprint('jkl')
 		je.selco_branch = self.selco_branch
+		je.voucher_type = self.voucher_type
+		je.selco_use_different_cost_center = self.use_different_cost_center
+		je.posting_date = self.posting_date
+		je.cheque_no = self.cheque_no
+		je.cheque_date = self.cheque_date
+		je.user_remark = self.user_remark
 		je.name = "J" + self.name
 		je.naming_series = "J" +str(frappe.db.get_value("Branch",self.selco_branch,"selco_bank_payment_naming_series"))
-		je.voucher_type = self.voucher_type
-		je.posting_date = self.posting_date
 		je.company = self.company
 		for d in self.get('accounts'):
 			je.append("accounts",{
 			"account":d.account,
+			"party_type":d.party_type,
+			"party":d.party,
+			"reference_type":d.reference_type,
+			"reference_name":d.reference_name,
+			"is_advance":d.is_advance,
 			"cost_center":d.cost_center,
 			"account_currency":d.account_currency,
 			"debit_in_account_currency":d.debit_in_account_currency,
