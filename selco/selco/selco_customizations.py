@@ -478,17 +478,13 @@ def selco_payment_entry_before_delete(doc,method):
         frappe.throw("You cannot delete Payment Entries")
 
 def selco_journal_entry_before_insert(doc,method):
-
+    frappe.msgprint(doc.name)
     local_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"selco_cost_center")
-
     for account in doc.accounts:
         account.cost_center = local_cost_center
+
     if doc.voucher_type == "Contra Entry":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_contra_naming_series")
-        """if doc.branch == "Head Office" and doc.transfer_type == "Branch Collectiion To Platinum":
-            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_collection")
-        elif doc.branch == "Head Office" and doc.transfer_type == "Platinum To Branch Expenditure":
-            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_expenditure")"""
     if doc.voucher_type == "Cash Payment":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_cash_payment_naming_series")
     if doc.voucher_type == "Debit Note":
@@ -505,6 +501,10 @@ def selco_journal_entry_before_insert(doc,method):
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
     if doc.voucher_type == "Commission Journal":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_commission_journal_naming_series")
+        """if doc.branch == "Head Office" and doc.transfer_type == "Branch Collectiion To Platinum":
+            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_collection")
+        elif doc.branch == "Head Office" and doc.transfer_type == "Platinum To Branch Expenditure":
+            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_expenditure")"""
 
 @frappe.whitelist()
 def selco_journal_entry_validate(doc,method):

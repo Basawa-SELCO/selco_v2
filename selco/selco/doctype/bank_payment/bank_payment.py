@@ -20,7 +20,7 @@ class BankPayment(Document):
 		je.cheque_date = self.cheque_date
 		je.user_remark = self.user_remark
 		je.name = "J" + self.name
-		je.naming_series = "J" +str(frappe.db.get_value("Branch",self.selco_branch,"selco_bank_payment_naming_series"))
+		frappe.msgprint("je.name is" + str(je.name))
 		je.company = self.company
 		for d in self.get('accounts'):
 			je.append("accounts",{
