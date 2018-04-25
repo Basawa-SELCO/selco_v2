@@ -164,14 +164,17 @@ def selco_material_approved_and_dispatched(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_before_insert(doc,method):
-    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
-    doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_mrn_naming_series")
+    # BRANCH2WAREHOUSE
+    # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    # doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_mrn_naming_series")
+    doc.naming_series = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_mrn_naming_series")
 
 @frappe.whitelist()
 def selco_purchase_order_before_insert(doc,method):
-    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
-    doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_po_naming_series")
-
+    # BRANCH2WAREHOUSE
+    # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    # doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_po_naming_series")
+    doc.naming_series = frappe.db.get_value("Warehouse", doc.selco_godown, "selco_po_naming_series")
 
 
 @frappe.whitelist()
@@ -195,8 +198,10 @@ def selco_purchase_order_validate(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_validate(doc,method):
-    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
-    selco_cost_center = frappe.db.get_value("Branch",local_branch,"selco_cost_center")
+    # BRANCH2WAREHOUSE
+    # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    # selco_cost_center = frappe.db.get_value("Branch",local_branch,"selco_cost_center")
+    godown_cost_center = frappe.db.get_value("Warehouse", doc.selco_godown, "selco_cost_center")
 
     for d in doc.get('items'):
         d.cost_center = selco_cost_center
@@ -518,9 +523,11 @@ def selco_journal_entry_validate(doc,method):
 def selco_purchase_invoice_before_insert(doc,method):
     if doc.is_return == 1:
         doc.naming_series = "DN/HO/16-17/"
-    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
-    doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_purchase_invoice_naming_series")
 
+    # BRANCH2WAREHOUSE
+    # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
+    # doc.naming_series = frappe.db.get_value("Branch",local_branch,"selco_purchase_invoice_naming_series")
+    doc.naming_series = frappe.db.get_value("Warehouse", doc.selco_godown, "selco_purchase_invoice_naming_series")
 
 
 @frappe.whitelist()
