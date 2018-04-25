@@ -176,11 +176,12 @@ def selco_purchase_order_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_order_validate(doc,method):
-    from frappe.contacts.doctype.address.address import get_address_display
-    local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
-    doc.selco_godown_email = frappe.db.get_value("Branch",local_branch,"selco_branch_email_id")
-    doc.selco_godown_address = frappe.db.get_value("Branch",local_branch,"selco_address")
-    doc.selco_godown_address_details = get_address_display(doc.selco_godown_address)
+    godown_address_ret = get_default_address_name_and_display("Warehouse", selco_godown)
+    doc.selco_godown_address = godown_address_ret.address_name
+    doc.selco_godown_address_details = godown_address_ret.address_display
+
+    doc.selco_godown_email = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_godown_email_id")
+    
     doc.base_rounded_total= round(doc.base_grand_total)
     advance_local = doc.base_rounded_total * (float(doc.selco_advance_percentage_1) / 100)
     advance_local = round(advance_local)
@@ -190,7 +191,6 @@ def selco_purchase_order_validate(doc,method):
 
     for d in doc.get('items'):
         d.warehouse = doc.selco_godown
-
 
 
 @frappe.whitelist()
@@ -786,3 +786,17 @@ def selco_test_print():
             message="PO",
             attachments=my_attachments,
             now=True)
+
+@frappe.whitelist()
+def get_default_address_name_and_display(doctype, docname):
+    from frappe.contacts.doctype.address.address import get_address_display, get_default_address
+
+    out = frappe._dict({"address_name": None, "address_display": None})
+    default_address = get_default_address(doctype, docname)
+
+    if default_address:
+        out.address_name = default_address
+        out.address_display = get_address_display(default_address)
+
+    return out
+
