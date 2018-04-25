@@ -258,7 +258,7 @@ def selco_stock_entry_updates(doc,method):
 
     selco_cost_center = frappe.db.get_value("Branch",doc.selco_branch,"selco_cost_center")
     selco_selco_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"selco_warehouse")
-    selco_repair_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"repair_warehouse")
+    selco_repair_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"selco_repair_warehouse")
 
 
     if doc.purpose=="Material Transfer":
@@ -323,7 +323,7 @@ def selco_stock_entry_updates(doc,method):
             d.cost_center = selco_cost_center
             d.is_sample_item = 1
     elif doc.purpose=="Repack":
-        if doc.stock_journal == 0:
+        if doc.selco_stock_journal == 0:
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bill_of_material_naming_series")
         else:
             doc.naming_series = "SJ/HO/17-18/"
