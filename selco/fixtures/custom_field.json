@@ -6428,7 +6428,7 @@
   "collapsible_depends_on": null, 
   "columns": 0, 
   "default": null, 
-  "depends_on": "eval:(doc.type_of_invoice=='System Sales Invoice' || doc.type_of_invoice=='Bill of Sale')", 
+  "depends_on": "eval:(doc.selco_type_of_invoice=='System Sales Invoice' || doc.selco_type_of_invoice=='Bill of Sale')", 
   "description": null, 
   "docstatus": 0, 
   "doctype": "Custom Field", 
