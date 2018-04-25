@@ -204,10 +204,10 @@ def selco_purchase_receipt_validate(doc,method):
     godown_cost_center = frappe.db.get_value("Warehouse", doc.selco_godown, "selco_cost_center")
 
     for d in doc.get('items'):
-        d.cost_center = selco_cost_center
-        d.warehouse = doc.selco_godown
+        d.cost_center = godown_cost_center #BRANCH2WAREHOUSE
+        d.warehouse = doc.selco_godown 
     for d in doc.get('taxes'):
-        d.cost_center = selco_cost_center
+        d.cost_center = godown_cost_center #BRANCH2WAREHOUSE
 
 
     doc.set('selco_purchase_receipt_item_print', [])
