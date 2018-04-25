@@ -501,10 +501,10 @@ def selco_journal_entry_before_insert(doc,method):
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
     if doc.voucher_type == "Commission Journal":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_commission_journal_naming_series")
-        """if doc.branch == "Head Office" and doc.transfer_type == "Branch Collectiion To Platinum":
-            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_collection")
-        elif doc.branch == "Head Office" and doc.transfer_type == "Platinum To Branch Expenditure":
-            doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_expenditure")"""
+        # """if doc.branch == "Head Office" and doc.transfer_type == "Branch Collectiion To Platinum":
+        #     doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_collection")
+        # elif doc.branch == "Head Office" and doc.transfer_type == "Platinum To Branch Expenditure":
+        #     doc.naming_series = frappe.db.get_value("Branch",doc.branch,"bank_payment_expenditure")"""
 
 @frappe.whitelist()
 def selco_journal_entry_validate(doc,method):
