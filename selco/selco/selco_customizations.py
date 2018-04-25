@@ -183,7 +183,7 @@ def selco_purchase_order_validate(doc,method):
     doc.selco_godown_address = godown_address_ret.address_name
     doc.selco_godown_address_details = godown_address_ret.address_display
 
-    doc.selco_godown_email = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_godown_email_id")
+    doc.selco_godown_email = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_godown_email")
     
     doc.base_rounded_total= round(doc.base_grand_total)
     advance_local = doc.base_rounded_total * (float(doc.selco_advance_percentage_1) / 100)
