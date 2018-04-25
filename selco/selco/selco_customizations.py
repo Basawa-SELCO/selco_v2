@@ -179,7 +179,7 @@ def selco_purchase_order_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_order_validate(doc,method):
-    godown_address_ret = get_default_address_name_and_display("Warehouse", selco_godown)
+    godown_address_ret = get_default_address_name_and_display("Warehouse", doc.selco_godown)
     doc.selco_godown_address = godown_address_ret.address_name
     doc.selco_godown_address_details = godown_address_ret.address_display
 
