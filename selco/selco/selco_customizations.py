@@ -398,8 +398,9 @@ def selco_customer_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_customer_validate(doc,method):
-    if not ( doc.selco_customer_contact_number or doc.selco_landline_mobile_2 ):
-        frappe.throw("Enter either Customer Contact Number ( Mobile 1 ) or Mobile 2 / Landline")
+    #Suspended for Import
+    # if not ( doc.selco_customer_contact_number or doc.selco_landline_mobile_2 ):
+    #     frappe.throw("Enter either Customer Contact Number ( Mobile 1 ) or Mobile 2 / Landline")
     if doc.selco_customer_contact_number:
         if len(doc.selco_customer_contact_number) != 10:
             frappe.throw("Invalid Customer Contact Number ( Mobile 1 ) - Please enter exact 10 digits of mobile no ex : 9900038803")
