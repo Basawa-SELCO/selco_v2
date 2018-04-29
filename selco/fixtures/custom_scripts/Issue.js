@@ -149,7 +149,7 @@ frappe.ui.form.on("Issue", "refresh", function(frm) {
 cur_frm.fields_dict.selco_customer_id.new_doc = quick_entry_customer;
 //cur_frm.fields_dict.selco_customer_address.new_doc = quick_entry_address;
 })
-quick_entry_address = function(){
+var quick_entry_address = function(){
 console.log("Overrided");
     frappe._from_link = this;
     quick_entry("Address",
@@ -163,7 +163,7 @@ console.log("Overrided");
     });
 }
 
-quick_entry_customer = function(){
+var quick_entry_customer = function(){
     frappe._from_link = this;
     frappe.db.get_value("Branch", cur_frm.doc.selco_branch, "selco_customer_naming_series", function(r) {
     	quick_entry("Customer",
@@ -177,7 +177,7 @@ quick_entry_customer = function(){
 }
 
 
-quick_entry = function(doctype, success, fields_map={}) {
+var quick_entry = function(doctype, success, fields_map={}) {
 	frappe.model.with_doctype(doctype, function() {
 		var mandatory = [];
 
