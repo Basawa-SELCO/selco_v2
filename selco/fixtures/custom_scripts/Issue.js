@@ -59,6 +59,7 @@ frm.set_df_property("selco_sbm_remarks", "read_only",1);
 })
 
 frappe.ui.form.on("Issue", "selco_customer_id", function(frm) {
+	if (!frm.doc.selco_customer_id) { return 0; }
     frappe.call({
 	    method: "frappe.contacts.doctype.address.address.get_default_address",
 	    args: {
