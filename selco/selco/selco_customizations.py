@@ -265,6 +265,12 @@ def selco_stock_entry_updates(doc,method):
     selco_selco_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"selco_warehouse")
     selco_repair_warehouse = frappe.db.get_value("Branch",doc.selco_branch,"selco_repair_warehouse")
 
+    if not selco_cost_center:
+        frappe.throw("Please set Cost Center in the selected Branch")
+    if not selco_selco_warehouse:
+        frappe.throw("Please set Warehouse in the selected Branch")
+    if not selco_repair_warehouse:
+        frappe.throw("Please set Warehouse in the selected Branch")
 
     if doc.purpose=="Material Transfer":
         if doc.selco_inward_or_outward=="Inward" and doc.selco_type_of_stock_entry == "GRN":
