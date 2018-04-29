@@ -17424,7 +17424,7 @@
   "in_list_view": 0, 
   "in_standard_filter": 0, 
   "insert_after": "selco_state_gstin", 
-  "label": "selco_address", 
+  "label": "Address", 
   "modified": "2018-04-29 15:49:32.651589", 
   "name": "Warehouse-selco_address", 
   "no_copy": 0, 
