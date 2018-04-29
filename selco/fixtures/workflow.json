@@ -975,7 +975,7 @@
   "doctype": "Workflow", 
   "document_type": "Purchase Order", 
   "is_active": 1, 
-  "modified": "2017-11-27 16:43:16.343621", 
+  "modified": "2018-04-30 00:49:01.494834", 
   "name": "Purchase Order Approval Process", 
   "override_status": 0, 
   "states": [
@@ -1132,6 +1132,30 @@
     "allowed": "System Manager", 
     "next_state": "AGM Approval Pending - PO", 
     "state": "Old PO Kept on Hold"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "System Manager", 
+    "next_state": "Approved By All - PO", 
+    "state": "Approved By All - PO"
+   }, 
+   {
+    "action": "Approve - PO", 
+    "allowed": "System Manager", 
+    "next_state": "Logistics Manager Approval Pending - PO", 
+    "state": "Logostics Mnaager Approval Pending - PO"
+   }, 
+   {
+    "action": "Cancel - PO", 
+    "allowed": "SELCO Logistics Executive", 
+    "next_state": "Cancelled - PO", 
+    "state": "Approved By All - PO"
+   }, 
+   {
+    "action": "Revise - PO", 
+    "allowed": "SELCO Logistics Manager", 
+    "next_state": "Draft - PO", 
+    "state": "Accounts Approval Pending - PO"
    }
   ], 
   "workflow_name": "Purchase Order Approval Process", 
