@@ -421,5 +421,14 @@
   "name": "Complaint Resolved By Branch CSE", 
   "style": "Success", 
   "workflow_state_name": "Complaint Resolved By Branch CSE"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow State", 
+  "icon": "", 
+  "modified": "2018-04-30 12:54:30.590429", 
+  "name": "Pending from Vendor", 
+  "style": "", 
+  "workflow_state_name": "Pending from Vendor"
  }
 ]

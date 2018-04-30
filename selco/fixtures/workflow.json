@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2018-04-30 12:27:26.941326", 
+  "modified": "2018-04-30 12:54:40.035293", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -109,6 +109,14 @@
     "doc_status": "0", 
     "message": null, 
     "state": "Dispatched From Godown", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Pending from Vendor", 
     "update_field": null, 
     "update_value": null
    }
