@@ -63,9 +63,9 @@ doc_events = {
          "on_submit": "selco.selco.selco_customizations.selco_stock_entry_on_submit_updates",
          "on_cancel": "selco.selco.selco_customizationss.selco_stock_entry_on_cancel_updates"
    },
-   "Address":{
-        "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
-   },
+   # "Address":{
+   #      "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
+   # },
     "Purchase Order":{
             "before_insert":"selco.selco.selco_customizations.selco_purchase_order_before_insert",
              "validate": "selco.selco.selco_customizations.selco_purchase_order_validate"
