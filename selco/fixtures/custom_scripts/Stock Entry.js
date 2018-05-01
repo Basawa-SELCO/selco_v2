@@ -273,7 +273,7 @@ cur_frm.clear_table("items");
         options:"Material Request", reqd: 1, get_query: function(){
           //return {filters: { workflow_state:"Approved - IBM",branch:cur_frm.doc.branch}}
           //return {filters: { workflow_state:["in", ["Approved - IBM", "Partially Dispatched From Godown - IBM"]] ,selco_branch:cur_frm.doc.selco_branch}}
-          return {filters: {selco_branch:cur_frm.doc.selco_branch}}
+          return {filters: {selco_branch:cur_frm.doc.selco_being_dispatched_to}}
         }},
       {fieldname:"fetch", "label":__("Get Items from IBM"), "fieldtype":"Button"}
     ]
