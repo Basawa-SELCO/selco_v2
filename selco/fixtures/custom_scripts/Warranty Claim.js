@@ -24,7 +24,7 @@ cur_frm.set_query("selco_item_code", function() {
     }
 });
 
-cur_frm.set_query("supplier", function() {
+cur_frm.set_query("selco_supplier", function() {
     return {
         filters: [
             ['Supplier', 'supplier_type', 'in', 'Module Manufacturer, Common Supplier']
@@ -44,7 +44,7 @@ cur_frm.set_query("selco_item_code", function() {
     }
 });
 
-cur_frm.set_query("supplier", function() {
+cur_frm.set_query("selco_supplier", function() {
     return {
         filters: [
             ['Supplier', 'supplier_type', 'in', 'Battery Manufacturer, Common Supplier']
@@ -65,7 +65,7 @@ cur_frm.set_query("selco_item_code", function() {
     }
 });
 
-cur_frm.set_query("supplier", function() {
+cur_frm.set_query("selco_supplier", function() {
     return {
         filters: [
             ['Supplier', 'supplier_type', 'in', 'Inverter Manufacturer, Common Supplier']
@@ -86,7 +86,7 @@ cur_frm.set_query("selco_item_code", function() {
     }
 });
 
-cur_frm.set_query("supplier", function() {
+cur_frm.set_query("selco_supplier", function() {
     return {
         filters: [
             ['Supplier', 'supplier_type', 'in', 'Solar Water Heater ETC Manufacturer, Common Supplier']
