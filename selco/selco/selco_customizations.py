@@ -655,7 +655,7 @@ def selco_stock_entry_on_submit_updates(doc,method):
             ref_doc.save(ignore_permissions=True)
     if(doc.selco_type_of_stock_entry == "GRN"):
         for item in doc.items:
-            item.reference_rej_in_or_rej_ot = doc.suppliers_ref
+            item.reference_rej_in_or_rej_ot = doc.selco_suppliers_ref
             ref_doc = frappe.get_doc("Stock Entry",doc.selco_suppliers_ref)
             #frappe.msgprint(ref_doc)
             for ref_item in ref_doc.items:
