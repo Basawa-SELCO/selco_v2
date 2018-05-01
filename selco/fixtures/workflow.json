@@ -606,7 +606,7 @@
   "doctype": "Workflow", 
   "document_type": "Material Request", 
   "is_active": 1, 
-  "modified": "2017-11-25 12:16:10.897899", 
+  "modified": "2018-05-01 09:14:27.925669", 
   "name": "IBM Approval Process", 
   "override_status": 0, 
   "states": [
@@ -997,6 +997,66 @@
     "allowed": "SELCO Godown Office Administrator", 
     "next_state": "Dispatched From Godown - IBM", 
     "state": "Content Dispatched"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "SELCO Projects Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Approved - IBM"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "System Manager", 
+    "next_state": "Dispatched From Godown - IBM", 
+    "state": "Rejected By Godown - IBM"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Approval Pending by SM - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Draft - IBM", 
+    "state": "Content Dispatched"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Draft - IBM"
+   }, 
+   {
+    "action": "Draft", 
+    "allowed": "System Manager", 
+    "next_state": "Approved - IBM", 
+    "state": "Partially Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Request Content", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Content Dispatch Pending", 
+    "state": "Partially Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Change to partially dispatched", 
+    "allowed": "System Manager", 
+    "next_state": "Partially Dispatched From Godown - IBM", 
+    "state": "Dispatched From Godown - IBM"
+   }, 
+   {
+    "action": "Revise", 
+    "allowed": "System Manager", 
+    "next_state": "Rejected By Godown - IBM", 
+    "state": "Content Dispatch Pending"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "System Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Partially Dispatched From Godown - IBM"
    }
   ], 
   "workflow_name": "IBM Approval Process", 
