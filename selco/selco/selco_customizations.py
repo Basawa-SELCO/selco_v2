@@ -349,10 +349,10 @@ def selco_stock_entry_updates(doc,method):
 
 @frappe.whitelist()
 def selco_stock_entry_validate(doc,method):
-    from frappe.contacts.doctype.address.address import get_address_display
+    from frappe.contacts.doctype.address.address import get_address_display, get_default_address
     if doc.selco_type_of_stock_entry == "Outward DC":
         local_warehouse = frappe.db.get_value("Branch",doc.selco_being_dispatched_to,"selco_warehouse")
-        doc.selco_recipient_address_link = frappe.db.get_value("Warehouse",local_warehouse,"address")
+        doc.selco_recipient_address_link = get_default_address("Warehouse", local_warehouse) #frappe.db.get_value("Warehouse",local_warehouse,"address")
         doc.selco_recipient_address = "<b>" + doc.selco_being_dispatched_to.upper() + " BRANCH</b><br>"
         doc.selco_recipient_address+= "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.selco_recipient_address+= str(get_address_display(doc.selco_recipient_address_link))
@@ -360,7 +360,7 @@ def selco_stock_entry_validate(doc,method):
         sender = frappe.db.get_value("Stock Entry",doc.selco_suppliers_ref,"selco_branch")
         frappe.msgprint(doc.selco_suppliers_ref)
         sender_warehouse = frappe.db.get_value("Branch",sender,"selco_warehouse")
-        doc.sender_address_link = frappe.db.get_value("Warehouse",sender_warehouse,"address")
+        doc.sender_address_link = get_default_address("Warehouse", sender_warehouse) #frappe.db.get_value("Warehouse",sender_warehouse,"address")
         doc.sender_address = "<b>" + str(sender) + " SELCO BRANCH</b><br>"
         doc.sender_address += "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.sender_address += str(get_address_display(doc.sender_address_link))
@@ -584,15 +584,16 @@ def selco_validate_if_lead_contact_number_exists(contact_number,lead_id):
     if var15 != "None" and lead_id != var15:
         frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var15 + "\n Lead Name : " + var16)
 
-@frappe.whitelist()
+# @frappe.whitelist()
 def selco_address_before_insert(doc,method):
-    if doc.selco_customer_link:
-        temp_name = frappe.get_value("Customer",doc.selco_customer_link,"customer_name")
-        doc.address_title = doc.selco_customer_link + " - " + temp_name
-        doc.name = doc.selco_customer_link + " - " + temp_name + " - "
-    if doc.selco_customer_link:
-        doc.append("links",{"link_doctype":"Customer","link_name":doc.selco_customer_link})
-        #doc.links[0].link_name=doc.selco_customer_link
+    pass
+#     if doc.selco_customer_link:
+#         temp_name = frappe.get_value("Customer",doc.selco_customer_link,"customer_name")
+#         doc.address_title = doc.selco_customer_link + " - " + temp_name
+#         doc.name = doc.selco_customer_link + " - " + temp_name + " - "
+#     if doc.selco_customer_link:
+#         doc.append("links",{"link_doctype":"Customer","link_name":doc.selco_customer_link})
+#         #doc.links[0].link_name=doc.selco_customer_link
 
 
 @frappe.whitelist()
