@@ -555,7 +555,7 @@ def clean_up(doc,method):
 
 @frappe.whitelist()
 def selco_lead_before_insert(doc,method):
-    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"lead_naming_series")
+    doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_lead_naming_series")
     if doc.selco_project_enquiry == 1:
         doc.naming_series = "ENQ/17-18/"
 
