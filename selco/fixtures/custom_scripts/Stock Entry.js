@@ -474,7 +474,7 @@ frappe.ui.form.on("Stock Entry", "from_warehouse", function(frm) {
 });
 
 frappe.ui.form.on("Stock Entry", "to_warehouse", function(frm) {
-  get_warehouse_address(frm, frm.doc.from_warehouse, "target_warehouse_address");
+  get_warehouse_address(frm, frm.doc.to_warehouse, "target_warehouse_address");
 });
 
 function get_warehouse_address(frm, warehouse_name, field_to_set) {
