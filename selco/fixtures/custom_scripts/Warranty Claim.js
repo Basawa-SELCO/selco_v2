@@ -5,9 +5,9 @@ cur_frm.add_fetch("selco_complaint_number", "selco_branch", "selco_branch");
 cur_frm.add_fetch("selco_complaint_number", "selco_ics_number", "selco_ics_number");
 cur_frm.add_fetch("selco_complaint_number", "selco_ics_date", "selco_ics_date");
 
-cur_frm.add_fetch("selco_item_code2", "item_name", "selco_item_name");
-cur_frm.add_fetch("selco_item_code2", "item_group", "item_group");
-cur_frm.add_fetch("selco_item_code2", "description", "item_description");
+cur_frm.add_fetch("selco_item_code", "item_name", "selco_item_name");
+cur_frm.add_fetch("selco_item_code", "item_group", "item_group");
+cur_frm.add_fetch("selco_item_code", "description", "item_description");
 
 cur_frm.add_fetch("selco_panel_capacity", "item_name", "selco_panel_name");
 cur_frm.add_fetch("selco_battery_capacity", "item_name", "selco_battery_name"); 
@@ -16,7 +16,7 @@ cur_frm.add_fetch("selco_water_heater_capacity", "item_name", "selco_water_heate
 
 
 frappe.ui.form.on("Warranty Claim", "selco_panel", function(frm) {
-cur_frm.set_query("selco_item_code2", function() {
+cur_frm.set_query("selco_item_code", function() {
     return {
         filters: [
             ['Item', 'item_group', 'in', 'Modules, Common Item']
@@ -36,7 +36,7 @@ cur_frm.set_query("supplier", function() {
 
 
 frappe.ui.form.on("Warranty Claim", "selco_battery", function(frm) {
-cur_frm.set_query("selco_item_code2", function() {
+cur_frm.set_query("selco_item_code", function() {
     return {
         filters: [
             ['Item', 'item_group', 'in', 'Batteries, Common Item']
@@ -57,7 +57,7 @@ cur_frm.set_query("supplier", function() {
 
 
 frappe.ui.form.on("Warranty Claim", "selco_inverter", function(frm) {
-cur_frm.set_query("selco_item_code2", function() {
+cur_frm.set_query("selco_item_code", function() {
     return {
         filters: [
             ['Item', 'item_group', 'in', 'Inverters, Common Item']
@@ -78,7 +78,7 @@ cur_frm.set_query("supplier", function() {
 
 
 frappe.ui.form.on("Warranty Claim", "selco_water_heater", function(frm) {
-cur_frm.set_query("selco_item_code2", function() {
+cur_frm.set_query("selco_item_code", function() {
     return {
         filters: [
             ['Item', 'item_group', 'in', 'ETC Water Heater Systems, Common Item ,Water Heater Consumables,Water Heater Tanks Spare']
