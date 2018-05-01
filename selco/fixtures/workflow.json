@@ -383,7 +383,7 @@
   "doctype": "Workflow", 
   "document_type": "Warranty Claim", 
   "is_active": 1, 
-  "modified": "2017-11-21 13:20:22.736910", 
+  "modified": "2018-05-01 09:29:43.708361", 
   "name": "Warranty Claim Approval Process", 
   "override_status": 0, 
   "states": [
@@ -450,12 +450,20 @@
     "state": "Pre-Cancellation", 
     "update_field": null, 
     "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Godown Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Pending from Vendor", 
+    "update_field": null, 
+    "update_value": null
    }
   ], 
   "transitions": [
    {
     "action": "Confirm", 
-    "allowed": "SELCO Branch Office Administrator", 
+    "allowed": "SELCO Service Basic", 
     "next_state": "Warranty Claim Format Raised - WC", 
     "state": "Draft"
    }, 
@@ -467,7 +475,7 @@
    }, 
    {
     "action": "Revise", 
-    "allowed": "SELCO Branch Office Administrator", 
+    "allowed": "SELCO Service Basic", 
     "next_state": "Draft", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
@@ -485,7 +493,7 @@
    }, 
    {
     "action": "Dispatched", 
-    "allowed": "SELCO Branch Office Administrator", 
+    "allowed": "SELCO Godown Basic", 
     "next_state": "Dispatched From Godown", 
     "state": "Warranty Claim Approved - WC"
    }, 
@@ -551,13 +559,13 @@
    }, 
    {
     "action": "Revise", 
-    "allowed": "SELCO Branch Office Administrator", 
+    "allowed": "SELCO Godown Office Administrator", 
     "next_state": "Draft", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Revise", 
-    "allowed": "SELCO Branch Office Administrator", 
+    "allowed": "SELCO Godown Office Administrator", 
     "next_state": "Draft", 
     "state": "Warranty Claim Approved - WC"
    }, 
@@ -596,6 +604,30 @@
     "allowed": "System Manager", 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Cancel", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Pre-Cancellation", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Dispatch To Vendor", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Pending from Vendor", 
+    "state": "Warranty Claim Approved - WC"
+   }, 
+   {
+    "action": "Received From Vendor", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Warranty Claim Approved - WC", 
+    "state": "Pending from Vendor"
+   }, 
+   {
+    "action": "Dispatched", 
+    "allowed": "SELCO Godown Office Administrator", 
+    "next_state": "Dispatched From Godown", 
+    "state": "Pending from Vendor"
    }
   ], 
   "workflow_name": "Warranty Claim Approval Process", 

@@ -208,5 +208,19 @@
   "modified": "2018-05-01 09:12:18.352315", 
   "name": "Change to partially dispatched", 
   "workflow_action_name": "Change to partially dispatched"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow Action", 
+  "modified": "2018-05-01 09:27:08.669832", 
+  "name": "Dispatch To Vendor", 
+  "workflow_action_name": "Dispatch To Vendor"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Workflow Action", 
+  "modified": "2018-05-01 09:28:00.478365", 
+  "name": "Received From Vendor", 
+  "workflow_action_name": "Received From Vendor"
  }
 ]
