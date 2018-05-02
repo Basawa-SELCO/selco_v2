@@ -10,7 +10,7 @@ import operator
 from erpnext.accounts.party import get_party_account, get_due_date
 from datetime import datetime
 from datetime import timedelta
-
+from frappe.utils import cint
 
 class SelcoCustomizations(Document):
     pass
@@ -639,7 +639,7 @@ def selco_stock_entry_on_submit_updates(doc,method):
             #frappe.msgprint(ref_doc)
             for ref_item in ref_doc.items:
                 if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity + item.qty
+                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
                     if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
                         frappe.throw("Please enter correct Quantity")
             ref_doc.save()
@@ -649,7 +649,7 @@ def selco_stock_entry_on_submit_updates(doc,method):
             #frappe.msgprint(ref_doc)
             for ref_item in ref_doc.items:
                 if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity + item.qty
+                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
                     if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
                         frappe.throw("Please enter correct Quantity")
             ref_doc.save(ignore_permissions=True)
@@ -660,7 +660,7 @@ def selco_stock_entry_on_submit_updates(doc,method):
             #frappe.msgprint(ref_doc)
             for ref_item in ref_doc.items:
                 if (ref_item.item_code == item.item_code and ref_item.item_code == item.item_code):
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity + item.qty
+                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
                     if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
                         frappe.throw("Please enter correct Quantity")
             ref_doc.save(ignore_permissions=True)
@@ -680,7 +680,7 @@ def selco_stock_entry_on_cancel_updates(doc,method):
             ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
             for ref_item in ref_doc.items:
                 if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity - item.qty
+                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
             ref_doc.save()
     """if(doc.type_of_stock_entry == "Rejection In"):
         for item in doc.items:
@@ -694,7 +694,7 @@ def selco_stock_entry_on_cancel_updates(doc,method):
             ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
             for ref_item in ref_doc.items:
                 if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity - item.qty
+                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
             ref_doc.save()
 
 """@frappe.whitelist()
