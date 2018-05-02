@@ -16,10 +16,21 @@ console.log("Hello");
 
 
 frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
-    frm.set_df_property("selco_money_received_by", "hidden", (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_financed", "hidden", (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_o_a_no", "hidden", (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_o_a_date", "hidden", (frm.doc.payment_type == "Pay"));
+    if (frm.doc.payment_type == "Pay") {
+        frm.set_df_property("selco_money_received_by", "hidden", 1);
+        frm.set_df_property("selco_financed", "hidden", 1);
+        frm.set_df_property("selco_financed", "reqd", 0);
+        frm.set_df_property("selco_money_received_by", "reqd", 0);
+        frm.set_df_property("selco_o_a_no", "hidden", 1);
+        frm.set_df_property("selco_o_a_date", "hidden", 1);
+    } else {
+        frm.set_df_property("selco_money_received_by", "hidden", 0);
+        frm.set_df_property("selco_financed", "hidden", 0);
+        frm.set_df_property("selco_financed", "reqd", 1);
+        frm.set_df_property("selco_money_received_by", "reqd", 1);
+        frm.set_df_property("selco_o_a_no", "hidden", 0);
+        frm.set_df_property("selco_o_a_date", "hidden", 0);
+    }
 
 //cur_frm.doc.mode_of_payment = "Bank";
 
