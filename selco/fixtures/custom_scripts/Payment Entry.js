@@ -16,10 +16,10 @@ console.log("Hello");
 
 
 frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
-    frm.set_df_property("selco_money_received_by", hidden, (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_financed", hidden, (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_o_a_no", hidden, (frm.doc.payment_type == "Pay"));
-    frm.set_df_property("selco_o_a_date", hidden, (frm.doc.payment_type == "Pay"));
+    frm.set_df_property("selco_money_received_by", "hidden", (frm.doc.payment_type == "Pay"));
+    frm.set_df_property("selco_financed", "hidden", (frm.doc.payment_type == "Pay"));
+    frm.set_df_property("selco_o_a_no", "hidden", (frm.doc.payment_type == "Pay"));
+    frm.set_df_property("selco_o_a_date", "hidden", (frm.doc.payment_type == "Pay"));
 
 //cur_frm.doc.mode_of_payment = "Bank";
 
