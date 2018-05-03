@@ -39,5 +39,33 @@ frappe.ui.form.on("Journal Entry", "voucher_type", function(frm, cdt, cdn) {
 		cur_frm.doc.naming_series = "CJ/HO/17-18/";
 		refresh_field("naming_series");
 	}
+
+	if (frm.doc.voucher_type == "Contra Entry") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_contra_naming_series")
+	}
+	if (frm.doc.voucher_type == "Cash Payment") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_cash_payment_naming_series")
+	}
+	if (frm.doc.voucher_type == "Debit Note") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_debit_note_naming_series")
+	}
+	if (frm.doc.voucher_type == "Credit Note") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_credit_note_naming_series")
+	}
+	if (frm.doc.voucher_type == "Journal Entry") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_journal_entry_naming_series")
+	}
+	if (frm.doc.voucher_type == "Write Off Entry") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_write_off_naming_series")
+	}
+	if (frm.doc.voucher_type == "Bank Payment") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_bank_payment_naming_series")
+	}
+	if (frm.doc.voucher_type == "Receipt") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_receipt_naming_series")
+	}
+	if (frm.doc.voucher_type == "Commission Journal") {
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_commission_journal_naming_series")
+	}
 });
 
