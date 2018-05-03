@@ -13,8 +13,7 @@ frappe.ui.form.on("Material Request", "onload_post_render", function(frm) {
 frappe.ui.form.on("Material Request", "refresh", function(frm) {
 
 	cur_frm.set_value("material_request_type","Material Transfer");
-
-	 
+ 
     if (!cur_frm.custom_buttons[__("Get Items from BOM SELCO")]) {
       cur_frm.add_custom_button(__("Get Items from BOM SELCO"),
         cur_frm.cscript.get_items_from_bom1);
@@ -35,6 +34,8 @@ frappe.ui.form.on("Material Request", "refresh", function(frm) {
 		frm.set_df_property("selco_dc_number", "read_only",0);
 		frm.set_df_property("selco_dc_date", "read_only",0);
 		frm.set_df_property("selco_godown_oa_comments", "read_only",0);
+		frm.set_df_property("selco_logistics_manager_comments", "read_only",0);
+		frm.set_df_property("selco_senior_manager_comments", "read_only",0);
 
 		var df = frappe.meta.get_docfield("Material Request Item", "item_code", cur_frm.doc.name);
 		df.read_only = 1;
