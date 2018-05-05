@@ -374,7 +374,7 @@ def get_items_from_outward_stock_entry(selco_doc_num,selco_branch):
     if selco_var_dc.selco_type_of_material=="Good Stock":
         to_warehouse = frappe.db.get_value("Branch",selco_var_dc.selco_being_dispatched_to,"selco_warehouse")
     else:
-        to_warehouse = frappe.db.get_value("Branch",selco_var_dc.selco_being_dispatched_to,"repair_warehouse")
+        to_warehouse = frappe.db.get_value("Branch",selco_var_dc.selco_being_dispatched_to,"selco_repair_warehouse")
     return { 'dc' : selco_var_dc,'from_warehouse' : from_warehouse, 'to_warehouse' :to_warehouse }
 
 @frappe.whitelist()
