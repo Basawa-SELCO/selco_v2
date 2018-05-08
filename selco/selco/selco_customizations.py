@@ -327,7 +327,7 @@ def selco_stock_entry_updates(doc,method):
             d.cost_center = selco_cost_center
             d.is_sample_item = 1
     elif doc.purpose=="Material Issue":
-        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_rejection_out__naming_series")
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_rejection_out_naming_series")
         doc.from_warehouse = selco_repair_warehouse
         for d in doc.get('items'):
             d.f_warehouse = selco_repair_warehouse
