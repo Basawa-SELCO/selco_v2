@@ -270,7 +270,7 @@ def selco_stock_entry_updates(doc,method):
     if not selco_selco_warehouse:
         frappe.throw("Please set Warehouse in the selected Branch")
     if not selco_repair_warehouse:
-        frappe.throw("Please set Warehouse in the selected Branch")
+        frappe.throw("Please set Repair Warehouse in the selected Branch")
 
     if doc.purpose=="Material Transfer":
         if doc.selco_inward_or_outward=="Inward" and doc.selco_type_of_stock_entry == "GRN":
@@ -343,13 +343,13 @@ def selco_stock_entry_updates(doc,method):
             d.cost_center = selco_cost_center
             d.s_warehouse = selco_selco_warehouse
             #d.t_warehouse = selco_selco_warehouse #Repack, so do not set target warehouse for these items.
+            #if d.t_warehouse:
+            d.basic_rate = 0
 
         #Repack, so Clear source warehouse. Set only target warehouse on last line item.
         doc.get('items')[-1:][0].s_warehouse = None
         doc.get('items')[-1:][0].t_warehouse = selco_selco_warehouse
 
-            if d.t_warehouse:
-                d.basic_rate = 0
     if doc.selco_type_of_stock_entry == "Outward DC":
         doc.selco_recipient_email_id = frappe.db.get_value("Branch",doc.selco_being_dispatched_to,"selco_branch_email_id")
 
