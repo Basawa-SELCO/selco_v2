@@ -118,11 +118,7 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
     if (cur_frm.doc.selco_money_received_by == "Cheque/DD" || cur_frm.doc.selco_money_received_by == "Online-NEFT/RTGS" ) {
         cur_frm.set_value("reference_no", "");
 
-        if (cur_frm.doc.selco_money_received_by == "Cheque/DD") {
-            cur_frm.set_value("mode_of_payment", "Cheque");
-        } else if (cur_frm.doc.selco_money_received_by == "Online-NEFT/RTGS") {
-            cur_frm.set_value("mode_of_payment", "Wire Transfer");
-        }
+        cur_frm.set_value("mode_of_payment", "Bank");
 
         var d = locals[cdt][cdn];
         frappe.call({
