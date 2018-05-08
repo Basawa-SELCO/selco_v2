@@ -24,8 +24,7 @@ cur_frm.set_df_property("items", "read_only", false);
 
 })
 
-
-
+  
 frappe.ui.form.on('Stock Entry', 'selco_supplier_or_customer_id', function(frm, cdt, cdn) {
      var d = frappe.model.get_doc(cdt, cdn);
      frappe.call({
@@ -98,6 +97,9 @@ cur_frm.set_df_property("selco_type_of_material", "read_only", true);
 cur_frm.set_df_property("selco_supplier_or_customer", "reqd", true);
 cur_frm.set_df_property("selco_supplier_or_customer_id", "reqd", true);
 }
+
+toggle_custom_buttons(frm);
+
 });
 
  
@@ -175,30 +177,31 @@ frappe.ui.form.on("Stock Entry", "to_warehouse", function(frm, cdt, cdn) {consol
 })
 
 frappe.ui.form.on("Stock Entry", "selco_recipient_address_link", function(frm, cdt, cdn) {
-        return frm.call({
-            method: "frappe.contacts.doctype.address.address.get_address_display",
-            args: {
-                "address_dict": frm.doc.selco_recipient_address_link
-            },
-            callback: function(r) {
-            if(r.message) {
-             frappe.model.set_value(cdt,cdn,"selco_recipient_address", r.message);
+  return frm.call({
+      method: "frappe.contacts.doctype.address.address.get_address_display",
+      args: {
+          "address_dict": frm.doc.selco_recipient_address_link
+      },
+      callback: function(r) {
+        if(r.message) {
+         frappe.model.set_value(cdt,cdn,"selco_recipient_address", r.message);
         }
-        }});
-     
-})
+      }
+  });
+});
 
 
 frappe.ui.form.on("Stock Entry", "refresh", function(frm) {
-    cur_frm.set_query("selco_supplier_or_customer", function() {
-        return {
-            "filters": {
-                "name":["in", ["Customer", "Supplier"]]
+  cur_frm.set_query("selco_supplier_or_customer", function() {
+    return {
+      "filters": {
+        "name":["in", ["Customer", "Supplier"]]
+      }
+    };
+  });
 
-            }
-        };
-})
-    });
+  toggle_custom_buttons(frm);
+});
 
 
 
@@ -256,12 +259,13 @@ refresh_field("to_warehouse");
 
 
 
-frappe.ui.form.on("Stock Entry", "refresh", function(frm) {
-   {
-      cur_frm.add_custom_button(__("Get Items from IBM"),
-        cur_frm.cscript.get_items_from_ibm1);
-    }
-})
+// frappe.ui.form.on("Stock Entry", "refresh", function(frm) {
+//    // {
+//    //    cur_frm.add_custom_button(__("Get Items from IBM"),
+//    //      cur_frm.cscript.get_items_from_ibm1);
+//    //  }
+   
+// })
 
  cur_frm.cscript.get_items_from_ibm1 = function()
 {
@@ -312,15 +316,12 @@ cur_frm.clear_table("items");
 }
 
 frappe.ui.form.on("Stock Entry", "selco_supplier_or_customer", function(frm) {
-    {
-
-        if (cur_frm.doc.selco_type_of_stock_entry == "Rejection In" && cur_frm.doc.selco_supplier_or_customer == "Supplier") {
-            cur_frm.add_custom_button(__("Get Items From Rejection Out"), cur_frm.cscript.get_items_from_rejection_out);
-        } else if (cur_frm.doc.selco_type_of_stock_entry == "Rejection Out" && cur_frm.doc.selco_supplier_or_customer == "Customer") {
-            cur_frm.add_custom_button(__("Get Items From Rejection In"), cur_frm.cscript.get_items_from_rejection_in);
-        }
+    if (cur_frm.doc.selco_type_of_stock_entry == "Rejection In" && cur_frm.doc.selco_supplier_or_customer == "Supplier") {
+        cur_frm.add_custom_button(__("Get Items From Rejection Out"), cur_frm.cscript.get_items_from_rejection_out);
+    } else if (cur_frm.doc.selco_type_of_stock_entry == "Rejection Out" && cur_frm.doc.selco_supplier_or_customer == "Customer") {
+        cur_frm.add_custom_button(__("Get Items From Rejection In"), cur_frm.cscript.get_items_from_rejection_in);
     }
-})
+});
 
 
 cur_frm.cscript.get_items_from_rejection_in = function()
@@ -505,4 +506,17 @@ function update_warehouse_in_items(frm, source_or_target, warehouse_name) {
     } 
   });
   refresh_field("items")
+}
+
+
+function toggle_custom_buttons(frm) {
+    if (!in_list(["Rejection Out", "Rejection In"], frm.doc.selco_type_of_stock_entry)) {
+      if (!frm.custom_buttons["Get Items from IBM"]) {
+        frm.add_custom_button(__("Get Items from IBM"), cur_frm.cscript.get_items_from_ibm1);
+      }
+    } else {
+      frm.remove_custom_button("Get Items from IBM");
+      frm.remove_custom_button("Make Material Request");
+      frm.remove_custom_button("Purchase Invoice", "Get items from");
+    }  
 }
