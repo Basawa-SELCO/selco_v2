@@ -61,7 +61,7 @@ doc_events = {
          "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
          "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "on_submit": "selco.selco.selco_customizations.selco_stock_entry_on_submit_updates",
-         "on_cancel": "selco.selco.selco_customizationss.selco_stock_entry_on_cancel_updates"
+         "on_cancel": "selco.selco.selco_customizations.selco_stock_entry_on_cancel_updates"
    },
    # "Address":{
    #      "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
