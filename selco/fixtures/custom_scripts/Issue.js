@@ -304,3 +304,18 @@ var quick_entry = function(doctype, success, fields_map={}) {
 		}
 	});
 }
+
+
+frappe.ui.form.on("Issue", "refresh",
+    function(frm) {
+
+	cur_frm.set_query("service_person", "service_record_details", function(doc, cdt, cdn) {
+		var d = locals[cdt][cdn];
+		return{
+			filters: [
+				['Service Person', 'disabled', 'in', '0'],
+			]
+		}
+	});
+
+});
