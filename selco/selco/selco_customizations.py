@@ -467,7 +467,7 @@ def selco_payment_entry_before_insert(doc,method):
     if doc.payment_type == "Receive":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
         if doc.mode_of_payment == "Bank":
-            if doc.amount_credited_to_platinum_account == 1:
+            if doc.selco_amount_credited_to_platinum_account == 1:
                 doc.paid_to = frappe.db.get_value("Branch","Head Office","selco_collection_account")
             else:
                 doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
