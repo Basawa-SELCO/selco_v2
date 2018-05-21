@@ -1,5 +1,31 @@
 cur_frm.add_fetch("selco_branch", "selco_branch_email_id", "selco_branch_email_id");
 
+frappe.ui.form.on("Stock Entry", "refresh", async function(frm) {
+  if (cur_frm.doc.__islocal == 1) {
+    if (frappe.user_info().email == "southgodown@selco-india.com") {
+      await cur_frm.set_value("selco_branch", "Manipal Godown");
+      cur_frm.set_df_property("selco_branch", "read_only", true);
+    } else if (frappe.user_info().email == "northgodown@selco-india.com") {
+      await cur_frm.set_value("selco_branch", "Dharwad Godown"); 
+      cur_frm.set_df_property("selco_branch", "read_only", true);
+    } else if (frappe.user_info().email == "bangalore_godown@selco-india.com") {
+      await cur_frm.set_value("selco_branch", "Bangalore Godown");
+      cur_frm.set_df_property("selco_branch", "read_only", true);
+    }
+  }
+
+  cur_frm.set_query("selco_supplier_or_customer", function() {
+    return {
+      "filters": {
+        "name":["in", ["Customer", "Supplier"]]
+      }
+    };
+  });
+
+  toggle_custom_buttons(frm);
+});
+
+
 
 frappe.ui.form.on("Stock Entry", "selco_supplier_or_customer", function(frm) {
 if ((cur_frm.doc.selco_supplier_or_customer == "Customer")
@@ -190,18 +216,6 @@ frappe.ui.form.on("Stock Entry", "selco_recipient_address_link", function(frm, c
   });
 });
 
-
-frappe.ui.form.on("Stock Entry", "refresh", function(frm) {
-  cur_frm.set_query("selco_supplier_or_customer", function() {
-    return {
-      "filters": {
-        "name":["in", ["Customer", "Supplier"]]
-      }
-    };
-  });
-
-  toggle_custom_buttons(frm);
-});
 
 
 
@@ -451,24 +465,6 @@ newrow.reference_rej_in_or_rej_ot = data.message.name;
 
 
 }
-frappe.ui.form.on("Stock Entry", "refresh", function(frm) {
-if (cur_frm.doc.__islocal == 1)
-{
-if (frappe.user_info().email == "southgodown@selco-india.com")
-{
-cur_frm.set_value("selco_branch", "Manipal Godown");
-cur_frm.set_df_property("selco_branch", "read_only", true);
-} else if (frappe.user_info().email == "northgodown@selco-india.com")
-{
-cur_frm.set_value("selco_branch", "Dharwad Godown");
-cur_frm.set_df_property("selco_branch", "read_only", true);
-}else if (frappe.user_info().email == "bangalore_godown@selco-india.com")
-{
-cur_frm.set_value("selco_branch", "Bangalore Godown");
-cur_frm.set_df_property("selco_branch", "read_only", true);
-}
-}
-})
 
 frappe.ui.form.on("Stock Entry", "from_warehouse", function(frm) {
   get_warehouse_address(frm, frm.doc.from_warehouse, "source_warehouse_address");
