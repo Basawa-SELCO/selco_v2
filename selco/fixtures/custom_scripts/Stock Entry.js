@@ -456,15 +456,15 @@ if (cur_frm.doc.__islocal == 1)
 {
 if (frappe.user_info().email == "southgodown@selco-india.com")
 {
-cur_frm.doc.selco_branch = "Manipal Godown";
+cur_frm.set_value("selco_branch", "Manipal Godown");
 cur_frm.set_df_property("selco_branch", "read_only", true);
 } else if (frappe.user_info().email == "northgodown@selco-india.com")
 {
-cur_frm.doc.selco_branch = "Dharwad Godown";
+cur_frm.set_value("selco_branch", "Dharwad Godown");
 cur_frm.set_df_property("selco_branch", "read_only", true);
 }else if (frappe.user_info().email == "bangalore_godown@selco-india.com")
 {
-cur_frm.doc.selco_branch = "Bangalore Godown";
+cur_frm.set_value("selco_branch", "Bangalore Godown");
 cur_frm.set_df_property("selco_branch", "read_only", true);
 }
 }
