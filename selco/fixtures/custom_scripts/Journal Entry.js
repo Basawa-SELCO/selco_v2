@@ -47,7 +47,7 @@ frappe.ui.form.on("Journal Entry", "voucher_type", function(frm, cdt, cdn) {
 	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_cash_payment_naming_series")
 	}
 	if (frm.doc.voucher_type == "Debit Note") {
-	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_debit_note_naming_series")
+	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_debit_note__naming_series")
 	}
 	if (frm.doc.voucher_type == "Credit Note") {
 	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_credit_note_naming_series")
