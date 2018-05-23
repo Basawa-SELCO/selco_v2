@@ -503,7 +503,7 @@ def selco_journal_entry_before_insert(doc,method):
 
     if doc.voucher_type == "Contra Entry":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_contra_naming_series")
-    if doc.voucher_type == "Cash Payment":
+    if doc.voucher_type == "Cash Entry":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_cash_payment_naming_series")
     if doc.voucher_type == "Debit Note":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_debit_note__naming_series")
@@ -513,7 +513,7 @@ def selco_journal_entry_before_insert(doc,method):
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_journal_entry_naming_series")
     if doc.voucher_type == "Write Off Entry":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_write_off_naming_series")
-    if doc.voucher_type == "Bank Payment":
+    if doc.voucher_type == "Bank Entry":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bank_payment_naming_series")
     if doc.voucher_type == "Receipt":
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_receipt_naming_series")
