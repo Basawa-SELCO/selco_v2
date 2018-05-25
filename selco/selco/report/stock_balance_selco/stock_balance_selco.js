@@ -2,14 +2,14 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Stock Balance - SELCO"] = {
+frappe.query_reports["Stock Balance-SELCO"] = {
 	"filters": [
 		{
 			"fieldname":"from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
 			"width": "80",
-			"default": sys_defaults.year_start_date,
+			"default": frappe.sys_defaults.year_start_date
 		},
 		{
 			"fieldname":"to_date",
