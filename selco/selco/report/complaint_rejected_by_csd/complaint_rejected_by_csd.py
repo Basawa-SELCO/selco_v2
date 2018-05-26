@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-from erpnext.hr.doctype.process_payroll.process_payroll import get_month_details
+from erpnext.hr.doctype.payroll_entry.payroll_entry import get_month_details
 from frappe import msgprint
 import datetime
 from datetime import timedelta
@@ -63,4 +63,4 @@ def get_details_complaint_rejected_csd(filters):
 	if selco_service_person:
 		return frappe.db.sql("""select name, selco_complaint_received_date, selco_customer_full_name, selco_ics_date, selco_complaint_handled_by_cse,selco_special_budget,selco_service_charges_collected,selco_service_record_number_1,selco_service_record_number_2,selco_remarks from `tabIssue` where (workflow_state="Complaint Rejected By CSD") AND selco_service_branch_email_id = %s AND selco_complaint_closed_date BETWEEN %s AND %s AND selco_complaint_handled_by_cse LIKE %s""", (selco_branch,msd,med,selco_service_person),as_dict=1)
 	else:
-		return frappe.db.sql("""select name, selco_complaint_received_date, selco_customer_full_name, selco_ics_date, selco_complaint_handled_by_cse,selco_special_budget,selco_service_charges_collected,selco_service_record_numbe_1,selco_service_record_number_2,selco_remarks from `tabIssue` where (workflow_state="Complaint Rejected By CSD") AND selco_service_branch_email_id = %s AND selco_complaint_closed_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)
+		return frappe.db.sql("""select name, selco_complaint_received_date, selco_customer_full_name, selco_ics_date, selco_complaint_handled_by_cse,selco_special_budget,selco_service_charges_collected,selco_service_record_number_1,selco_service_record_number_2,selco_remarks from `tabIssue` where (workflow_state="Complaint Rejected By CSD") AND selco_service_branch_email_id = %s AND selco_complaint_closed_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)

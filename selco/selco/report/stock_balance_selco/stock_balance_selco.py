@@ -85,8 +85,8 @@ def get_stock_ledger_entries(filters):
 
 def get_item_warehouse_map(filters):
     iwb_map = {}
-    from_date = getdate(filters["from_date"])
-    to_date = getdate(filters["to_date"])
+    from_date = getdate(filters.get("from_date"))
+    to_date = getdate(filters.get("to_date"))
 
     sle = get_stock_ledger_entries(filters)
 

@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-from erpnext.hr.doctype.process_payroll.process_payroll import get_month_details
+from erpnext.hr.doctype.payroll_entry.payroll_entry import get_month_details
 from frappe import msgprint
 import datetime
 from datetime import timedelta
@@ -42,4 +42,4 @@ def get_details(filters):
 		month_days = cint(calendar.monthrange(cint(msd.year) ,cint(month))[1]) # days in month
 		med = datetime.date(msd.year, cint(month), month_days) # month end date
 	var1 = filters.get("ss")
-	return frappe.db.sql("""select name,selco_branch, selco_complaint_received_date, selco_customer_full_name, selco_detail_address, selco_customer_contact_number, selco_description_of_complaint, owner, selco_complaint_handled_by_cse, workflow_state, selco_service_record_number_1, Selco_record_date, selco_branch_remarks from `tabIssue` where selco_service_branch_email_id = %s AND selco_complaint_received_date BETWEEN %s AND %s AND docstatus!=2 """, (var1,msd,med))
+	return frappe.db.sql("""select name,selco_branch, selco_complaint_received_date, selco_customer_full_name, selco_detail_address, selco_customer_contact_number, selco_description_of_complaint, owner, selco_complaint_handled_by_cse, workflow_state, selco_service_record_number_1, selco_service_record_date, selco_branch_remarks from `tabIssue` where selco_service_branch_email_id = %s AND selco_complaint_received_date BETWEEN %s AND %s AND docstatus!=2 """, (var1,msd,med))
