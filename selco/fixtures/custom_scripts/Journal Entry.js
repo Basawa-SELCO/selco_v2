@@ -1,5 +1,5 @@
 /*To set naming series when branch is choosen for the first time */
-cur_frm.add_fetch("selco_branch", "selco_receipt_naming_series", "naming_series"); 
+cur_frm.add_fetch("selco_branch", "selco_journal_entry_naming_series", "naming_series"); 
 
 frappe.ui.form.on("Journal Entry", "validate", function(frm) {
 	if (frappe.user_roles.indexOf("SELCO Lead Accountant")!=-1 && cur_frm.doc.voucher_type=="Write Off Entry") {
@@ -67,5 +67,4 @@ frappe.ui.form.on("Journal Entry", "voucher_type", function(frm, cdt, cdn) {
 	if (frm.doc.voucher_type == "Commission Journal") {
 	    frm.doc.naming_series = frappe.db.get_value("Branch",frm.doc.selco_branch,"selco_commission_journal_naming_series")
 	}
-});
-
+});	
