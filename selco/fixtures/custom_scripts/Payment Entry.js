@@ -91,7 +91,7 @@ frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
 frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt, cdn) {
     if (cur_frm.doc.selco_money_received_by == "Cash") {
 
-        cur_frm.set_value("mode_of_payment", "Cash");
+        //cur_frm.set_value("mode_of_payment", "Cash");
 
         cur_frm.set_value("selco_money_received_by", "Cash");
         cur_frm.set_value("selco_financed", "NO");
@@ -125,7 +125,7 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
     if (cur_frm.doc.selco_money_received_by == "Cheque/DD" || cur_frm.doc.selco_money_received_by == "Online-NEFT/RTGS" ) {
         cur_frm.set_value("reference_no", "");
 
-        cur_frm.set_value("mode_of_payment", "Bank");
+        //cur_frm.set_value("mode_of_payment", "Bank");
 
         var d = locals[cdt][cdn];
         frappe.call({
