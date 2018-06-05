@@ -106,7 +106,7 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
         		name: d.selco_branch
         	},
         	callback: function (data) {
-        		frappe.model.set_value(d.doctype, d.name, "paid_to", data.message.selco_collection_account_cash);
+        		frappe.model.set_value(d.doctype, d.name, "paid_to", data.message.selco_collection_account);
         	}
         });
 
