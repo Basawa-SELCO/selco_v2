@@ -542,7 +542,7 @@ def selco_journal_entry_validate(doc,method):
 @frappe.whitelist()
 def selco_purchase_invoice_before_insert(doc,method):
     if doc.is_return == 1:
-        doc.naming_series = "DN/HO/16-17/"
+        doc.naming_series = "DN/HO/18-19/"
 
     # BRANCH2WAREHOUSE
     # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")

@@ -96,7 +96,15 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
         cur_frm.set_value("selco_money_received_by", "Cash");
         cur_frm.set_value("selco_financed", "NO");
         cur_frm.set_value("reference_no", "Cash");
+        cur_frm.set_value("reference_date", frappe.datetime.get_today());
         cur_frm.set_df_property("reference_no", "read_only", true);
+
+        cur_frm.set_df_property("reference_no", "hidden", 1);
+        cur_frm.set_df_property("reference_no", "reqd", 0);
+        cur_frm.set_df_property("reference_date", "hidden", 1);
+        cur_frm.set_df_property("reference_date", "reqd", 0);
+        cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", 1);
+        cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", 0);
 
         var d = locals[cdt][cdn];
         frappe.call({
@@ -111,21 +119,24 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
         });
 
         // cur_frm.set_df_property("reference_no", "hidden", true);
-        // cur_frm.set_df_property("reference_date", "hidden", true);
         // cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", true);
         // cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", false);
-        cur_frm.set_df_property("reference_no", "hidden", 1);
-        cur_frm.set_df_property("reference_no", "reqd", 0);
-        cur_frm.set_df_property("reference_date", "hidden", 1);
-        cur_frm.set_df_property("reference_date", "reqd", 0);
-        cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", 1);
-        cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", 0);
+        
     }
 
     if (cur_frm.doc.selco_money_received_by == "Cheque/DD" || cur_frm.doc.selco_money_received_by == "Online-NEFT/RTGS" ) {
         cur_frm.set_value("reference_no", "");
 
+
+        cur_frm.set_value("reference_no", "");
+        cur_frm.set_value("reference_date", undefined);
         //cur_frm.set_value("mode_of_payment", "Bank");
+        cur_frm.set_df_property("reference_no", "hidden", 0);
+        cur_frm.set_df_property("reference_no", "reqd", 1);
+        cur_frm.set_df_property("reference_date", "hidden", 0);
+        cur_frm.set_df_property("reference_date", "reqd", 1);
+        cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", 0);
+        cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", 1);
 
         var d = locals[cdt][cdn];
         frappe.call({
@@ -144,12 +155,6 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
         // cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", false);
         // cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", true);
 
-        cur_frm.set_df_property("reference_no", "hidden", 0);
-        cur_frm.set_df_property("reference_no", "reqd", 1);
-        cur_frm.set_df_property("reference_date", "hidden", 0);
-        cur_frm.set_df_property("reference_date", "reqd", 1);
-        cur_frm.set_df_property("selco_cheque_issuing_bank", "read_only", 0);
-        cur_frm.set_df_property("selco_cheque_issuing_bank", "reqd", 1);
     }
 });
 
