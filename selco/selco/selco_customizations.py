@@ -337,7 +337,7 @@ def selco_stock_entry_updates(doc,method):
         if doc.selco_stock_journal == 0:
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bill_of_material_naming_series")
         else:
-            doc.naming_series = "SJ/HO/17-18/"
+            doc.naming_series = "SJ/HO/18-19/"
 
         for d in doc.get('items'):
             d.cost_center = selco_cost_center
@@ -535,7 +535,7 @@ def selco_journal_entry_validate(doc,method):
 @frappe.whitelist()
 def selco_purchase_invoice_before_insert(doc,method):
     if doc.is_return == 1:
-        doc.naming_series = "DN/HO/16-17/"
+        doc.naming_series = "DN/HO/18-19/"
 
     # BRANCH2WAREHOUSE
     # local_branch = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_branch")
@@ -554,7 +554,7 @@ def selco_purchase_invoice_validate(doc,method):
 @frappe.whitelist()
 def clean_up(doc,method):
     var1 = 1
-    #var1 = frappe.get_doc("Purchase Receipt", "MRN/S/17/004")
+    #var1 = frappe.get_doc("Purchase Receipt", "MRN/S/19/004")
     #var1.cancel()
     #frappe.delete_doc("Purchase Receipt", var1.name)
     #frappe.msgprint("Triggered")
@@ -563,7 +563,7 @@ def clean_up(doc,method):
 def selco_lead_before_insert(doc,method):
     doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_lead_naming_series")
     if doc.selco_project_enquiry == 1:
-        doc.naming_series = "ENQ/17-18/"
+        doc.naming_series = "ENQ/18-19/"
 
 @frappe.whitelist()
 def selco_lead_validate(doc,method):
@@ -801,7 +801,7 @@ def selco_stock_entry_cancel_updates():
 
 @frappe.whitelist()
 def selco_test_print():
-    #my_attachments = [frappe.attach_print("Purchase Order", "PO/MPL/16-17/00468", file_name="po_file",print_format="SELCO PO")]
+    #my_attachments = [frappe.attach_print("Purchase Order", "PO/MPL/18-19/00468", file_name="po_file",print_format="SELCO PO")]
     my_attachments = []
     local_var = []
     receipt_list = frappe.db.sql("""SELECT name from `tabPayment Entry` where posting_date BETWEEN "20170901" AND "20170930" """,as_dict=True)
@@ -827,4 +827,3 @@ def get_default_address_name_and_display(doctype, docname):
         out.address_display = get_address_display(default_address)
 
     return out
-
