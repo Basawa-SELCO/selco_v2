@@ -472,7 +472,7 @@ def selco_payment_entry_before_insert(doc,method):
             else:
                 doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
         elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
     elif doc.payment_type == "Pay":
         if doc.mode_of_payment == "Bank":
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_bank_payment_naming_series")
@@ -480,11 +480,18 @@ def selco_payment_entry_before_insert(doc,method):
 
 def selco_payment_entry_validate(doc,method):
     if doc.payment_type == "Receive":
-        if doc.mode_of_payment == "Bank":
+        if doc.selco_money_received_by == "Cash":
+            doc.mode_of_payment = "Cash"
             doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
-        elif doc.mode_of_payment == "Cash":
-            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
-            frappe.msgprint("Cash Account is" + doc.paid_to)
+        else:
+            doc.mode_of_payment = "Bank"
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
+            
+        # if doc.mode_of_payment == "Bank":
+        #     doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
+        # elif doc.mode_of_payment == "Cash":
+        #     doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
+        #     frappe.msgprint("Cash Account is" + doc.paid_to)
     local_sum = 0
     local_sum = doc.paid_amount
     for deduction in doc.deductions:
