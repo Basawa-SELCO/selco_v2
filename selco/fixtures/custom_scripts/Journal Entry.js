@@ -21,22 +21,22 @@ frappe.ui.form.on("Journal Entry", "voucher_type", function(frm, cdt, cdn) {
 	
 	if(cur_frm.doc.voucher_type == "Payment Entry - HO - SBI" && cur_frm.doc.selco_branch == "Head Office")
 	{
-	cur_frm.doc.naming_series = "SBI/HO/17-18/";
+	cur_frm.doc.naming_series = "SBI/HO/18-19/";
 	console.log("SBI");
 	refresh_field("naming_series");
 	}
 	else if (cur_frm.doc.voucher_type == "Journal Entry - HO - FD" && cur_frm.doc.selco_branch == "Head Office")   
 	{
-	cur_frm.doc.naming_series = "FD/HO/17-18/";
+	cur_frm.doc.naming_series = "FD/HO/18-19/";
 	} 
 	else if (cur_frm.doc.voucher_type == "Opening Entry - HO - SELCO" && cur_frm.doc.selco_branch == "Head Office")   
 	{
-	cur_frm.doc.naming_series = "OPNS/HO/17-18/";
+	cur_frm.doc.naming_series = "OPNS/HO/18-19/";
 	} 
 
 	if(cur_frm.doc.voucher_type == "Commission Journal" && cur_frm.doc.selco_branch == "Head Office")
 	{
-		cur_frm.doc.naming_series = "CJ/HO/17-18/";
+		cur_frm.doc.naming_series = "CJ/HO/18-19/";
 		refresh_field("naming_series");
 	}
 
