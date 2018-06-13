@@ -58,7 +58,8 @@ frappe.ui.form.on("Sales Invoice", "selco_type_of_invoice", function(frm) {
         cur_frm.set_query("selco_sales_account", function() {
             return {
                 "filters": {
-                    "parent_account": ["in", ["Karnataka Service - SELCO", "Tamilnadu Service - SELCO", "Interstate Service - SELCO"]]
+                    "parent_account": ["in", ["Karnataka Service - SELCO", "Tamilnadu Service - SELCO", "Interstate Service - SELCO","Bihar Service - SELCO","Maharashtra Service - SELCO","Kerala Service - SELCO"]]
+
                 }
             };
         });
@@ -69,7 +70,8 @@ frappe.ui.form.on("Sales Invoice", "selco_type_of_invoice", function(frm) {
         cur_frm.set_query("selco_sales_account", function() {
             return {
                 "filters": {
-                    "parent_account": ["in", ["Karnataka Sales - SELCO"]]
+                    "parent_account": ["in", ["Karnataka Sales - SELCO","Kerala Sales - SELCO","Maharashtra Sales - SELCO","Bihar Sales - SELCO","Tamilnadu Sales - SELCO","Interstate Sales - SELCO"]]
+
                 }
             };
         });
@@ -85,37 +87,8 @@ else if(cur_frm.doc.selco_type_of_invoice == "Bill of Sale")
             };
         });
     }
- 
-
-else if ((cur_frm.doc.selco_type_of_invoice == "System Sales Invoice") || (cur_frm.doc.selco_type_of_invoice == "Spare Sales Invoice")) {
-    cur_frm.set_query("selco_sales_account", function() {
-        return {
-            "filters": {
-                "parent_account": ["in", ["Karnataka Sales - SELCO"]]
-            }
-        };
-    });
-}
 
 });
-frappe.ui.form.on("Sales Invoice", "validate", function(frm) {
-for (i=0;i<cur_frm.doc.taxes.length;i++)
-{
-if (cur_frm.doc.taxes[i].account_head == "Discount Karnataka 14.5% - SELCO")
-{
-//frappe.msgprint("Discount!!");
-if(cur_frm.doc.taxes[i].tax_amount>0)
-{
-cur_frm.doc.taxes[i].tax_amount = cur_frm.doc.taxes[i].tax_amount * -1;
-}
-}
-}
-});
-
-
-
-
-
 
 
 
