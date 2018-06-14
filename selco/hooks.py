@@ -230,7 +230,7 @@ fixtures = [
     "dt":"Custom Field",
     "filters":[
       ["name", "in", [
-      "Employee-aadhaar_number",
+      "Employee-selco_aadhaar_number",
       "Issue-selco_sms_counter_open",
       "Issue-selco_sms_number",
       "Warehouse-selco_warehouse_type",
@@ -1146,8 +1146,6 @@ fixtures = [
       "Livelihood Project IBM",
       "eShala IBMs",
       "Livelihood IBMs",
-      "Stock Balance-SELCO",
-      "Stock Ledger-SELCO",
       "Complaint Register - Service Branchwise",
       "CSE Service Calls",
       "Complaint Rejected By CSD",
