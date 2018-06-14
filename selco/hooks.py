@@ -841,6 +841,8 @@ fixtures = [
       "Purchase Order Item-base_net_amount-hidden",
       "Purchase Order Item-base_net_rate-hidden",
       "Purchase Order Item-item_weight_details-hidden",
+      "Purchase Order Item-item_name-in_list_view",
+      "Purchase Order Item-schedule_date-in_list_view",
       "Purchase Invoice Item-item_weight_details-hidden",
       "Purchase Invoice-raw_materials_supplied-hidden",
       "Purchase Invoice-shipping_rule-hidden",
