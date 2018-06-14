@@ -128,7 +128,7 @@ cur_frm.doc.selco_sms_counter_1 = cur_frm.doc.selco_sms_counter_1 +1 ;
 
 frappe.ui.form.on("Issue", "refresh", function(frm) {
    {
-var workflow_states = ['Complaint Open','Complaint Assigned To CSE','Complaint Escalated To SBM']
+var workflow_states = ['Complaint Open','Complaint Assigned To CSE','Complaint Escalated To SBM','Complaint Attended By CSE - Still Open']
 if (workflow_states.indexOf(cur_frm.doc.workflow_state) != -1)
 {
       cur_frm.add_custom_button(__("Raise Warranty Claim"),
