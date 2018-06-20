@@ -230,6 +230,7 @@ fixtures = [
     "dt":"Custom Field",
     "filters":[
       ["name", "in", [
+      "Stock Entry Detail-hsn_code",
       "Employee-selco_aadhaar_number",
       "Issue-selco_sms_counter_open",
       "Issue-selco_sms_number",
