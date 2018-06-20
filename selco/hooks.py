@@ -886,7 +886,6 @@ fixtures = [
       "Bank Payment-naming_series-options",
       "Contra Entry-naming_series-options",
       "Employee-naming_series-options",
-      "Purchase Order-terms_section_break-hidden",
       "Purchase Order-get_items_from_open_material_requests-hidden",
       "Purchase Order-naming_series-read_only",
       "Branch-quick_entry",
