@@ -16,12 +16,11 @@ frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
     if (frm.doc.payment_type == "Pay") {
         frm.set_df_property("selco_financed", "hidden", 1);
         frm.set_df_property("selco_financed", "reqd", 0);
-        frm.set_df_property("selco_money_received_by", "reqd", 0);
+        frm.set_df_property("selco_money_received_by", "hidden", 1);
         frm.set_df_property("selco_o_a_no", "hidden", 1);
         frm.set_df_property("selco_o_a_date", "hidden", 1);
         frm.set_df_property("paid_amount", "label", "Paid Amount");
     } else {
-        frm.set_df_property("selco_money_received_by", "hidden", 0);
         frm.set_df_property("selco_financed", "hidden", 0);
         frm.set_df_property("selco_financed", "reqd", 1);
         frm.set_df_property("selco_money_received_by", "reqd", 1);
@@ -52,7 +51,7 @@ frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
             return {
                 "filters": {
                     "supplier": cur_frm.doc.party
-                }
+                }   
             };
         }
     };
