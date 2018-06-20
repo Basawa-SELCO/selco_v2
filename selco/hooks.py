@@ -981,6 +981,7 @@ fixtures = [
       "Material Request Item-schedule_date-in_list_view",
       "Material Request Item-warehouse-in_list_view",
       "Material Request-material_request_type-options",
+      "Material Request-material_request_type-in_list_view",
       "Material Request-naming_series-options",
       "Material Request-naming_series-read_only",
       "Quotation-naming_series-in_list_view",
