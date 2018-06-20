@@ -698,6 +698,7 @@ fixtures = [
   {"dt": "Print Format",
    "filters": 
      [["name", "in", [
+      "SELCO Stock Entry",
       "SELCO - IBM",
       "GST DC SELCO",
       "SELCO GST Sales Invoice",
@@ -759,6 +760,8 @@ fixtures = [
   {"dt": "Property Setter",
    "filters": 
      [["name", "in", [
+      "Delivery Note-apply_discount_on-default",
+      "Delivery Note-apply_discount_on-read_only",
       "Branch-selco_receipt_note_naming_series-width",
       "Purchase Receipt-naming_series-options",
       "Issue-raised_by-width",

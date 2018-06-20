@@ -5880,5 +5880,39 @@
   "property": "options", 
   "property_type": "Text", 
   "value": "\nService\nInstallation"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Delivery Note", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "apply_discount_on", 
+  "modified": "2018-06-20 16:50:37.971750", 
+  "name": "Delivery Note-apply_discount_on-read_only", 
+  "property": "read_only", 
+  "property_type": "Check", 
+  "value": "1"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Delivery Note", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "apply_discount_on", 
+  "modified": "2018-06-20 16:52:19.671529", 
+  "name": "Delivery Note-apply_discount_on-default", 
+  "property": "default", 
+  "property_type": "Text", 
+  "value": "Net Total"
  }
 ]
