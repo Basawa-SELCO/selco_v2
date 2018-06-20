@@ -740,23 +740,6 @@
   "docstatus": 0, 
   "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
-  "field_name": "naming_series", 
-  "modified": "2017-11-04 12:37:18.845927", 
-  "name": "Lead-naming_series-options", 
-  "property": "options", 
-  "property_type": "Text", 
-  "value": "LEAD/HO/\nLEAD/KUSH/\nLEAD/KUM/\nLEAD/KOL/\nLEAD/UDU/\nLEAD/HAV/\nLEAD/BGK/\nLEAD/GUL/"
- }, 
- {
-  "_assign": null, 
-  "_comments": null, 
-  "_liked_by": null, 
-  "_user_tags": null, 
-  "default_value": null, 
-  "doc_type": "Lead", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocField", 
   "field_name": "gender", 
   "modified": "2017-11-04 13:13:52.705549", 
   "name": "Lead-gender-hidden", 
@@ -5812,5 +5795,22 @@
   "property": "options", 
   "property_type": "Text", 
   "value": "IBM/\nIBM/MYS/17-18/\nIBM/BIJ/17-18/\nIBM/KUN/17-18/\nIBM/BEL/17-18/\nIBM/BLY/17-18/\nIBM/BLG/17-18/\nIBM/CHM/17-18/\nIBM/CKM/17-18/\nIBM/CHI/17-18/\nIBM/CHA/17-18/\nIBM/DAV/17-18/\nIBM/DHA/17-18/\nIBM/GAD/17-18/\nIBM/HAS/17-18/\nIBM/HAV/17-18/\nIBM/HOS/17-18/\nIBM/HUB/17-18/\nIBM/GUL/17-18/\nIBM/KRK/17-18/\nIBM/KOL/17-18/\nIBM/KOP/17-18/\nIBM/KUM/17-18/\nIBM/KUS/17-18/\nIBM/MDY/17-18/\nIBM/RAI/17-18/\nIBM/RAM/17-18/\nIBM/SHI/17-18/\nIBM/SIN/17-18/\nIBM/SIR/17-18/\nIBM/SUL/17-18/\nIBM/TPT/17-18/\nIBM/TUM/17-18/\nIBM/UDU/17-18/\nIBM/MAD/17-18/\nIBM/CKB/17-18/\nIBM/TAL/17-18/\nIBM/BAI/17-18/\nIBM/BAN/17-18/\nIBM/KAS/17-18/\nIBM/PUT/17-18/\nIBM/MAN/17-18/\nIBM/GUL/17-18/\nIBM/BGK/17-18/\nIBM/MYSSB/17-18/\nIBM/PUTSB/17-18/\nIBM/HASSB/17-18/\nIBM/KUNSB/17-18/\nIBM/BANSB/17-18/\nIBM/CHASB/17-18/\nIBM/BLYSB/17-18/\nIBM/BIJSB/17-18/\nIBM/SHISB/17-18/\nIBM/DHASB/17-18/\nIBM/MUN/17-18/\nIBM/HOD/17-18/\nIBM/SOL/17-18/\nTEST/IBM/\nIBM/TAL/18-19/\nIBM/BID/18-19/\nIBM/RAI/18-19/\nIBM/KUN/18-19/\nIBM/CSD/18-19/\nIBM/DHU/18-19/\nIBM/ERO/18-19/\nIBM/KLH/18-19/\nIBM/PUN/18-19/\nIBM/TIR/18-19/\nIBM/DAV/18-19/\nIBM/KAS/18-19/\nIBM/KOL/18-19/\nIBM/SUL/18-19/\nIBM/TPT/18-19/\nIBM/TUM/18-19/\nIBM/UDU/18-19/\nIBM/SHISB/18-19/\nIBM/HASSB/18-19/\nIBM/SOL/18-19/\nIBM/MAD/18-19/\nIBM/MUN/18-19/\nIBM/AHA/18-19/\nIBM/BLY/18-19/\nIBM/KOP/18-19/\nIBM/BIJ/18-19/\nIBM/KUNSB/18-19/\nIBM/BLG/18-19/\nIBM/GAD/18-19/\nIBM/BLYSB/18-19/\nIBM/DHASB/18-19/\nIBM/BEL/18-19/\nIBM/HOD/18-19/ \nIBM/KUM/18-19/\nIBM/BAI/18-19/\nIBM/CHA/18-19/\nIBM/MYS/18-19/\nIBM/SIR/18-19/\nIBM/PUT/18-19/\nIBM/HAS/18-19/\nIBM/CKB/18-19/\nIBM/BJPSB/18-19/\nIBM/BANSB/18-19/\nIBM/CHASB/18-19/\nIBM/MAN/18-19/\nIBM/CKM/18-19/\nIBM/CHM/18-19/\nIBM/DHA/18-19/\nIBM/HUB/18-19/\nIBM/MDY/18-19/\nIBM/HOS/18-19/\nIBM/GUL/18-19/\nIBM/RAM/18-19/\nIBM/SIN/18-19/\nIBM/KUS/18-19/\nIBM/PUTSB/18-19/\nIBM/HAV/18-19/\nIBM/MYSSB/18-19/\nIBM/CHI/18-19/\nIBM/KRK/18-19/\nIBM/BAN/18-19/\nIBM/SHI/18-19/\nIBM/BGK/18-19/"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Lead", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "naming_series", 
+  "modified": "2018-06-21 02:40:28.735773", 
+  "name": "Lead-naming_series-options", 
+  "property": "options", 
+  "property_type": "Text", 
+  "value": "LEAD/HO/\nLEAD/KUSH/\nLEAD/KUM/\nLEAD/KOL/\nLEAD/UDU/\nLEAD/HAV/\nLEAD/BGK/\nLEAD/GUL/\nLEAD/MAN/18-19/\nLEAD/HO/18-19/\nLEAD/TAL/18-19/\nLEAD/BID/18-19/\nLEAD/RAI/18-19/\nLEAD/KUN/18-19/\nLEAD/BAN/18-19/\nLEAD/CSD/18-19/\nLEAD/DHU/18-19/\nLEAD/ERO/18-19/\nLEAD/KLH/18-19/\nLEAD/PUN/18-19/\nLEAD/TIR/18-19/\nLEAD/DAV/18-19/\nLEAD/KAS/18-19/\nLEAD/KOL/18-19/\nLEAD/SUL/18-19/\nLEAD/TPT/18-19/\nLEAD/TUM/18-19/\nLEAD/UDU/18-19/\nLEAD/SOL/18-19/\nLEAD/MAD/18-19/\nLEAD/MUN/18-19/\nLEAD/AHA/18-19/\nLEAD/BLY/18-19/\nLEAD/KOP/18-19/\nLEAD/BIJ/18-19/\nLEAD/BLG/18-19/\nLEAD/GAD/18-19/\nLEAD/BEL/18-19/\nLEAD/KUM/18-19/\nLEAD/BAI/18-19/\nLEAD/CHA/18-19/\nLEAD/MYS/18-19/\nLEAD/SIR/18-19/\nLEAD/PUT/18-19/\nLEAD/HAS/18-19/\nLEAD/CKB/18-19/\nLEAD/CKM/18-19/\nLEAD/CHM/18-19/\nLEAD/DHA/18-19/\nLEAD/HUB/18-19/\nLEAD/MDY/18-19/\nLEAD/HOS/18-19/\nLEAD/GUL/18-19/\nLEAD/RAM/18-19/\nLEAD/SIN/18-19/\nLEAD/KUS/18-19/\nLEAD/HAV/18-19/\nLEAD/CHI/18-19/\nLEAD/KRK/18-19/\nLEAD/BAN/18-19/\nLEAD/SHI/18-19/\nLEAD/BGK/18-19/"
  }
 ]
