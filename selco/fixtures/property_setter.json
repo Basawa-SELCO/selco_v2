@@ -247,23 +247,6 @@
   "docstatus": 0, 
   "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
-  "field_name": "naming_series", 
-  "modified": "2017-11-04 12:37:18.845927", 
-  "name": "Lead-naming_series-options", 
-  "property": "options", 
-  "property_type": "Text", 
-  "value": "LEAD/HO/\nLEAD/KUSH/\nLEAD/KUM/\nLEAD/KOL/\nLEAD/UDU/\nLEAD/HAV/\nLEAD/BGK/\nLEAD/GUL/"
- }, 
- {
-  "_assign": null, 
-  "_comments": null, 
-  "_liked_by": null, 
-  "_user_tags": null, 
-  "default_value": null, 
-  "doc_type": "Lead", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocField", 
   "field_name": "gender", 
   "modified": "2017-11-04 13:13:52.705549", 
   "name": "Lead-gender-hidden", 
@@ -5778,5 +5761,22 @@
   "property": "options", 
   "property_type": "Text", 
   "value": "Journal Entry\nBank Entry\nCash Entry\nCredit Card Entry\nDebit Note\nCredit Note\nContra Entry\nExcise Entry\nWrite Off Entry\nOpening Entry\nDepreciation Entry\nOpening Entry - HO - SELCO\nJournal Entry - HO - FD\nPayment Entry - HO - SBI"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Lead", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "naming_series", 
+  "modified": "2018-06-20 19:55:22.106154", 
+  "name": "Lead-naming_series-options", 
+  "property": "options", 
+  "property_type": "Text", 
+  "value": "LEAD/HO/\nLEAD/KUSH/\nLEAD/KUM/\nLEAD/KOL/\nLEAD/UDU/\nLEAD/HAV/\nLEAD/BGK/\nLEAD/GUL/\nLEAD/MAN/18-19/\nLEAD/HO/18-19/\nLEAD/TAL/18-19/\nLEAD/BID/18-19/\nLEAD/RAI/18-19/\nLEAD/KUN/18-19/\nLEAD/BAN/18-19/\nLEAD/CSD/18-19/\nLEAD/DHU/18-19/\nLEAD/ERO/18-19/\nLEAD/KLH/18-19/\nLEAD/PUN/18-19/\nLEAD/TIR/18-19/\nLEAD/DAV/18-19/\nLEAD/KAS/18-19/\nLEAD/KOL/18-19/\nLEAD/SUL/18-19/\nLEAD/TPT/18-19/\nLEAD/TUM/18-19/\nLEAD/UDU/18-19/\nLEAD/SOL/18-19/\nLEAD/MAD/18-19/\nLEAD/MUN/18-19/\nLEAD/AHA/18-19/\nLEAD/BLY/18-19/\nLEAD/KOP/18-19/\nLEAD/BIJ/18-19/\nLEAD/BLG/18-19/\nLEAD/GAD/18-19/\nLEAD/BEL/18-19/\nLEAD/KUM/18-19/\nLEAD/BAI/18-19/\nLEAD/CHA/18-19/\nLEAD/MYS/18-19/\nLEAD/SIR/18-19/\nLEAD/PUT/18-19/\nLEAD/HAS/18-19/\nLEAD/CKB/18-19/\nLEAD/CKM/18-19/\nLEAD/CHM/18-19/\nLEAD/DHA/18-19/\nLEAD/HUB/18-19/\nLEAD/MDY/18-19/\nLEAD/HOS/18-19/\nLEAD/GUL/18-19/\nLEAD/RAM/18-19/\nLEAD/SIN/18-19/\nLEAD/KUS/18-19/\nLEAD/HAV/18-19/\nLEAD/CHI/18-19/\nLEAD/KRK/18-19/\nLEAD/BAN/18-19/\nLEAD/SHI/18-19/\nLEAD/BGK/18-19/"
  }
 ]
