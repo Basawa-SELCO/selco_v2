@@ -5846,5 +5846,39 @@
   "property": "default", 
   "property_type": "Text", 
   "value": "Net Total"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Stock Entry Detail", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "basic_rate", 
+  "modified": "2018-06-22 04:25:29.213602", 
+  "name": "Stock Entry Detail-basic_rate-in_list_view", 
+  "property": "in_list_view", 
+  "property_type": "Check", 
+  "value": "1"
+ }, 
+ {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
+  "default_value": null, 
+  "doc_type": "Stock Entry Detail", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "amount", 
+  "modified": "2018-06-22 04:25:29.232832", 
+  "name": "Stock Entry Detail-amount-in_list_view", 
+  "property": "in_list_view", 
+  "property_type": "Check", 
+  "value": "1"
  }
 ]
