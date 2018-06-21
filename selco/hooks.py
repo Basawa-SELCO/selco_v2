@@ -412,7 +412,7 @@ fixtures = [
       "Warranty Claim-selco_cell_no_4",
       "Warranty Claim-selco_battery_within_warranty",
       "Warranty Claim-selco_battery_supplier",
-      "Warranty Claim-p",
+      "Warranty Claim-selcocb7",
       "Warranty Claim-selco_battery_voltage",
       "Warranty Claim-selco_cell_no_3",
       "Warranty Claim-selco_cell_no_2",
