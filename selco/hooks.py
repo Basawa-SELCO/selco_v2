@@ -1012,6 +1012,8 @@ fixtures = [
       "Journal Entry-naming_series-read_only",
       "Delivery Note-naming_series-options",
       "Delivery Note-naming_series-read_only",
+      "Delivery Note-apply_discount_on-read_only",
+      "Delivery Note-apply_discount_on-default",
       "Sales Person-employee-reqd",
       "Sales Invoice-naming_series-options",
       "Sales Invoice-naming_series-bold",
