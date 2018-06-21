@@ -779,6 +779,8 @@ fixtures = [
       "Sales Invoice-apply_discount_on-read_only",
       "User-last_active-width",
       "Stock Entry Detail-actual_qty-width",
+      "Stock Entry Detail-basic_rate-in_list_view",
+      "Stock Entry Detail-amount-in_list_view",
       "Warehouse-warehouse_name-width",
       "Payment Entry-default_print_format",
       "Stock Entry-default_print_format",
