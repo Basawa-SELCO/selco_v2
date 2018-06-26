@@ -1,5 +1,5 @@
 cur_frm.add_fetch("selco_branch", "selco_branch_email_id", "selco_branch_email_id");
-cur_frm.add_fetch("item", "gst_hsn_code", "hsn_code");
+cur_frm.add_fetch("item_code", "gst_hsn_code", "hsn_code");
 
 frappe.ui.form.on("Stock Entry", "refresh", async function(frm) {
 	if (cur_frm.doc.__islocal == 1) {
