@@ -699,6 +699,7 @@ fixtures = [
   {"dt": "Print Format",
    "filters": 
      [["name", "in", [
+      "SELCO IBM",
       "SELCO Stock Entry",
       "SELCO - IBM",
       "GST DC SELCO",

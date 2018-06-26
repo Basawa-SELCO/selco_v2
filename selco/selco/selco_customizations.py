@@ -142,7 +142,7 @@ def selco_material_request_validate(doc,method):
                 flag = "Y"
         for d in doc.get('items'):
             if flag != "Y":
-                d.dispatched_quantity = d.qty
+                d.selco_dispatched_quantity = d.qty
     if doc.workflow_state == "Dispatched From Godown - IBM":
         for d in doc.get('items'):
             d.selco_dispatched_quantity = d.qty
