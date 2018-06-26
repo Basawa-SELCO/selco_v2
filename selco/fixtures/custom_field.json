@@ -10827,7 +10827,7 @@
   "reqd": 1, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "269"
  }, 
  {
   "allow_on_submit": 0, 
@@ -11310,7 +11310,7 @@
   "modified": "2017-10-26 14:57:22.306000", 
   "name": "Issue-selco_faulty_complaint", 
   "no_copy": 0, 
-  "options": "\nBattery\nCharge Controller\nETC - Collector\nETC - Tank\nFan - Coil\nFan- Switch\nFP - Collector\nFP - Glass\nFP - Tank\nFuse\nLamp - CFL\nLamp - LED\nLFE - Connector\nLFE - Small Battery\nLuminary - CFL\nLuminary - LED\nPanel\nPortable Battery\nInverter", 
+  "options": "\nBattery\nCharge Controller\nETC - Collector\nETC - Tank\nFan - Coil\nFan- Switch\nFP - Collector\nFP - Glass\nFP - Tank\nFuse\nLamp - CFL\nLamp - LED\nLFE - Connector\nLFE - Small Battery\nLuminary - CFL\nLuminary - LED\nPanel\nPortable Battery\nInverter\neShala - CLT Box", 
   "permlevel": 0, 
   "precision": "", 
   "print_hide": 0, 
