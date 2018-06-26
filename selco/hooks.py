@@ -1153,8 +1153,6 @@ fixtures = [
       "Complaint Register - Service Branchwise",
       "CSE Service Calls",
       "Complaint Rejected By CSD",
-      "Complaint Budget V2 With 2 Columns",
-      "Complaint Budget V2",
       "Complaint Budget - Service Branch Wise",
       "Open Complaint Details - Other than Warranty Claim",
       "Open Complaint Details - With Counter",
