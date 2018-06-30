@@ -30,7 +30,15 @@ def execute(filters=None):
 		else:
 			var1=0
 			var2=0
-		row = [d.name,d.selco_customer_full_name,d.selco_service_person,d.selco_service_record_number_1,d.service_amount,var1,var2,d.selco_remarks]
+		#row = [d.name,d.selco_customer_full_name,d.selco_service_person,d.selco_service_record_number_1,d.service_amount,var1,var2,d.selco_remarks]
+		row = [d.name,
+			d.selco_customer_full_name,
+			d.service_person, 
+			d.service_record_number, 
+			d.service_amount,
+			var1,
+			var2
+			d.csd_remarks]
 		data.append(row)
 		var1=0
 		var2=0
