@@ -75,34 +75,34 @@ frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
     if (cur_frm.doc.__islocal == 1) {
         if (frappe.user_info().email == "bangalore_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Bangalore Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "kundapura_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Kundapur Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "hassan_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Hassan Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "bellary_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Bellary Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "chitradurga_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Chitradurga Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "dharwad_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Dharwad Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "mysore_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Mysore Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "puttur_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Puttur Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "vijayapura_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Vijayapura Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } else if (frappe.user_info().email == "shimoga_service_center@selco-india.com") {
             cur_frm.set_value("selco_branch", "Shivamogga Service Branch");
-            cur_frm.set_df_property("selco_branch", "read_only", true);
+            //cur_frm.set_df_property("selco_branch", "read_only", true);
         } 
     }
 
@@ -188,7 +188,6 @@ frappe.ui.form.on("Payment Entry", "selco_money_received_by", function(frm, cdt,
 frappe.ui.form.on("Payment Entry", "selco_financed", function(frm, cdt, cdn) {
     if (cur_frm.doc.selco_financed == "YES") {
         cur_frm.set_df_property("selco_financing_institution", "read_only", false);
-        cur_frm.refresh_field("selco_financing_institution");
         cur_frm.set_df_property("selco_financing_institution_branch", "read_only", false);
         cur_frm.set_df_property("selco_financing_institution", "reqd", true);
         cur_frm.set_df_property("selco_financing_institution_branch", "reqd", true);
@@ -198,6 +197,7 @@ frappe.ui.form.on("Payment Entry", "selco_financed", function(frm, cdt, cdn) {
         cur_frm.set_df_property("selco_financing_institution", "reqd", false);
         cur_frm.set_df_property("selco_financing_institution_branch", "reqd", false);
     }
+    cur_frm.refresh_field("selco_financing_institution");
 });
 
 //  frappe.ui.form.on("Payment Entry", "refresh", function(frm) {
