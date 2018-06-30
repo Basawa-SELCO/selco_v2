@@ -37,7 +37,7 @@ def execute(filters=None):
 			d.service_record_number, 
 			d.service_amount,
 			var1,
-			var2
+			var2,
 			d.csd_remarks]
 		data.append(row)
 		var1=0
