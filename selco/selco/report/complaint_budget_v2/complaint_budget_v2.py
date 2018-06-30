@@ -22,7 +22,15 @@ def execute(filters=None):
 			var1=0.35*d.selco_service_amount
 		else:
 			var1=0
-		row = [d.name,d.selco_customer_full_name,d.selco_service_person,d.service_record_number_1,d.selco_service_amount,var1,d.selco_csd_remarks]
+		
+		row = [d.name,
+			d.selco_customer_full_name,
+			d.service_person, 
+			d.service_record_number, 
+			d.service_amount,
+			var1,
+			d.csd_remarks]
+
 		data.append(row)
 
 	return columns, data
