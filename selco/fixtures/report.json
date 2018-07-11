@@ -5176,5 +5176,61 @@
     "role": "SELCO Management"
    }
   ]
+ }, 
+ {
+  "add_total_row": 0, 
+  "apply_user_permissions": 1, 
+  "disabled": 0, 
+  "docstatus": 0, 
+  "doctype": "Report", 
+  "is_standard": "No", 
+  "javascript": null, 
+  "json": null, 
+  "letter_head": "Bailhongal", 
+  "modified": "2018-07-04 19:11:35.946044", 
+  "module": "Support", 
+  "name": "Open Complaint Details - Mobile", 
+  "query": "SELECT  A.selco_complaint_received_date                     AS \"Date:Date:80\", \n        A.name            AS  \"Complaint ID:Link/Issue:150\", \n        A.selco_branch                   AS \"Branch:Data:80\", \n        A.selco_customer_id     AS \"Customer ID:Link/Customer:150\", \n        A.selco_customer_full_name       AS \"Name:Data:130\", \n        A.selco_customer_full_name  AS \"Contact Number:Data:100\", \n        A.selco_detail_address           AS \"Detail Address:Data:150\", \n        Datediff(Now(), A.selco_complaint_received_date)    AS \"Open Since Days:Int:60\", \n        A.selco_description_of_complaint AS \"Description Of Complaint:Data:150\", \n        A.selco_branch_remarks           AS \"Branch Remarks:Data:100\", \n         A.workflow_state           AS \"Status:Data:150\", \n        A.selco_service_branch_email_id  AS \"Service Branch:Data:150\"\nFROM   `tabIssue` A LEFT JOIN `tabWarranty Claim` B ON A.name = B.selco_complaint_number\nWHERE   A.workflow_state NOT IN ( \"complaint closed by branch\", \n                               \"complaint closed by csd\", \n                               \"complaint cancelled\" \n                                      , \n                               \"complaint rejected by csd\" \n                                    ) \n \nORDER  BY selco_complaint_received_date ASC; \n", 
+  "ref_doctype": "Issue", 
+  "report_name": "Open Complaint Details - Mobile", 
+  "report_type": "Query Report", 
+  "roles": [
+   {
+    "role": "Support Team"
+   }, 
+   {
+    "role": "SELCO CSD Manager"
+   }, 
+   {
+    "role": "SELCO Senior Manager Energy Services"
+   }, 
+   {
+    "role": "SELCO Branch Office Administrator"
+   }, 
+   {
+    "role": "SELCO Service Branch Office Administrator"
+   }, 
+   {
+    "role": "SELCO Projects Manager"
+   }, 
+   {
+    "role": "SELCO Management"
+   }, 
+   {
+    "role": "SELCO Logistics Manager"
+   }, 
+   {
+    "role": "SELCO Godown Office Administrator"
+   }, 
+   {
+    "role": "System Manager"
+   }, 
+   {
+    "role": "SELCO Lead Accountant"
+   }, 
+   {
+    "role": "SELCO Service Basic"
+   }
+  ]
  }
 ]
