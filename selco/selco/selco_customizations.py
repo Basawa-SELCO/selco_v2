@@ -426,13 +426,13 @@ def selco_validate_if_customer_contact_number_exists(contact_number,customer_id)
     var5 = unicode(var4) or u''
     var6 = frappe.db.get_value("Customer", {"selco_customer_contact_number": (contact_number)}, "customer_name")
     if var5 != "None" and customer_id != var5:
-        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var5 + "\n Lead Name : " + var6)
+        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var5 + "\n Customer Name : " + var6)
 
     var14 = frappe.db.get_value("Customer", {"selco_landline_mobile_2": (contact_number)})
     var15 = unicode(var14) or u''
     var16 = frappe.db.get_value("Customer", {"selco_landline_mobile_2": (contact_number)}, "customer_name")
     if var15 != "None" and customer_id != var15:
-        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var15 + "\n Lead Name : " + var16)
+        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var15 + "\n Customer Name : " + var16)
 
 
 @frappe.whitelist()
