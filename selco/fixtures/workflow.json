@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2018-04-30 12:54:40.035293", 
+  "modified": "2018-07-11 15:34:11.478810", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -97,7 +97,7 @@
     "update_value": null
    }, 
    {
-    "allow_edit": "System Manager", 
+    "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
     "state": "Dispatch Pending From Godown", 
@@ -105,7 +105,7 @@
     "update_value": null
    }, 
    {
-    "allow_edit": "System Manager", 
+    "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
     "state": "Dispatched From Godown", 
@@ -373,6 +373,18 @@
     "allowed": "SELCO CSD Manager", 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Format Raised - WC"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "System Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Closed By CSD"
+   }, 
+   {
+    "action": "Reopen Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Drafted", 
+    "state": "Complaint Closed By Branch"
    }
   ], 
   "workflow_name": "Complaint Management", 
@@ -638,12 +650,12 @@
   "doctype": "Workflow", 
   "document_type": "Material Request", 
   "is_active": 1, 
-  "modified": "2018-05-01 09:14:27.925669", 
+  "modified": "2018-07-11 12:06:14.681090", 
   "name": "IBM Approval Process", 
   "override_status": 0, 
   "states": [
    {
-    "allow_edit": "SELCO Branch Office Administrator", 
+    "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
     "state": "Draft - IBM", 
@@ -743,6 +755,22 @@
     "doc_status": "0", 
     "message": null, 
     "state": "Content Dispatched", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Rejected By Godown - IBM", 
+    "update_field": null, 
+    "update_value": null
+   }, 
+   {
+    "allow_edit": "SELCO Service Branch Office Administrator", 
+    "doc_status": "0", 
+    "message": null, 
+    "state": "Draft - IBM", 
     "update_field": null, 
     "update_value": null
    }
@@ -1099,7 +1127,7 @@
   "doctype": "Workflow", 
   "document_type": "Purchase Order", 
   "is_active": 1, 
-  "modified": "2018-04-30 00:49:01.494834", 
+  "modified": "2018-07-11 11:59:44.095227", 
   "name": "Purchase Order Approval Process", 
   "override_status": 0, 
   "states": [
@@ -1144,7 +1172,7 @@
     "update_value": null
    }, 
    {
-    "allow_edit": "System Manager", 
+    "allow_edit": "SELCO Logistics Executive", 
     "doc_status": "2", 
     "message": null, 
     "state": "Cancelled - PO", 
