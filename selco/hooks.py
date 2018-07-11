@@ -693,7 +693,7 @@ fixtures = [
       "Customer-selco_customer_contact_number",
       "Customer-selco_gender",
       "Customer-selco_branch",
-      "Customer-status"]],
+      "Customer-status", "Material Request-selco_eshala_proposal_number", "Material Request-selco_content_dispatched"]],
     ]
   },
   {"dt": "Print Format",
@@ -756,7 +756,7 @@ fixtures = [
       "Payment Receipt Voucher",
       "Credit Note",
       "Cheque Printing Format",
-      "POS Invoice"
+      "POS Invoice", "SELCO New MRN"
         ]]]},
 
   {"dt": "Property Setter",
@@ -1283,7 +1283,7 @@ fixtures = [
       "Salary Register",
       "Feedback Ratings",
       "Serial No Status",
-      "Maintenance Schedules"
+      "Maintenance Schedules", "Open Complaint Details - Mobile"
     ]]]},  
     {"dt": "Workflow"},
     {"dt": "Role"},
