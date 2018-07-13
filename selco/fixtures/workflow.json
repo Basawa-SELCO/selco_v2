@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2018-07-11 15:34:11.478810", 
+  "modified": "2018-07-12 20:06:25.761733", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -203,7 +203,7 @@
    {
     "action": "Reopen Complaint - Issue", 
     "allowed": "SELCO CSD Manager", 
-    "next_state": "Complaint Rejected By CSD", 
+    "next_state": "Complaint Drafted", 
     "state": "Complaint Closed By Branch"
    }, 
    {
@@ -650,7 +650,7 @@
   "doctype": "Workflow", 
   "document_type": "Material Request", 
   "is_active": 1, 
-  "modified": "2018-07-11 12:06:14.681090", 
+  "modified": "2018-07-11 19:08:51.428939", 
   "name": "IBM Approval Process", 
   "override_status": 0, 
   "states": [
