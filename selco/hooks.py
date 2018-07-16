@@ -693,7 +693,7 @@ fixtures = [
       "Customer-selco_customer_contact_number",
       "Customer-selco_gender",
       "Customer-selco_branch",
-      "Customer-status", "Material Request-selco_eshala_proposal_number", "Material Request-selco_content_dispatched"]],
+      "Customer-status", "Material Request-selco_eshala_proposal_number", "Material Request-selco_content_dispatched", "Purchase Order-selco_delivery_address"]],
     ]
   },
   {"dt": "Print Format",
