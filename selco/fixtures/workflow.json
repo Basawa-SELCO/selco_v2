@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2018-07-12 20:06:25.761733", 
+  "modified": "2018-07-13 11:28:25.427406", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -89,7 +89,7 @@
     "update_value": null
    }, 
    {
-    "allow_edit": "SELCO Senior Manager Energy Services", 
+    "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
     "state": "Warranty Claim Format Raised - WC", 
@@ -650,7 +650,7 @@
   "doctype": "Workflow", 
   "document_type": "Material Request", 
   "is_active": 1, 
-  "modified": "2018-07-11 19:08:51.428939", 
+  "modified": "2018-07-13 11:44:42.048640", 
   "name": "IBM Approval Process", 
   "override_status": 0, 
   "states": [
@@ -735,7 +735,7 @@
     "update_value": null
    }, 
    {
-    "allow_edit": "SELCO Godown Office Administrator", 
+    "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
     "state": "Rejected By Godown - IBM", 
@@ -1127,7 +1127,7 @@
   "doctype": "Workflow", 
   "document_type": "Purchase Order", 
   "is_active": 1, 
-  "modified": "2018-07-11 11:59:44.095227", 
+  "modified": "2018-07-16 11:27:08.670051", 
   "name": "Purchase Order Approval Process", 
   "override_status": 0, 
   "states": [
