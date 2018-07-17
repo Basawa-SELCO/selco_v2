@@ -219,3 +219,20 @@ function set_branch_readonly(frm) {
 	}
 	}
 }
+
+if ( cur_frm.doc.workflow_state == "Content Dispatch Pending" )
+{
+cur_frm.set_value('selco_content_dispatched', "NO")
+}
+else if ( cur_frm.doc.workflow_state == "Content Dispatched" )
+{
+cur_frm.set_value('selco_content_dispatched', "YES")
+}
+if ( cur_frm.doc.workflow_state == "Dispatched From Godown - IBM" )
+{
+if (cur_frm.doc.selco_is_it_eshala_ibm == "YES" && cur_frm.doc.selco_content_dispatched == "NO")
+{
+frappe.msgprint("Please request content");
+validated = false;
+}
+}
