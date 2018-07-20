@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe import _
-from erpnext.hr.doctype.payroll_entry.payroll_entry import get_month_details
+# from erpnext.hr.doctype.payroll_entry.payroll_entry import get_month_details
 from frappe import msgprint
 import datetime
 from datetime import timedelta
@@ -24,7 +24,7 @@ def execute(filters=None):
 		elif d.within_warranty:
 			var1=70
 			var2=0
-		elif d.budget_thirty_five:
+		elif d.approve_budget:
 			var1=0
 			var2=0.35*d.service_amount
 		else:

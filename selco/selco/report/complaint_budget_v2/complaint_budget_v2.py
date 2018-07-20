@@ -18,7 +18,7 @@ def execute(filters=None):
 			var1=d.special_budget_approved_by_csd
 		elif d.within_warranty:
 			var1=70
-		elif d.budget_thirty_five:
+		elif d.approve_budget:
 			var1=0.35*d.selco_service_amount
 		else:
 			var1=0
