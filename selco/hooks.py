@@ -1283,7 +1283,7 @@ fixtures = [
       "Salary Register",
       "Feedback Ratings",
       "Serial No Status",
-      "Maintenance Schedules", "Open Complaint Details - Mobile"
+      "Maintenance Schedules", "Open Complaint Details - Mobile", "Open Complaint Details With Warranty Claim Including Supplier"
     ]]]},  
     {"dt": "Workflow"},
     {"dt": "Role"},
