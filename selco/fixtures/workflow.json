@@ -4,7 +4,7 @@
   "doctype": "Workflow", 
   "document_type": "Issue", 
   "is_active": 1, 
-  "modified": "2018-07-13 11:28:25.427406", 
+  "modified": "2018-07-19 20:20:42.507539", 
   "name": "Complaint Management", 
   "override_status": 0, 
   "states": [
@@ -384,6 +384,12 @@
     "action": "Reopen Complaint - Issue", 
     "allowed": "SELCO CSD Manager", 
     "next_state": "Complaint Drafted", 
+    "state": "Complaint Closed By Branch"
+   }, 
+   {
+    "action": "Reject Complaint - Issue", 
+    "allowed": "SELCO CSD Manager", 
+    "next_state": "Complaint Rejected By CSD", 
     "state": "Complaint Closed By Branch"
    }
   ], 
