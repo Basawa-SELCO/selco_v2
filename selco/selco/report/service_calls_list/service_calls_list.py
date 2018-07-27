@@ -10,6 +10,21 @@ import datetime
 from datetime import timedelta
 from frappe.utils import cint, flt, nowdate,getdate
 
+months = {
+	"Jan"  :"January",
+	"Feb"  :"February",
+	"Mar"  :"March",
+	"Apr"  :"April",
+	"May"  :"May",
+	"Jun"  :"June",
+	"Jul"  :"July",
+	"Aug"  :"August",
+	"Sep"  :"September",
+	"Oct"  :"October",
+	"Nov"  :"November",
+	"Dec"  :"December",
+}
+
 def execute(filters):
 	columns, data, initial = [], [],[]
 	columns= get_columns()
@@ -113,6 +128,7 @@ def get_columns():
 
 def get_data(filters):
 	mnth=filters.get("month")
+	mnth = months.get(mnth)
 	return frappe.db.sql("""
 	SELECT A.selco_branch, C.selco_reports_to, C.selco_status, B.service_person, C.selco_contact_number, C.selco_service_or_installation,
 	B.day_1+B.day_2+B.day_3+B.day_4+B.day_5+B.day_6+B.day_7+B.day_8+B.day_9+B.day_10+B.day_11+B.day_12+B.day_13+B.day_14+B.day_15+B.day_16+
