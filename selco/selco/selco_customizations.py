@@ -676,11 +676,6 @@ def selco_stock_entry_on_submit_updates(doc,method):
                         ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
                         if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
                             frappe.throw("Please enter correct Quantity")
-            else:
-                for ref_item in ref_doc.items:
-                    if (ref_item.item_code == item.item_code):
-                        if item.qty > ref_item.qty:
-                            frappe.throw("Please enter correct Quantity")
 
             ref_doc.save(ignore_permissions=True)
     if(doc.selco_type_of_stock_entry == "Outward DC"):
