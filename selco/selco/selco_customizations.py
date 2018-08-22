@@ -691,18 +691,13 @@ def selco_stock_entry_on_submit_updates(doc,method):
 def selco_stock_entry_on_cancel_updates(doc,method):
     if(doc.selco_type_of_stock_entry == "Rejection Out"):
         for item in doc.items:
-            ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-            for ref_item in ref_doc.items:
-                if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-            ref_doc.save()
-    """if(doc.type_of_stock_entry == "Rejection In"):
-        for item in doc.items:
-            ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-            for ref_item in ref_doc.items:
-                if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = ref_item.reference_rej_in_or_rej_quantity - item.qty
-            ref_doc.save()"""
+            if item.reference_rej_in_or_rej_ot:
+                ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
+                for ref_item in ref_doc.items:
+                    if ref_item.item_code == item.item_code:
+                        ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
+                ref_doc.save()
+
     if(doc.selco_type_of_stock_entry == "GRN"):
         for item in doc.items:
             if item.reference_rej_in_or_rej_ot:
