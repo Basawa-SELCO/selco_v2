@@ -645,103 +645,68 @@ def send_po_reminder():
 
 @frappe.whitelist()
 def selco_stock_entry_on_submit_updates(doc,method):
-    if((doc.selco_type_of_stock_entry == "Rejection Out") and (doc.selco_supplier_or_customer == "Customer")):
-        for item in doc.items:
-            ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-            #frappe.msgprint(ref_doc)
-            for ref_item in ref_doc.items:
-                if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
-                    if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
-                        frappe.throw("Please enter correct Quantity")
-            ref_doc.save()
-    if((doc.selco_type_of_stock_entry == "Rejection In") and (doc.selco_supplier_or_customer == "Supplier")):
-        for item in doc.items:
-            ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-            #frappe.msgprint(ref_doc)
-            for ref_item in ref_doc.items:
-                if ref_item.item_code == item.item_code:
-                    ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
-                    if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
-                        frappe.throw("Please enter correct Quantity")
-            ref_doc.save(ignore_permissions=True)
-    if(doc.selco_type_of_stock_entry == "GRN"):
-        for item in doc.items:
-            item.reference_rej_in_or_rej_ot = doc.selco_suppliers_ref
-            ref_doc = frappe.get_doc("Stock Entry",doc.selco_suppliers_ref)
-            #frappe.msgprint(ref_doc)
-            if doc.selco_type_of_material == "Repair Stock":
-                for ref_item in ref_doc.items:
-                    if (ref_item.item_code == item.item_code):
-                        ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
-                        if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
-                            frappe.throw("Please enter correct Quantity")
+	if((doc.selco_type_of_stock_entry == "Rejection Out") and (doc.selco_supplier_or_customer == "Customer")):
+		for item in doc.items:
+			if item.reference_rej_in_or_rej_ot:
+				ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
+				#frappe.msgprint(ref_doc)
+				for ref_item in ref_doc.items:
+					if ref_item.item_code == item.item_code:
+						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
+						if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
+							frappe.throw("Please enter correct Quantity")
+				ref_doc.save()
 
-            ref_doc.save(ignore_permissions=True)
-    if(doc.selco_type_of_stock_entry == "Outward DC"):
-        pass
-        """recipient_email_id  = frappe.db.get_value("Branch",doc.selco_being_dispatched_to,"selco_branch_email_id")
-        dc_submitted = "Please note new outwrad DC <b>" + doc.name + " </b>has been submitted <br/>"
-        frappe.sendmail(
-            recipients = recipient_email_id,
-            subject="Materials Dispatched To Your Branch",
-            message=dc_submitted)"""
+	if((doc.selco_type_of_stock_entry == "Rejection In") and (doc.selco_supplier_or_customer == "Supplier")):
+		for item in doc.items:
+			if item.reference_rej_in_or_rej_ot:
+				ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
+				#frappe.msgprint(ref_doc)
+				for ref_item in ref_doc.items:
+					if ref_item.item_code == item.item_code:
+						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
+						if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
+							frappe.throw("Please enter correct Quantity")
+				ref_doc.save(ignore_permissions=True)
+
+	if(doc.selco_type_of_stock_entry == "GRN"):
+		for item in doc.items:
+			if doc.selco_suppliers_ref:
+				item.reference_rej_in_or_rej_ot = doc.selco_suppliers_ref
+				ref_doc = frappe.get_doc("Stock Entry",doc.selco_suppliers_ref)
+				#frappe.msgprint(ref_doc)
+				if doc.selco_type_of_material == "Repair Stock":
+					for ref_item in ref_doc.items:
+						if (ref_item.item_code == item.item_code):
+							ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
+							if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
+								frappe.throw("Please enter correct Quantity")
+
+				ref_doc.save(ignore_permissions=True)
+
+	if(doc.selco_type_of_stock_entry == "Outward DC"):
+		pass
 
 @frappe.whitelist()
 def selco_stock_entry_on_cancel_updates(doc,method):
-    if(doc.selco_type_of_stock_entry == "Rejection Out"):
-        for item in doc.items:
-            if item.reference_rej_in_or_rej_ot:
-                ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-                for ref_item in ref_doc.items:
-                    if ref_item.item_code == item.item_code:
-                        ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-                ref_doc.save()
+	if(doc.selco_type_of_stock_entry == "Rejection Out"):
+		for item in doc.items:
+			if item.reference_rej_in_or_rej_ot:
+				ref_doc = frappe.get_doc("Stock Entry", item.reference_rej_in_or_rej_ot)
+				for ref_item in ref_doc.items:
+					if ref_item.item_code == item.item_code:
+						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
+				ref_doc.save()
 
-    if(doc.selco_type_of_stock_entry == "GRN"):
-        for item in doc.items:
-            if item.reference_rej_in_or_rej_ot:
-                if doc.selco_type_of_material == "Repair Stock":
-                    ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-                    for ref_item in ref_doc.items:
-                        if ref_item.item_code == item.item_code:
-                            ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-                    ref_doc.save()
+	if(doc.selco_type_of_stock_entry == "GRN"):
+		for item in doc.items:
+			if item.reference_rej_in_or_rej_ot and doc.selco_type_of_material == "Repair Stock":
+				ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
+				for ref_item in ref_doc.items:
+					if ref_item.item_code == item.item_code:
+						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
+				ref_doc.save()
 
-"""@frappe.whitelist()
-def cleanup_si():
-    for d in frappe.db.get_all("Sales Invoice",filters={"type_of_invoice": "Spare Sales Invoice"}):
-        si = frappe.get_doc("Sales Invoice",d.name)
-        si.cancel()
-        si.delete()
-    for d in frappe.db.get_all("Sales Invoice",filters={"type_of_invoice": "System Sales Invoice"}):
-        si = frappe.get_doc("Sales Invoice",d.name)
-        si.cancel()
-        si.delete()
-    for d in frappe.db.get_all("Sales Invoice",filters={"type_of_invoice": "Service Bill"}):
-        si = frappe.get_doc("Sales Invoice",d.name)
-        si.cancel()
-        si.delete()
-def cleanup_dc():
-    for d in frappe.db.get_all("Delivery Note",filters={"docstatus": 2 }):
-        dc = frappe.get_doc("Delivery Note",d.name)
-        dc.delete()
-    for d in frappe.db.get_all("Delivery Note",filters={"docstatus": 0 }):
-        dc = frappe.get_doc("Delivery Note",d.name)
-        dc.delete()
-    for d in frappe.db.get_all("Delivery Note"):
-        dc = frappe.get_doc("Delivery Note",d.name)
-        dc.cancel()
-        dc.delete()
-def cleanup_se():
-    for d in frappe.db.get_all("Stock Entry",filters={"docstatus": 0 }):
-        dc = frappe.get_doc("Stock Entry",d.name)
-        dc.delete()
-    se_list = frappe.db.sql("select name from `tabStock Entry` where NULLIF(amended_from, '') IS NOT NULL AND docstatus AND  purpose = 'Material Transfer' ",as_list = True)
-    for d in se_list:
-        dc = frappe.get_doc("Stock Entry",d[0])
-        dc.cancel()
-        dc.delete()"""
 @frappe.whitelist()
 def selco_create_customer(selco_branch,customer_group,customer_name,selco_customer_contact_number,selco_landline_mobile_2,selco_gender,selco_electrification_status):
     local_cust = frappe.new_doc("Customer")
