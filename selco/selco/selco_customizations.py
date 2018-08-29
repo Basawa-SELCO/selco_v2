@@ -644,7 +644,7 @@ def send_po_reminder():
             message=po_reminder)
 
 @frappe.whitelist()
-def selco_stock_entry_on_submit_updates(doc,method):
+def selco_stock_entry_on_submit_updates(doc, method):
 	if((doc.selco_type_of_stock_entry == "Rejection Out") and (doc.selco_supplier_or_customer == "Customer")):
 		for item in doc.items:
 			if item.reference_rej_in_or_rej_ot:
@@ -655,7 +655,8 @@ def selco_stock_entry_on_submit_updates(doc,method):
 						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
 						if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
 							frappe.throw("Please enter correct Quantity")
-				ref_doc.save()
+
+						ref_item.db_update()
 
 	if((doc.selco_type_of_stock_entry == "Rejection In") and (doc.selco_supplier_or_customer == "Supplier")):
 		for item in doc.items:
@@ -667,7 +668,8 @@ def selco_stock_entry_on_submit_updates(doc,method):
 						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
 						if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
 							frappe.throw("Please enter correct Quantity")
-				ref_doc.save(ignore_permissions=True)
+
+						ref_item.db_update()
 
 	if(doc.selco_type_of_stock_entry == "GRN"):
 		for item in doc.items:
@@ -682,7 +684,7 @@ def selco_stock_entry_on_submit_updates(doc,method):
 							if ref_item.reference_rej_in_or_rej_quantity > ref_item.qty:
 								frappe.throw("Please enter correct Quantity")
 
-				ref_doc.save(ignore_permissions=True)
+							ref_item.db_update()
 
 	if(doc.selco_type_of_stock_entry == "Outward DC"):
 		pass
@@ -696,7 +698,7 @@ def selco_stock_entry_on_cancel_updates(doc,method):
 				for ref_item in ref_doc.items:
 					if ref_item.item_code == item.item_code:
 						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-				ref_doc.save()
+						ref_item.db_update()
 
 	if(doc.selco_type_of_stock_entry == "GRN"):
 		for item in doc.items:
@@ -705,7 +707,7 @@ def selco_stock_entry_on_cancel_updates(doc,method):
 				for ref_item in ref_doc.items:
 					if ref_item.item_code == item.item_code:
 						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-				ref_doc.save()
+						ref_item.db_update()
 
 @frappe.whitelist()
 def selco_create_customer(selco_branch,customer_group,customer_name,selco_customer_contact_number,selco_landline_mobile_2,selco_gender,selco_electrification_status):
