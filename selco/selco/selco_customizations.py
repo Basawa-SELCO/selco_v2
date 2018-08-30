@@ -677,7 +677,7 @@ def selco_stock_entry_on_submit_updates(doc, method):
 				item.reference_rej_in_or_rej_ot = doc.selco_suppliers_ref
 				ref_doc = frappe.get_doc("Stock Entry",doc.selco_suppliers_ref)
 				#frappe.msgprint(ref_doc)
-				if doc.selco_type_of_material == "Repair Stock":
+				if doc.selco_type_of_material == "Repair Stock" and ref_doc.selco_type_of_material == 'Repair Stock':
 					for ref_item in ref_doc.items:
 						if (ref_item.item_code == item.item_code):
 							ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) + cint(item.qty)
@@ -702,12 +702,13 @@ def selco_stock_entry_on_cancel_updates(doc,method):
 
 	if(doc.selco_type_of_stock_entry == "GRN"):
 		for item in doc.items:
-			if item.reference_rej_in_or_rej_ot and doc.selco_type_of_material == "Repair Stock":
+			if item.reference_rej_in_or_rej_ot:
 				ref_doc = frappe.get_doc("Stock Entry",item.reference_rej_in_or_rej_ot)
-				for ref_item in ref_doc.items:
-					if ref_item.item_code == item.item_code:
-						ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
-						ref_item.db_update()
+				if ref_doc.selco_type_of_material == 'Repair Stock' and doc.selco_type_of_material == "Repair Stock":
+					for ref_item in ref_doc.items:
+						if ref_item.item_code == item.item_code:
+							ref_item.reference_rej_in_or_rej_quantity = cint(ref_item.reference_rej_in_or_rej_quantity) - cint(item.qty)
+							ref_item.db_update()
 
 @frappe.whitelist()
 def selco_create_customer(selco_branch,customer_group,customer_name,selco_customer_contact_number,selco_landline_mobile_2,selco_gender,selco_electrification_status):
