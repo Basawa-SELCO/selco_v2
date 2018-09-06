@@ -442,7 +442,7 @@ def selco_sales_invoice_before_insert(doc,method):
     if doc.is_return == 1:
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_credit_note_naming_series")
     else:
-        if doc.selco_type_of_invoice == "System Sales Invoice" or doc.selco_type_of_invoice == "Spare Sales Invoice":
+        if doc.selco_type_of_invoice in ["System Sales Invoice", "Spare Sales Invoice", "Write Off"]:
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_sales_invoice_naming_series")
         elif doc.selco_type_of_invoice == "Service Bill":
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_bill_naming_series")
