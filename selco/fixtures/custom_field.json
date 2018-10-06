@@ -6153,7 +6153,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "100"
  }, 
  {
   "allow_on_submit": 0, 
@@ -13742,7 +13742,7 @@
   "modified": "2017-11-10 10:14:35.920578", 
   "name": "Address-selco_district", 
   "no_copy": 0, 
-  "options": "\nBagalkote\nBelgaum\nBellary\nBengaluru Rural\nBengaluru\nBidar\nChamarajanagar\nChikkaballapur\nChikkamagaluru\nChitradurga\nDakshina Kannada\nDavanagere\nDharwad\nGadag\nHassan\nHaveri\nHyderabad\nKalaburagi\nKarwar\nKasaragod\nKodagu\nKolar\nKoppal\nMandya\nMysuru\nPudukottai\nRaichur\nRamanagara\nShivamogga\nSolapur\nTumakuru\nUdupi\nUttara Kannada\nVijayapura\nYadgir\nMunger\nPatna\nThane\nNandurbar\nAriyalur\nChennai\nCoimbatore\nCuddalore\nDindigul\nErode\nKanchipuram\nKanyakumari\nKarur\nMadurai\nNagapattinam\nNamakkal\nRamanahapuram\nSalem\nSivagangai\nThanjavur\nTheni\nThiruppur\nTrichi\nViridhunagar\nLudhiyan\nNilgiris\nDharmapuri\nTirunelveli", 
+  "options": "\nBagalkote\nBelgaum\nBellary\nBengaluru Rural\nBengaluru\nBidar\nChamarajanagar\nChikkaballapur\nChikkamagaluru\nChitradurga\nDakshina Kannada\nDavanagere\nDharwad\nGadag\nHassan\nHaveri\nHyderabad\nKalaburagi\nKarwar\nKasaragod\nKodagu\nKolar\nKoppal\nMandya\nMysuru\nPudukottai\nRaichur\nRamanagara\nShivamogga\nSolapur\nTumakuru\nUdupi\nUttara Kannada\nVijayapura\nYadgir\nMunger\nPatna\nThane\nNandurbar\nAriyalur\nChennai\nCoimbatore\nCuddalore\nDindigul\nErode\nKanchipuram\nKanyakumari\nKarur\nKachchh\nMadurai\nNagapattinam\nNamakkal\nRamanahapuram\nSalem\nSivagangai\nThanjavur\nTheni\nThiruppur\nTrichi\nViridhunagar\nLudhiyan\nNilgiris\nDharmapuri\nTirunelveli", 
   "permlevel": 0, 
   "precision": "", 
   "print_hide": 0, 
@@ -14171,45 +14171,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
- }, 
- {
-  "allow_on_submit": 0, 
-  "bold": 0, 
-  "collapsible": 0, 
-  "collapsible_depends_on": null, 
-  "columns": 0, 
-  "default": null, 
-  "depends_on": null, 
-  "description": null, 
-  "docstatus": 0, 
-  "doctype": "Custom Field", 
-  "dt": "Purchase Order", 
-  "fieldname": "selco_advance_percentage_1", 
-  "fieldtype": "Int", 
-  "hidden": 0, 
-  "ignore_user_permissions": 0, 
-  "ignore_xss_filter": 0, 
-  "in_global_search": 0, 
-  "in_list_view": 0, 
-  "in_standard_filter": 0, 
-  "insert_after": "selco_terms_of_delivery", 
-  "label": "Advance Percentage ", 
-  "modified": "2017-11-02 11:56:50.384952", 
-  "name": "Purchase Order-selco_advance_percentage_1", 
-  "no_copy": 0, 
-  "options": null, 
-  "permlevel": 0, 
-  "precision": "", 
-  "print_hide": 0, 
-  "print_hide_if_no_value": 0, 
-  "print_width": null, 
-  "read_only": 0, 
-  "report_hide": 0, 
-  "reqd": 1, 
-  "search_index": 0, 
-  "unique": 0, 
-  "width": null
+  "width": "40"
  }, 
  {
   "allow_on_submit": 0, 
@@ -14437,7 +14399,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "30"
  }, 
  {
   "allow_on_submit": 0, 
@@ -14475,7 +14437,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "74"
  }, 
  {
   "allow_on_submit": 0, 
@@ -14703,7 +14665,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "120"
  }, 
  {
   "allow_on_submit": 0, 
@@ -14795,7 +14757,7 @@
   "dt": "Sales Invoice", 
   "fieldname": "gst_section", 
   "fieldtype": "Section Break", 
-  "hidden": 1, 
+  "hidden": 0, 
   "ignore_user_permissions": 0, 
   "ignore_xss_filter": 0, 
   "in_global_search": 0, 
@@ -14953,7 +14915,7 @@
   "in_global_search": 0, 
   "in_list_view": 0, 
   "in_standard_filter": 0, 
-  "insert_after": "invoice_copy", 
+  "insert_after": "reverse_charge", 
   "label": "Invoice Type", 
   "modified": "2018-06-22 02:31:36.293408", 
   "name": "Sales Invoice-invoice_type", 
@@ -15083,7 +15045,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "120"
  }, 
  {
   "allow_on_submit": 0, 
@@ -15158,7 +15120,7 @@
   "report_hide": 0, 
   "reqd": 0, 
   "search_index": 0, 
-  "unique": 1, 
+  "unique": 0, 
   "width": null
  }, 
  {
@@ -15349,7 +15311,7 @@
   "reqd": 1, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "158"
  }, 
  {
   "allow_on_submit": 0, 
@@ -15843,7 +15805,7 @@
   "reqd": 1, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "162"
  }, 
  {
   "allow_on_submit": 0, 
@@ -15881,7 +15843,7 @@
   "reqd": 1, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "122"
  }, 
  {
   "allow_on_submit": 1, 
@@ -15919,7 +15881,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": "100"
+  "width": "133"
  }, 
  {
   "allow_on_submit": 0, 
@@ -15946,7 +15908,7 @@
   "modified": "2017-12-05 15:10:53.424586", 
   "name": "Stock Entry-selco_being_dispatched_to", 
   "no_copy": 0, 
-  "options": "\nBagalkote\nBailhongal\nBallari\nBallari Service Branch\nBangalore Godown\nBangalore Service Branch\nBelagavi\nBelthangady\nChamarajanagara\nChikkaballapura\nChikkamagaluru\nChikkodi\nChitradurga\nChitradurga Service Branch\nDavanagere\nDharwad\nDharwad Godown\nDharwad Service Branch\nGadag\nHassan\nHassan Service Branch\nHaveri\nHead Office\nHosanagar\nHospet Branch\nHubballi\nKalaburagi\nKarkala\nKasaragod\nKolar\nKolhapur Branch\nKoppal\nKumta\nKundapur Service Branch\nKundapura\nKushalanagara\nMadurai\nMandya\nMangalore CSD\nMangaluru\nManipal\nManipal Godown\nMunger\nMysore Service Branch\nMysuru\nPuttur\nPuttur Service Branch\nRaichur\nRamanagara\nShivamogga\nShivamogga Service Branch\nSindhanur\nSirsi\nSolapur\nSullia\nTiptur\nTumakuru\nUdupi\nVijayapura\nVijayapura Service Branch", 
+  "options": "\nBagalkote\nBailhongal\nBallari\nBallari Service Branch\nBangalore Godown\nBangalore Service Branch\nBelagavi\nBelthangady\nBidar\nChamarajanagara\nChikkaballapura\nChikkamagaluru\nChikkodi\nChitradurga\nChitradurga Service Branch\nCoimbatore\nDavanagere\nDharwad\nDharwad Godown\nDharwad Service Branch\nErode\nGadag\nHassan\nHassan Service Branch\nHaveri\nHead Office\nHosanagar\nHospet Branch\nHubballi\nKalaburagi\nKarkala\nKasaragod\nKolar\nKolhapur Branch\nKoppal\nKumta\nKundapur Service Branch\nKundapura\nKushalanagara\nMadurai\nMandya\nMangalore CSD\nMangaluru\nManipal\nManipal Godown\nMunger\nMysore Service Branch\nMysuru\nPuttur\nPuttur Service Branch\nRaichur\nRamanagara\nRajasthan\nShivamogga\nShivamogga Service Branch\nSindhanur\nSirsi\nSolapur\nSullia\nTiptur\nTirunelveli\nTumakuru\nUdupi\nVijayapura\nVijayapura Service Branch", 
   "permlevel": 0, 
   "precision": "", 
   "print_hide": 0, 
@@ -16033,7 +15995,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "217"
  }, 
  {
   "allow_on_submit": 0, 
@@ -16261,7 +16223,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "30"
  }, 
  {
   "allow_on_submit": 0, 
@@ -16299,7 +16261,7 @@
   "reqd": 0, 
   "search_index": 0, 
   "unique": 0, 
-  "width": null
+  "width": "263"
  }, 
  {
   "allow_on_submit": 0, 
@@ -16618,7 +16580,7 @@
   "doctype": "Custom Field", 
   "dt": "Stock Entry", 
   "fieldname": "selco_destination", 
-  "fieldtype": "Data", 
+  "fieldtype": "Text", 
   "hidden": 0, 
   "ignore_user_permissions": 0, 
   "ignore_xss_filter": 0, 
@@ -17741,6 +17703,44 @@
   "read_only": 0, 
   "report_hide": 0, 
   "reqd": 0, 
+  "search_index": 0, 
+  "unique": 0, 
+  "width": null
+ }, 
+ {
+  "allow_on_submit": 0, 
+  "bold": 0, 
+  "collapsible": 0, 
+  "collapsible_depends_on": null, 
+  "columns": 0, 
+  "default": null, 
+  "depends_on": null, 
+  "description": null, 
+  "docstatus": 0, 
+  "doctype": "Custom Field", 
+  "dt": "Purchase Order", 
+  "fieldname": "selco_advance_percentage_1", 
+  "fieldtype": "Float", 
+  "hidden": 0, 
+  "ignore_user_permissions": 0, 
+  "ignore_xss_filter": 0, 
+  "in_global_search": 0, 
+  "in_list_view": 0, 
+  "in_standard_filter": 0, 
+  "insert_after": "selco_terms_of_delivery", 
+  "label": "Advance Percentage", 
+  "modified": "2018-10-01 10:47:51.340661", 
+  "name": "Purchase Order-selco_advance_percentage_1", 
+  "no_copy": 0, 
+  "options": null, 
+  "permlevel": 0, 
+  "precision": "", 
+  "print_hide": 0, 
+  "print_hide_if_no_value": 0, 
+  "print_width": null, 
+  "read_only": 0, 
+  "report_hide": 0, 
+  "reqd": 1, 
   "search_index": 0, 
   "unique": 0, 
   "width": null
