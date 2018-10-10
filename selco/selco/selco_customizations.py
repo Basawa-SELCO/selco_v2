@@ -49,8 +49,22 @@ def selco_issue_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_warranty_claim_validate(doc,method):
-    doc.selco_senior_service_manager_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_manager_email_id")
-    doc.selco_godown_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_godown_email_id")
+	doc.selco_senior_service_manager_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_manager_email_id")
+	doc.selco_godown_email_id = frappe.db.get_value("Branch",doc.selco_branch,"selco_godown_email_id")
+	set_issue_workslow(doc)
+
+def set_issue_workslow(doc):
+	workflow_dict = {
+		'Warranty Claim Format Raised - WC': 'Warranty Claim Format Raised - WC',
+		'Warranty Claim Approved - WC': 'Dispatch Pending From Godown',
+		'Warranty Claim Rejected - WC': 'Complaint Attended By CSE - Still Open',
+		'Dispatched From Godown': 'Dispatched From Godown'
+	}
+
+	if doc.selco_complaint_number:
+		if doc.workflow_state in workflow_dict:
+			frappe.db.set_value('Issue', doc.selco_complaint_number,
+				'workflow_state', workflow_dict.get(doc.workflow_state))
 
 @frappe.whitelist()
 def selco_issue_validate1(doc,method):
