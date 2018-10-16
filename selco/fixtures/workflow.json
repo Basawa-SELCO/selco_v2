@@ -7,11 +7,13 @@
   "modified": "2018-07-19 20:20:42.507539", 
   "name": "Complaint Management", 
   "override_status": 0, 
+  "send_email_alert": 0, 
   "states": [
    {
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Drafted", 
     "update_field": null, 
     "update_value": null
@@ -20,6 +22,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Open", 
     "update_field": null, 
     "update_value": null
@@ -28,6 +31,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Assigned To CSE", 
     "update_field": null, 
     "update_value": null
@@ -36,6 +40,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Attended By CSE - Still Open", 
     "update_field": null, 
     "update_value": null
@@ -44,6 +49,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Escalated To SBM", 
     "update_field": null, 
     "update_value": null
@@ -52,6 +58,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Closed By Branch", 
     "update_field": null, 
     "update_value": null
@@ -60,6 +67,7 @@
     "allow_edit": "SELCO CSD Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Closed By CSD", 
     "update_field": null, 
     "update_value": null
@@ -68,6 +76,7 @@
     "allow_edit": "SELCO CSD Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Cancelled", 
     "update_field": null, 
     "update_value": null
@@ -76,6 +85,7 @@
     "allow_edit": "SELCO CSD Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Complaint Rejected By CSD", 
     "update_field": null, 
     "update_value": null
@@ -84,6 +94,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pre-Cancellation", 
     "update_field": null, 
     "update_value": null
@@ -92,6 +103,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Warranty Claim Format Raised - WC", 
     "update_field": null, 
     "update_value": null
@@ -100,6 +112,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Dispatch Pending From Godown", 
     "update_field": null, 
     "update_value": null
@@ -108,6 +121,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Dispatched From Godown", 
     "update_field": null, 
     "update_value": null
@@ -116,6 +130,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pending from Vendor", 
     "update_field": null, 
     "update_value": null
@@ -124,271 +139,361 @@
   "transitions": [
    {
     "action": "Confirm Complaint Details - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Open", 
     "state": "Complaint Drafted"
    }, 
    {
     "action": "Complaint Assigned To CSE - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Assigned To CSE", 
     "state": "Complaint Open"
    }, 
    {
     "action": "Complaint Attended By CSE - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Attended By CSE - Still Open", 
     "state": "Complaint Assigned To CSE"
    }, 
    {
     "action": "Complaint Escalated To SBM - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Escalated To SBM", 
     "state": "Complaint Attended By CSE - Still Open"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Complaint Open"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Complaint Assigned To CSE"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Complaint Attended By CSE - Still Open"
    }, 
    {
     "action": "Close Complaint By CSD - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Complaint Closed By Branch"
    }, 
    {
     "action": "Complaint Escalated To SBM - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Escalated To SBM", 
     "state": "Complaint Assigned To CSE"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Complaint Escalated To SBM"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Open"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Assigned To CSE"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Escalated To SBM"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Closed By Branch"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Complaint Rejected By CSD"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Cancelled", 
     "state": "Pre-Cancellation"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Open"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Cancelled", 
     "state": "Complaint Closed By CSD"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Assigned To CSE"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Attended By CSE - Still Open"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Complaint Closed By CSD"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Closed By Branch"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Attended By CSE - Still Open"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Escalated To SBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Draft", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Open", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Close Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By Branch", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Close Complaint By CSD - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Dispatch Pending From Godown", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Open", 
     "state": "Complaint Closed By Branch"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatch Pending From Godown"
    }, 
    {
     "action": "Close Complaint By CSD - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Closed By CSD", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Complaint Drafted"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Closed By CSD"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Drafted", 
     "state": "Complaint Closed By Branch"
    }, 
    {
     "action": "Reject Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Complaint Rejected By CSD", 
     "state": "Complaint Closed By Branch"
    }
@@ -404,11 +509,13 @@
   "modified": "2018-05-01 09:29:43.708361", 
   "name": "Warranty Claim Approval Process", 
   "override_status": 0, 
+  "send_email_alert": 0, 
   "states": [
    {
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Draft", 
     "update_field": null, 
     "update_value": null
@@ -417,6 +524,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Warranty Claim Format Raised - WC", 
     "update_field": null, 
     "update_value": null
@@ -425,6 +533,7 @@
     "allow_edit": "SELCO Senior Manager Energy Services", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Warranty Claim Approved - WC", 
     "update_field": null, 
     "update_value": null
@@ -433,6 +542,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Warranty Claim Rejected - WC", 
     "update_field": null, 
     "update_value": null
@@ -441,6 +551,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Dispatched From Godown", 
     "update_field": null, 
     "update_value": null
@@ -449,6 +560,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "2", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Cancelled - WC", 
     "update_field": null, 
     "update_value": null
@@ -457,6 +569,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Warranty Claim Rejected By Godown - WC", 
     "update_field": null, 
     "update_value": null
@@ -465,6 +578,7 @@
     "allow_edit": "SELCO CSD Manager", 
     "doc_status": "1", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pre-Cancellation", 
     "update_field": null, 
     "update_value": null
@@ -473,6 +587,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pending from Vendor", 
     "update_field": null, 
     "update_value": null
@@ -481,169 +596,225 @@
   "transitions": [
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Warranty Claim Format Raised - WC", 
     "state": "Draft"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Basic", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Reject", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Warranty Claim Rejected - WC", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Basic", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Warranty Claim Rejected - WC"
    }, 
    {
     "action": "Received - WC", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Received - WC", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Warranty Claim Rejected By Godown - WC", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Cancelled - WC", 
     "state": "Pre-Cancellation"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Draft", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Draft"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Dispatched From Godown"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "eShala Manager", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Request AGM Approval", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Warranty Claim Format Raised - WC", 
     "state": "Warranty Claim Format Raised - WC"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO CSD Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Dispatch To Vendor", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Pending from Vendor", 
     "state": "Warranty Claim Approved - WC"
    }, 
    {
     "action": "Received From Vendor", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Warranty Claim Approved - WC", 
     "state": "Pending from Vendor"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown", 
     "state": "Pending from Vendor"
    }
@@ -659,11 +830,13 @@
   "modified": "2018-07-13 11:44:42.048640", 
   "name": "IBM Approval Process", 
   "override_status": 0, 
+  "send_email_alert": 0, 
   "states": [
    {
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Draft - IBM", 
     "update_field": null, 
     "update_value": null
@@ -672,6 +845,7 @@
     "allow_edit": "SELCO Branch Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Approval Pending by SM - IBM", 
     "update_field": null, 
     "update_value": null
@@ -680,6 +854,7 @@
     "allow_edit": "SELCO Branch Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Approval Pending by AGM - IBM", 
     "update_field": null, 
     "update_value": null
@@ -688,6 +863,7 @@
     "allow_edit": "SELCO Senior Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Approved - IBM", 
     "update_field": null, 
     "update_value": null
@@ -696,6 +872,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Partially Dispatched From Godown - IBM", 
     "update_field": null, 
     "update_value": null
@@ -704,6 +881,7 @@
     "allow_edit": "SELCO Godown Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Dispatched From Godown - IBM", 
     "update_field": null, 
     "update_value": null
@@ -712,6 +890,7 @@
     "allow_edit": "SELCO Branch Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Rejected", 
     "update_field": null, 
     "update_value": null
@@ -720,6 +899,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "2", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Cancelled - IBM", 
     "update_field": null, 
     "update_value": null
@@ -728,6 +908,7 @@
     "allow_edit": "Projects Head", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Technically Approved - IBM", 
     "update_field": null, 
     "update_value": null
@@ -736,6 +917,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "1", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pre-Cancellation", 
     "update_field": null, 
     "update_value": null
@@ -744,6 +926,7 @@
     "allow_edit": "SELCO Service Basic", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Rejected By Godown - IBM", 
     "update_field": null, 
     "update_value": null
@@ -752,6 +935,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Content Dispatch Pending", 
     "update_field": null, 
     "update_value": null
@@ -760,6 +944,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Content Dispatched", 
     "update_field": null, 
     "update_value": null
@@ -768,6 +953,7 @@
     "allow_edit": "SELCO Branch Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Rejected By Godown - IBM", 
     "update_field": null, 
     "update_value": null
@@ -776,6 +962,7 @@
     "allow_edit": "SELCO Service Branch Office Administrator", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Draft - IBM", 
     "update_field": null, 
     "update_value": null
@@ -784,343 +971,457 @@
   "transitions": [
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Request AGM Approval", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager", 
+    "condition": null, 
     "next_state": "Approval Pending by AGM - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Rejected", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO AGM", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Approval Pending by AGM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO AGM", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Approval Pending by AGM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager", 
+    "condition": null, 
     "next_state": "Rejected", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Dispatched Partially", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Partially Dispatched From Godown - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown - IBM", 
     "state": "Partially Dispatched From Godown - IBM"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO AGM", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Dispatched From Godown - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Approve", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Senior Manager Energy Services", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Reopen Complaint - Issue", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Partially Dispatched From Godown - IBM"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Rejected"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Cancelled - IBM", 
     "state": "Pre-Cancellation"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Projects Manager", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Reject", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Rejected By Godown - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected By Godown - IBM"
    }, 
    {
     "action": "Request AGM Approval", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Approval Pending by AGM - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Reject", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Rejected By Godown - IBM", 
     "state": "Partially Dispatched From Godown - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "Special Project Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Revise IBM", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Revise IBM", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "Projects Head", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Service Branch Office Administrator", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected By Godown - IBM"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Executive", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Rejected By Godown - IBM"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Executive", 
+    "condition": null, 
     "next_state": "Cancelled - IBM", 
     "state": "Pre-Cancellation"
    }, 
    {
     "action": "Draft", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Rejected", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Projects Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Projects Manager", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected"
    }, 
    {
     "action": "Confirm", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Projects Manager", 
+    "condition": null, 
     "next_state": "Approval Pending by SM - IBM", 
     "state": "Rejected By Godown - IBM"
    }, 
    {
     "action": "Request Content", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Content Dispatch Pending", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Mission Executive", 
+    "condition": null, 
     "next_state": "Content Dispatched", 
     "state": "Content Dispatch Pending"
    }, 
    {
     "action": "Dispatched Partially", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Partially Dispatched From Godown - IBM", 
     "state": "Content Dispatched"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Dispatched From Godown - IBM", 
     "state": "Content Dispatched"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Projects Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Approved - IBM"
    }, 
    {
     "action": "Dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Dispatched From Godown - IBM", 
     "state": "Rejected By Godown - IBM"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Approval Pending by SM - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Draft - IBM", 
     "state": "Content Dispatched"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Draft - IBM"
    }, 
    {
     "action": "Draft", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Approved - IBM", 
     "state": "Partially Dispatched From Godown - IBM"
    }, 
    {
     "action": "Request Content", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Godown Office Administrator", 
+    "condition": null, 
     "next_state": "Content Dispatch Pending", 
     "state": "Partially Dispatched From Godown - IBM"
    }, 
    {
     "action": "Change to partially dispatched", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Partially Dispatched From Godown - IBM", 
     "state": "Dispatched From Godown - IBM"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Rejected By Godown - IBM", 
     "state": "Content Dispatch Pending"
    }, 
    {
     "action": "Cancel", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre-Cancellation", 
     "state": "Partially Dispatched From Godown - IBM"
    }
@@ -1136,11 +1437,13 @@
   "modified": "2018-07-16 11:27:08.670051", 
   "name": "Purchase Order Approval Process", 
   "override_status": 0, 
+  "send_email_alert": 0, 
   "states": [
    {
     "allow_edit": "SELCO Logistics Executive", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Draft - PO", 
     "update_field": null, 
     "update_value": null
@@ -1149,6 +1452,7 @@
     "allow_edit": "SELCO Logistics Executive", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Logistics Manager Approval Pending - PO", 
     "update_field": null, 
     "update_value": null
@@ -1157,6 +1461,7 @@
     "allow_edit": "SELCO Chief Manager Accounts & Finance", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Accounts Approval Pending - PO", 
     "update_field": null, 
     "update_value": null
@@ -1165,6 +1470,7 @@
     "allow_edit": "SELCO AGM", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "AGM Approval Pending - PO", 
     "update_field": null, 
     "update_value": null
@@ -1173,6 +1479,7 @@
     "allow_edit": "SELCO Logistics Executive", 
     "doc_status": "1", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Approved By All - PO", 
     "update_field": null, 
     "update_value": null
@@ -1181,6 +1488,7 @@
     "allow_edit": "SELCO Logistics Executive", 
     "doc_status": "2", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Cancelled - PO", 
     "update_field": null, 
     "update_value": null
@@ -1189,6 +1497,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "1", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Pre Cancellation - PO", 
     "update_field": null, 
     "update_value": null
@@ -1197,6 +1506,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Suspended for Now", 
     "update_field": null, 
     "update_value": null
@@ -1205,6 +1515,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Old PO Kept on Hold", 
     "update_field": null, 
     "update_value": null
@@ -1213,6 +1524,7 @@
     "allow_edit": "System Manager", 
     "doc_status": "0", 
     "message": null, 
+    "next_action_email_template": null, 
     "state": "Logostics Mnaager Approval Pending - PO", 
     "update_field": null, 
     "update_value": null
@@ -1221,97 +1533,129 @@
   "transitions": [
    {
     "action": "Confirm - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Basic", 
+    "condition": null, 
     "next_state": "Logistics Manager Approval Pending - PO", 
     "state": "Draft - PO"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Manager", 
+    "condition": null, 
     "next_state": "Accounts Approval Pending - PO", 
     "state": "Logistics Manager Approval Pending - PO"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Chief Manager Accounts & Finance", 
+    "condition": null, 
     "next_state": "AGM Approval Pending - PO", 
     "state": "Accounts Approval Pending - PO"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Management", 
+    "condition": null, 
     "next_state": "Approved By All - PO", 
     "state": "AGM Approval Pending - PO"
    }, 
    {
     "action": "Revise - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Executive", 
+    "condition": null, 
     "next_state": "Draft - PO", 
     "state": "Logistics Manager Approval Pending - PO"
    }, 
    {
     "action": "Revise - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Chief Manager Accounts & Finance", 
+    "condition": null, 
     "next_state": "Draft - PO", 
     "state": "Accounts Approval Pending - PO"
    }, 
    {
     "action": "Revise - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Management", 
+    "condition": null, 
     "next_state": "Draft - PO", 
     "state": "AGM Approval Pending - PO"
    }, 
    {
     "action": "Cancel - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Executive", 
+    "condition": null, 
     "next_state": "Cancelled - PO", 
     "state": "Approved By All - PO"
    }, 
    {
     "action": "Cancel - PO", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Pre Cancellation - PO", 
     "state": "Draft - PO"
    }, 
    {
     "action": "Cancel - PO", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Cancelled - PO", 
     "state": "Pre Cancellation - PO"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Approved By All - PO", 
     "state": "Old PO Kept on Hold"
    }, 
    {
     "action": "Revise", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "AGM Approval Pending - PO", 
     "state": "Old PO Kept on Hold"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Approved By All - PO", 
     "state": "Approved By All - PO"
    }, 
    {
     "action": "Approve - PO", 
+    "allow_self_approval": 1, 
     "allowed": "System Manager", 
+    "condition": null, 
     "next_state": "Logistics Manager Approval Pending - PO", 
     "state": "Logostics Mnaager Approval Pending - PO"
    }, 
    {
     "action": "Cancel - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Executive", 
+    "condition": null, 
     "next_state": "Cancelled - PO", 
     "state": "Approved By All - PO"
    }, 
    {
     "action": "Revise - PO", 
+    "allow_self_approval": 1, 
     "allowed": "SELCO Logistics Manager", 
+    "condition": null, 
     "next_state": "Draft - PO", 
     "state": "Accounts Approval Pending - PO"
    }
