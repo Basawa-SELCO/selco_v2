@@ -224,7 +224,7 @@ scheduler_events = {
 # 	"frappe.desk.doctype.event.event.get_events": "selco.event.get_events"
 # }
 
-
+'''
 fixtures = [
   {
     "dt":"Custom Field",
@@ -1291,3 +1291,4 @@ fixtures = [
     {"dt": "Workflow Action"}
 
 ]
+'''
