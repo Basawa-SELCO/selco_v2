@@ -1,7 +1,0 @@
-{
- "custom_fields": [], 
- "custom_perms": [], 
- "doctype": "Purchase Receipt Item Code", 
- "property_setters": [], 
- "sync_on_migrate": 1
-}
