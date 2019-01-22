@@ -112,6 +112,7 @@ def get_columns():
 	("Sr. MGR Name")+":Link/Service Person:135",
 	("P/T")+":Data:80",
 	("Name of CSE")+":Link/Service Person:140",
+	("Designation")+"Link/Designation:140",
 	("CSE Contact No")+":Data:100",
 	("Service/Installation")+":Data:85",
 	("Row Total")+":Data:75",
@@ -130,7 +131,7 @@ def get_data(filters):
 	mnth=filters.get("month")
 	mnth = months.get(mnth)
 	return frappe.db.sql("""
-	SELECT A.selco_branch, C.selco_reports_to, C.selco_status, B.service_person, C.selco_contact_number, C.selco_service_or_installation,
+	SELECT A.selco_branch, C.selco_reports_to, C.selco_status, B.service_person, C.selco_designation, C.selco_contact_number, C.selco_service_or_installation,
 	B.day_1+B.day_2+B.day_3+B.day_4+B.day_5+B.day_6+B.day_7+B.day_8+B.day_9+B.day_10+B.day_11+B.day_12+B.day_13+B.day_14+B.day_15+B.day_16+
 	B.day_17+B.day_18+B.day_19+B.day_20+B.day_21+B.day_22+B.day_23+B.day_24+B.day_25+B.day_26+B.day_27+B.day_28+B.day_29+B.day_30+B.day_31,
 	B.day_1, B.day_2, B.day_3, B.day_4, B.day_5, B.day_6, B.day_7, B.day_8, B.day_9, B.day_10, B.day_11, B.day_12, B.day_13, B.day_14, B.day_15, B.day_16,
