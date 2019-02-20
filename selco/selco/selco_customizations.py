@@ -198,7 +198,7 @@ def selco_purchase_order_validate(doc,method):
     doc.selco_godown_address_details = godown_address_ret.address_display
 
     doc.selco_godown_email = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_godown_email")
-    
+
     doc.base_rounded_total= round(doc.base_grand_total)
     advance_local = doc.base_rounded_total * (float(doc.selco_advance_percentage_1) / 100)
     advance_local = round(advance_local)
@@ -219,7 +219,7 @@ def selco_purchase_receipt_validate(doc,method):
 
     for d in doc.get('items'):
         d.cost_center = godown_cost_center #BRANCH2WAREHOUSE
-        d.warehouse = doc.selco_godown 
+        d.warehouse = doc.selco_godown
     for d in doc.get('taxes'):
         d.cost_center = godown_cost_center #BRANCH2WAREHOUSE
 
@@ -456,8 +456,10 @@ def selco_sales_invoice_before_insert(doc,method):
     if doc.is_return == 1:
         doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_credit_note_naming_series")
     else:
-        if doc.selco_type_of_invoice in ["System Sales Invoice", "Spare Sales Invoice", "Write Off"]:
+        if doc.selco_type_of_invoice in ["System Sales Invoice", "Spare Sales Invoice"]:
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_sales_invoice_naming_series")
+        elif doc.selco_type_of_invoice == "Write Off":
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_write_off_naming_series")
         elif doc.selco_type_of_invoice == "Service Bill":
             doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_service_bill_naming_series")
         elif doc.selco_type_of_invoice == "Bill of Sale":
@@ -499,7 +501,7 @@ def selco_payment_entry_validate(doc,method):
         else:
             doc.mode_of_payment = "Bank"
             doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
-            
+
         # if doc.mode_of_payment == "Bank":
         #     doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account")
         # elif doc.mode_of_payment == "Cash":
