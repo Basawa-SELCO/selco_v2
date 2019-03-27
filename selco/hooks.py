@@ -57,11 +57,10 @@ doc_events = {
              "validate":"selco.selco.selco_customizations.selco_purchase_invoice_validate"
      },
      "Stock Entry":{
-        "before_insert": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
          "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
-         "on_submit": "selco.selco.selco_customizations.selco_stock_entry_on_submit_updates",
-         "on_cancel": "selco.selco.selco_customizations.selco_stock_entry_on_cancel_updates"
+         "on_submit": "selco.selco.selco_customizations.stock_entry_reference_qty_update",
+         "on_cancel": "selco.selco.selco_customizations.stock_entry_reference_qty_update"
    },
    # "Address":{
    #      "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
@@ -697,7 +696,7 @@ fixtures = [
     ]
   },
   {"dt": "Print Format",
-   "filters": 
+   "filters":
      [["name", "in", [
       "SELCO IBM",
       "SELCO Stock Entry",
@@ -760,7 +759,7 @@ fixtures = [
         ]]]},
 
   {"dt": "Property Setter",
-   "filters": 
+   "filters":
      [["name", "in", [
       "Delivery Note-apply_discount_on-default",
       "Delivery Note-apply_discount_on-read_only",
@@ -1113,7 +1112,7 @@ fixtures = [
       "Customer-salutation-depends_on"
   ]]]},
     {"dt": "Report",
-     "filters": 
+     "filters":
        [["name", "in", [
       "Service Calls List"
       "Item Balance (Simple)",
@@ -1284,7 +1283,7 @@ fixtures = [
       "Feedback Ratings",
       "Serial No Status",
       "Maintenance Schedules", "Open Complaint Details - Mobile", "Open Complaint Details With Warranty Claim Including Supplier"
-    ]]]},  
+    ]]]},
     {"dt": "Workflow"},
     {"dt": "Role"},
     {"dt": "Workflow State"},
