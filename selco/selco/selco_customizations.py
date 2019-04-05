@@ -310,7 +310,7 @@ def selco_stock_entry_updates(doc,method):
                 d.s_warehouse = "Demo Warehouse - SELCO"
                 d.t_warehouse = selco_selco_warehouse
         elif doc.selco_inward_or_outward=="Outward" and doc.selco_type_of_stock_entry== "Outward DC":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_delivery_note_naming_series")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_stock_entry_naming_series")
             if doc.selco_type_of_material=="Good Stock":
                 doc.from_warehouse = selco_selco_warehouse
                 frappe.msgprint(selco_selco_warehouse)
@@ -328,7 +328,7 @@ def selco_stock_entry_updates(doc,method):
                     d.cost_center = selco_cost_center
                     d.is_sample_item = 1
         elif doc.selco_inward_or_outward=="Outward" and doc.selco_type_of_stock_entry== "Demo - Material Issue":
-            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_delivery_note_naming_series")
+            doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_stock_entry_naming_series")
             for d in doc.get('items'):
                 d.s_warehouse = selco_selco_warehouse
                 d.t_warehouse = "Demo Warehouse - SELCO"
