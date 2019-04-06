@@ -29,7 +29,7 @@ def execute(filters):
 	columns, data, initial = [], [],[]
 	columns= get_columns()
 	#unorganized data
-	initial = get_data(filters)	
+	initial = get_data(filters)
 
 	ins_sb=[]						#insentive service
 	ins_ist=[]						#insentive installation
@@ -67,7 +67,7 @@ def execute(filters):
 	total_ins[3]='<b><u>ELIGIBLE CSE</u> : </b>'+'<b>'+str(tot_ins)+'</b>'
 	total_no[2]='<b>&emsp;&emsp;&nbsp;<u>TOTAL</u>-</b>'
 	total_no[3]='<b><u>UNELIGIBLE CSE</u> : </b>'+'<b>'+str(tot_no)+'</b>'
-	
+
 	data.append(total_ins)
 	data.append(total_no)
 
@@ -99,7 +99,7 @@ def execute(filters):
 		data.append(info_no_ins)
 		data=data+no_ist
 
-	total=get_sum(initial)			
+	total=get_sum(initial)
 	data.append(total)
 
 
@@ -138,10 +138,10 @@ def get_data(filters):
 	B.day_17, B.day_18, B.day_19, B.day_20, B.day_21, B.day_22, B.day_23, B.day_24, B.day_25, B.day_26, B.day_27, B.day_28, B.day_29, B.day_30, B.day_31
 	FROM `tabService Call` AS A INNER JOIN `tabService Call Details` AS B INNER JOIN `tabService Person` AS C ON A.name=B.parent
 	AND B.service_person=C.name
-	WHERE A.selco_month= %s
+	WHERE A.selco_month= %s and A.fiscal_year = %s
 	ORDER BY B.day_1+B.day_2+B.day_3+B.day_4+B.day_5+B.day_6+B.day_7+B.day_8+B.day_9+B.day_10+
 	B.day_11+B.day_12+B.day_13+B.day_14+B.day_15+B.day_16+B.day_17+B.day_18+B.day_19+B.day_20+B.day_21+B.day_22+B.day_23+B.day_24+B.day_25+
-	B.day_26+B.day_27+B.day_28+B.day_29+B.day_30+B.day_31 DESC""",(mnth),as_list=1)
+	B.day_26+B.day_27+B.day_28+B.day_29+B.day_30+B.day_31 DESC""",(mnth, filters.get("fiscal_year")),as_list=1)
 	#sum of calls for each day
 
 def get_sum(data):
