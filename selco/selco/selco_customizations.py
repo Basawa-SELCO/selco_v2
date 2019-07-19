@@ -3,7 +3,7 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import frappe
+import frappe, json
 from frappe import _
 from frappe.model.document import Document
 from frappe.utils import now,now_datetime
@@ -11,7 +11,8 @@ import operator
 from erpnext.accounts.party import get_party_account, get_due_date
 from datetime import datetime
 from datetime import timedelta
-from frappe.utils import cint
+from frappe.utils import cint, getdate, add_days, add_months, date_diff
+from erpnext.hr.doctype.employee.employee import get_holiday_list_for_employee
 
 class SelcoCustomizations(Document):
     pass
@@ -69,6 +70,32 @@ def set_issue_workslow(doc):
 		if doc.workflow_state in workflow_dict:
 			frappe.db.set_value('Issue', doc.selco_complaint_number,
 				'workflow_state', workflow_dict.get(doc.workflow_state))
+
+@frappe.whitelist()
+def selco_get_items_from_rejection_in_or_out(stock_entry, branch):
+	doc = frappe.get_doc('Stock Entry', stock_entry)
+
+	items = []
+	for d in doc.items:
+		items.append({
+			's_warehouse': d.t_warehouse,
+			'item_code': d.item_code,
+			'item_name': d.item_name,
+			'transfer_qty':d.transfer_qty,
+			'description': d.description,
+			'qty': d.qty,
+			'uom': d.uom,
+			'item_group': d.item_group,
+			'basic_rate': d.basic_rate,
+			'against_stock_entry': d.parent,
+			'ste_detail': d.name,
+			'stock_uom': d.stock_uom,
+			'conversion_factor': d.conversion_factor,
+			'serial_no': d.serial_no,
+			'batch_no': d.batch_no
+		})
+	
+	return items
 
 @frappe.whitelist()
 def selco_issue_validate1(doc,method):
@@ -163,9 +190,10 @@ def selco_purchase_order_before_insert(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_order_validate(doc,method):
-    godown_address_ret = get_default_address_name_and_display("Warehouse", doc.selco_godown)
-    doc.selco_godown_address = godown_address_ret.address_name
-    doc.selco_godown_address_details = godown_address_ret.address_display
+    if doc.selco_godown:
+        godown_address_ret = get_default_address_name_and_display("Warehouse", doc.selco_godown)
+        doc.selco_godown_address = godown_address_ret.address_name
+        doc.selco_godown_address_details = godown_address_ret.address_display
 
     doc.selco_godown_email = frappe.get_cached_value("Warehouse",doc.selco_godown,"selco_godown_email")
 
@@ -254,8 +282,7 @@ def selco_stock_entry_updates(doc,method):
                 .format(label, doc.selco_branch))
 
     if doc.purpose in ['Receive at Warehouse', 'Send to Warehouse']:
-        if doc.is_new():
-            doc.naming_series = (branch_data.selco_receipt_note_naming_series
+        doc.naming_series = (branch_data.selco_receipt_note_naming_series
                 if doc.stock_entry_type=="Receive at Warehouse" else branch_data.selco_stock_entry_naming_series)
 
         warehouse = (branch_data.selco_warehouse
@@ -307,7 +334,7 @@ def selco_stock_entry_validate(doc,method):
         doc.selco_recipient_address+= "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.selco_recipient_address+= str(get_address_display(doc.selco_recipient_address_link))
     elif doc.stock_entry_type=="Receive at Warehouse":
-        sender = frappe.get_cached_value("Stock Entry",doc.selco_suppliers_ref,"selco_branch")
+        sender = frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"selco_branch")
         sender_warehouse = frappe.get_cached_value("Branch",sender,"selco_warehouse")
         doc.sender_address_link = get_default_address("Warehouse", sender_warehouse) #frappe.get_cached_value("Warehouse",sender_warehouse,"address")
         doc.sender_address = "<b>" + str(sender) + " SELCO BRANCH</b><br>"
@@ -348,18 +375,7 @@ def selco_customer_validate(doc,method):
         selco_validate_if_customer_contact_number_exists(doc.selco_landline_mobile_2,doc.name)
 
 def selco_validate_if_customer_contact_number_exists(contact_number,customer_id):
-    #frappe.msgprint(frappe.session.user)
-    var4 = frappe.get_cached_value("Customer", {"selco_customer_contact_number": (contact_number)})
-    var5 = unicode(var4) or u''
-    var6 = frappe.get_cached_value("Customer", {"selco_customer_contact_number": (contact_number)}, "customer_name")
-    if var5 != "None" and customer_id != var5:
-        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var5 + "\n Customer Name : " + var6)
-
-    var14 = frappe.get_cached_value("Customer", {"selco_landline_mobile_2": (contact_number)})
-    var15 = unicode(var14) or u''
-    var16 = frappe.get_cached_value("Customer", {"selco_landline_mobile_2": (contact_number)}, "customer_name")
-    if var15 != "None" and customer_id != var15:
-        frappe.throw("Customer with contact no " + contact_number + " already exists \n Customer ID : " + var15 + "\n Customer Name : " + var16)
+	pass
 
 @frappe.whitelist()
 def selco_sales_invoice_before_insert(doc,method):
@@ -380,14 +396,117 @@ def selco_sales_invoice_before_insert(doc,method):
         elif doc.selco_type_of_invoice == "Bill of Sale":
             doc.naming_series = frappe.get_cached_value("Branch",doc.selco_branch,"selco_bill_of_sales_naming_series")
 
+
+def selco_sales_invoice_submit(doc, method):
+	make_maintenance_schedule(doc)
+
+def make_maintenance_schedule(doc):
+	if doc.is_return:
+		if doc.return_against:
+			for d in frappe.get_all('Maintenance Schedule', 
+				filters={'sales_invoice': doc.return_against, 'docstatus': 0}):
+				frappe.delete_doc("Maintenance Schedule", d.name)
+
+		return
+
+	if doc.start_date and doc.end_date and doc.periodicity:
+		schedule_list = create_schedule_list(doc.start_date, 
+			doc.end_date, doc.no_of_visits, doc)
+		
+		days_diff = 0
+		for i, from_date in enumerate(schedule_list):
+			m_doc = frappe.get_doc({
+				'doctype': 'Maintenance Schedule',
+				'customer': doc.customer,
+				'transaction_date': doc.posting_date,
+				'sales_invoice': doc.name
+			})
+
+			end_date = (add_days(doc.end_date, days_diff) if i == len(schedule_list) - 1
+				else schedule_list[i+1])
+
+			if not days_diff:
+				days_diff = date_diff(end_date, from_date)
+
+			for d in doc.items:
+				m_doc.append('items', {
+					'item_code': d.item_code,
+					'item_name': d.item_name,
+					'description': d.description,
+					'start_date': from_date,
+					'end_date': end_date,
+					'no_of_visits': 1,
+					'sales_person': doc.sales_person
+				})
+
+			m_doc.generate_schedule()
+			m_doc.save()
+			frappe.msgprint(_("Maintenance Schedule {0} created").format(m_doc.name))
+
+def create_schedule_list(start_date, end_date, no_of_visit, doc):
+		schedule_list = []
+		start_date_copy = start_date
+		date_diff = (getdate(end_date) - getdate(start_date)).days
+		add_by = date_diff / no_of_visit
+
+		for visit in range(cint(no_of_visit)):
+			if (getdate(start_date_copy) < getdate(end_date)):
+				start_date_copy = add_days(start_date_copy, add_by)
+				if len(schedule_list) < no_of_visit:
+					schedule_date = validate_schedule_date_for_holiday_list(getdate(start_date_copy), doc.sales_person, doc.company)
+					if schedule_date > getdate(end_date):
+						schedule_date = getdate(end_date)
+					schedule_list.append(schedule_date)
+
+		return schedule_list
+
+def validate_schedule_date_for_holiday_list(schedule_date, sales_person, company):
+		validated = False
+
+		employee = frappe.db.get_value("Sales Person", sales_person, "employee")
+		if employee:
+			holiday_list = get_holiday_list_for_employee(employee)
+		else:
+			holiday_list = frappe.get_cached_value('Company',  company,  "default_holiday_list")
+
+		holidays = frappe.db.sql_list('''select holiday_date from `tabHoliday` where parent=%s''', holiday_list)
+
+		if not validated and holidays:
+
+			# max iterations = len(holidays)
+			for i in range(len(holidays)):
+				if schedule_date in holidays:
+					schedule_date = add_days(schedule_date, -1)
+				else:
+					validated = True
+					break
+
+		return schedule_date
+
 @frappe.whitelist()
 def selco_sales_invoice_validate(doc,method):
     #selco_warehouse  = frappe.get_cached_value("Branch",doc.branch,"selco_warehouse")
     selco_cost_center = frappe.get_cached_value("Branch", doc.selco_branch, "selco_cost_center")
 
+    doc.total_sales_person_incentive, doc.total_budget_value = 0.0, 0.0
+    doc.total_commission = 0.0
     for d in doc.get('items'):
         d.cost_center = selco_cost_center
         d.income_account = doc.selco_sales_account
+	d.commission_value_of_sales_person = (d.amount * d.commission_rate_for_sales_person) / 100
+	d.commission_value_of_sales_partner = (d.amount * d.commission_rate_for_sales_partner) / 100
+	d.value_of_budget = (d.amount * d.commission_rate_for_budget) / 100
+
+	doc.total_sales_person_incentive += d.commission_value_of_sales_person
+        doc.total_budget_value += d.value_of_budget
+	doc.total_commission += d.commission_value_of_sales_partner
+
+    for d in doc.sales_team:
+        if doc.total_sales_person_incentive:
+            d.incentives = (doc.total_sales_person_incentive * d.allocated_percentage) / 100
+
+        if doc.total_budget_value:
+            d.budget = (doc.total_budget_value * d.allocated_percentage) / 100
 
     for d in doc.get('taxes'):
         d.cost_center = selco_cost_center
@@ -396,6 +515,15 @@ def selco_sales_invoice_validate(doc,method):
         if doc.taxes[i].account_head == "Discount Karnataka 14.5% - SELCO":
            if doc.taxes[i].tax_amount>0:
               doc.taxes[i].tax_amount = doc.taxes[i].tax_amount * -1
+
+    if doc.start_date and doc.periodicity:
+        month_map = {'Monthly': 1, 'Quarterly': 3, 'Half-yearly': 6, 'Yearly': 12}
+        mcount = month_map.get(doc.periodicity)
+        if mcount:
+            doc.end_date = add_months(doc.start_date, mcount)
+        else:
+            days = 7 if doc.periodicity == 'Weekly' else 2
+            doc.end_date = add_days(doc.start_date, days)
 
 def selco_payment_entry_before_insert(doc,method):
     if doc.payment_type == "Receive":
@@ -545,27 +673,46 @@ def send_po_reminder():
             message=po_reminder)
 
 def stock_entry_reference_qty_update(doc, method):
+    if doc.docstatus == 1 and doc.purpose == 'Send to Warehouse':
+      make_stock_receive_entry(doc)
+
     for item in doc.items:
-        if doc.stock_entry_type=="Receive at Warehouse" and doc.selco_suppliers_ref:
-            item.reference_rej_in_or_rej_ot = doc.selco_suppliers_ref
+        if doc.stock_entry_type=="Receive at Warehouse" and doc.outgoing_stock_entry:
+            item.reference_rej_in_or_rej_ot = doc.outgoing_stock_entry
+        elif doc.stock_entry_type=="Rejection Out" and doc.selco_rejection_in_id:
+            item.reference_rej_in_or_rej_ot = doc.selco_rejection_in_id
+        elif doc.stock_entry_type=="Rejection In" and doc.selco_rejection_out_id:
+            item.reference_rej_in_or_rej_ot = doc.selco_rejection_out_id
 
         if item.reference_rej_in_or_rej_ot:
             data = frappe.get_all('Stock Entry Detail',
-                fields = ["ifnull(sum(qty), 0) as qty"],
+                fields = ["sum(qty) as qty"],
                 filters = {'docstatus': 1, 'reference_rej_in_or_rej_ot': item.reference_rej_in_or_rej_ot,
-                    'item_code': item.item_code}, as_dict=1)
+                    'item_code': item.item_code})
 
-            if data:
-                name, ste_qty = frappe.get_cached_value('Stock Entry Detail',
-                    {'parent': item.reference_rej_in_or_rej_ot,
+            reference_qty = data[0].qty if data else 0
+
+            name, ste_qty = frappe.get_cached_value('Stock Entry Detail',
+               {'parent': item.reference_rej_in_or_rej_ot,
                     'item_code': item.item_code}, ['name', 'qty'], as_dict=1)
 
-                if data[0].qty > ste_qty:
-                    frappe.throw(_("Please enter correct quantity in the stock entry {0}")
-                        .format(doc.name))
+            if reference_qty and reference_qty > ste_qty:
+                frappe.throw(_("Please enter correct quantity in the stock entry {0}")
+                    .format(doc.name))
 
-                frappe.db.set_value('Stock Entry Detail', name,
-                    'reference_rej_in_or_rej_quantity', data[0].qty)
+            frappe.db.set_value('Stock Entry Detail', name,
+                'reference_rej_in_or_rej_quantity', reference_qty)
+
+def make_stock_receive_entry(doc):
+	from erpnext.stock.doctype.stock_entry.stock_entry import make_stock_in_entry
+
+	new_doc = make_stock_in_entry(doc.name)
+	new_doc.selco_branch = doc.selco_being_dispatched_to
+	new_doc.purpose = 'Receive at Warehouse'
+	new_doc.set_stock_entry_type()
+	selco_stock_entry_updates(new_doc, '')
+	new_doc.save(ignore_permissions=True)
+	frappe.msgprint(_("Receive at warehouse entry {0} created").format(new_doc.name))
 
 @frappe.whitelist()
 def get_stock_entry(doctype, txt, searchfield, start, page_len, filters):
@@ -629,11 +776,12 @@ def selco_add_new_address(selco_branch,address_type,address_line1,address_line2,
 def get_default_address_name_and_display(doctype, docname):
     from frappe.contacts.doctype.address.address import get_address_display, get_default_address
 
-    out = frappe._dict({"address_name": None, "address_display": None})
-    default_address = get_default_address(doctype, docname)
+    if doctype and docname:
+        out = frappe._dict({"address_name": None, "address_display": None})
+        default_address = get_default_address(doctype, docname)
 
-    if default_address:
-        out.address_name = default_address
-        out.address_display = get_address_display(default_address)
+        if default_address:
+            out.address_name = default_address
+            out.address_display = get_address_display(default_address)
 
-    return out
+        return out

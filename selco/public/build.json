@@ -1,0 +1,7 @@
+{
+	"js/customer-item-dashboard.min.js": [
+		"public/js/custom_item_dashboard.js",
+		"public/js/custom_item_dashboard.html",
+		"public/js/custom_item_dashboard_list.html"
+	]
+}

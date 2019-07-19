@@ -49,14 +49,16 @@ doc_events = {
              "validate":"selco.selco.selco_customizations.selco_delivery_note_validates"
      },
      "Sales Invoice":{
-             "before_insert":"selco.selco.selco_customizations.selco_sales_invoice_before_insert",
-              "validate":"selco.selco.selco_customizations.selco_sales_invoice_validate"
+             "before_insert": "selco.selco.selco_customizations.selco_sales_invoice_before_insert",
+             "validate": "selco.selco.selco_customizations.selco_sales_invoice_validate",
+             "on_submit": "selco.selco.selco_customizations.selco_sales_invoice_submit"
      },
      "Purchase Invoice":{
              "before_insert":"selco.selco.selco_customizations.selco_purchase_invoice_before_insert",
              "validate":"selco.selco.selco_customizations.selco_purchase_invoice_validate"
      },
      "Stock Entry":{
+         "before_validate": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
          "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "on_submit": "selco.selco.selco_customizations.stock_entry_reference_qty_update",
