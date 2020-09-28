@@ -1,0 +1,57 @@
+{
+ "creation": "2020-09-22 17:54:38.617360",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_group",
+  "commission_rate_for_sales_person",
+  "commission_rate_for_sales_partner",
+  "commission_rate_for_budget"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "commission_rate_for_sales_person",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Incentive for Sales Person",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "commission_rate_for_sales_partner",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Commission Rate for Sales Partner",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "commission_rate_for_budget",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Budget for Sales Person",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-09-23 17:32:05.223425",
+ "modified_by": "poorvi@selco-india.com",
+ "module": "SELCO",
+ "name": "Sales Partner Budget",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

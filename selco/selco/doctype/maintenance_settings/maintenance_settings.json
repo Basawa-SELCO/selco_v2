@@ -1,0 +1,45 @@
+{
+ "creation": "2020-09-22 17:35:55.482427",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "role_to_make_maintenance_schedule",
+  "auto_create_maintenance_schedule"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "role_to_make_maintenance_schedule",
+   "fieldtype": "Link",
+   "label": "Allow Role to Make Maintenance Schedule From Sales Invoice",
+   "options": "Role"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_create_maintenance_schedule",
+   "fieldtype": "Check",
+   "label": "Auto Create Maintenance Schedule"
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-10-05 12:06:03.921258",
+ "modified_by": "Administrator",
+ "module": "SELCO",
+ "name": "Maintenance Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
