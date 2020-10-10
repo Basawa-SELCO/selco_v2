@@ -289,7 +289,8 @@ def selco_stock_entry_updates(doc,method):
                 .format(label, doc.selco_branch))
 
     if doc.stock_entry_type in ['Outward DC', 'GRN']:
-        doc.naming_series = (branch_data.selco_receipt_note_naming_series
+        if doc.is_new():
+            doc.naming_series = (branch_data.selco_receipt_note_naming_series
                 if doc.purpose=="Receive at Warehouse" else branch_data.selco_stock_entry_naming_series)
 
         warehouse = (branch_data.selco_warehouse
@@ -313,9 +314,8 @@ def selco_stock_entry_updates(doc,method):
 
         for d in doc.get('items'):
             d.cost_center = branch_data.selco_cost_center
-            if not d.s_warehouse:
-                d.s_warehouse = (git_warehouse
-                    if doc.purpose=="Receive at Warehouse" else warehouse)
+            d.s_warehouse = (git_warehouse
+                if doc.purpose=="Receive at Warehouse" else warehouse)
 
             d.t_warehouse = (warehouse
                 if doc.purpose=="Receive at Warehouse" else git_warehouse)
@@ -336,11 +336,22 @@ def selco_stock_entry_updates(doc,method):
                 d.set(warehouse_field, branch_data.selco_repair_warehouse)
             d.is_sample_item = 1
 
-    elif doc.stock_entry_type == "BOM":
+    elif doc.is_new() and doc.stock_entry_type == "BOM":
         doc.naming_series = branch_data.selco_bill_of_material_naming_series
 
-    else:
+    elif doc.is_new():
         doc.naming_series = branch_data.selco_other_stock_entry_naming_series
+
+    if doc.stock_entry_type == "BOM":
+        total_count = len(doc.items)
+        for row in doc.items:
+            row.s_warehouse = ''
+            row.t_warehouse = ''
+
+            if row.idx == total_count:
+                row.t_warehouse = branch_data.selco_warehouse
+            else:
+                row.s_warehouse = branch_data.selco_warehouse
 
     if doc.purpose == "Send to Warehouse":
         doc.selco_recipient_email_id = frappe.get_cached_value("Branch",doc.selco_being_dispatched_to,"selco_branch_email_id")

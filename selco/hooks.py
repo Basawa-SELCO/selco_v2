@@ -62,7 +62,8 @@ doc_events = {
      },
      "Stock Entry":{
          "before_insert": "selco.selco.selco_customizations.selco_stock_entry_updates",
-         "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
+         "before_validate": "selco.selco.selco_customizations.selco_stock_entry_updates",
+         "validate": ["selco.selco.selco_customizations.selco_stock_entry_validate"],
          "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "on_submit": "selco.selco.selco_customizations.stock_entry_reference_qty_update",
          "on_cancel": "selco.selco.selco_customizations.stock_entry_reference_qty_update"
