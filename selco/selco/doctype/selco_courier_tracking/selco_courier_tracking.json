@@ -1,0 +1,131 @@
+{
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
+ "autoname": "SCT/19-20/.####",
+ "creation": "2019-11-26 11:30:59.710811",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "selco_sent__by_branch",
+  "cb1_column",
+  "selco_sent_date",
+  "amended_from",
+  "sb1_section",
+  "selco_sent_to_branch",
+  "cb3_column",
+  "selco_courier_number",
+  "sb2_section",
+  "cb5_column",
+  "selco_received_date",
+  "workflow_state"
+ ],
+ "fields": [
+  {
+   "fieldname": "selco_sent__by_branch",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Sent  By Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "cb1_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "selco_sent_date",
+   "fieldtype": "Date",
+   "label": "Sent Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "SELCO Courier Tracking",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb1_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_sent_to_branch",
+   "fieldtype": "Select",
+   "label": "Sent To Branch",
+   "options": "\nBagalkote\nBailhongal\nBallari\nBallari Service Branch\nBangalore Godown\nBangalore Service Branch\nBelagavi\nBelthangady\nBidar\nChamarajanagara\nChikkaballapura\nChikkamagaluru\nChikkodi\nChitradurga\nChitradurga Service Branch\nCoimbatore\nDavanagere\nDharwad\nDharwad Godown\nDharwad Service Branch\nDhule\nErode\nGadag\nHassan\nHassan Service Branch\nHaveri\nHead Office\nHosanagar\nHospet Branch\nHubballi\nKalaburagi\nKarkala\nKasaragod\nKolar\nKolhapur\nKoppal\nKumta\nKundapur Service Branch\nKundapura\nKushalanagara\nMadurai\nMandya\nMangalore CSD\nMangaluru\nManipal\nManipal Godown\nMunger\nMysore Service Branch\nMysuru\nPune\nPuttur\nPuttur Service Branch\nRaichur\nRamanagara\nRajasthan\nShivamogga\nShivamogga Service Branch\nSindhanur\nSirsi\nSolapur\nSullia\nTiptur\nTirunelveli\nTumakuru\nUdupi\nVijayapura\nVijayapura Service Branch"
+  },
+  {
+   "fieldname": "cb3_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_courier_number",
+   "fieldtype": "Data",
+   "label": "Courier Number"
+  },
+  {
+   "fieldname": "sb2_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cb5_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_received_date",
+   "fieldtype": "Date",
+   "label": "Received Date",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "Workflow State",
+   "options": "Workflow State"
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2020-10-10 21:51:40.242909",
+ "modified_by": "Administrator",
+ "module": "SELCO",
+ "name": "SELCO Courier Tracking",
+ "owner": "poorvi@selco-india.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "SELCO Branch Office Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_name_in_global_search": 1,
+ "show_preview_popup": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

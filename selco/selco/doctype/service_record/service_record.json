@@ -1,0 +1,308 @@
+{
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2020-09-22 13:02:23.460871",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "selco_branch",
+  "naming_series",
+  "selco_customer_id",
+  "selco_customer_full_name",
+  "selco_customer_contact_number",
+  "selco_landline_mobile_2",
+  "selco_customer_address",
+  "selco_detail_address",
+  "cb1_column",
+  "selco_complaint_date",
+  "selco_posting_date",
+  "selco_cse_name",
+  "selco_type_of_service_attended",
+  "selco_within_warranty",
+  "selco_complaint_number",
+  "fault_rectified_and_replacement_details_section",
+  "fault_rectified_and_replacement_details",
+  "sb1_section",
+  "selco_service_charges_collected",
+  "cb11_column",
+  "selco_job_status",
+  "sb2_section",
+  "selco_customer_remarks",
+  "cb2_column",
+  "selco_customer_feedback",
+  "sb3_section",
+  "selco_cse_remarks",
+  "cb3_column",
+  "selco_cse_feedback",
+  "sb10_section",
+  "selco_cse_signature",
+  "selco_signature_of_the_cse",
+  "selco_cse_date",
+  "cb5_column",
+  "selco_customer_signature",
+  "selco_signature_of_the_customer",
+  "selco_customer_date",
+  "sb5_section",
+  "selco_cse_location",
+  "selco_fiscal_year",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "selco_branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fetch_from": "selco_branch.selco_service_record_naming_series",
+   "fetch_if_empty": 1,
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "naming series"
+  },
+  {
+   "fieldname": "selco_customer_id",
+   "fieldtype": "Link",
+   "label": "Customer ID",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "selco_customer_full_name",
+   "fieldtype": "Data",
+   "label": "Customer Full Name"
+  },
+  {
+   "fieldname": "selco_customer_contact_number",
+   "fieldtype": "Data",
+   "label": "Customer Contact Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "selco_landline_mobile_2",
+   "fieldtype": "Data",
+   "label": "Landline mobile 2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "selco_customer_address",
+   "fieldtype": "Link",
+   "label": "Customer Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "selco_detail_address",
+   "fieldtype": "Data",
+   "label": "Detail Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb1_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_complaint_date",
+   "fieldtype": "Date",
+   "label": "Complaint Date"
+  },
+  {
+   "default": "Today",
+   "fieldname": "selco_posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "selco_cse_name",
+   "fieldtype": "Link",
+   "label": "CSE Name",
+   "options": "Service Person"
+  },
+  {
+   "fieldname": "selco_type_of_service_attended",
+   "fieldtype": "Select",
+   "label": "Type of Service Attended",
+   "options": "\nScheduled\nComplaint Based\nAMC Based"
+  },
+  {
+   "fieldname": "selco_within_warranty",
+   "fieldtype": "Select",
+   "label": "Within Warranty",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "selco_complaint_number",
+   "fieldtype": "Link",
+   "label": "Complaint Number",
+   "options": "Issue"
+  },
+  {
+   "fieldname": "fault_rectified_and_replacement_details_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fault_rectified_and_replacement_details",
+   "fieldtype": "Table",
+   "label": "Fault Rectified and Replacement Details",
+   "options": "Issue Service Record Items"
+  },
+  {
+   "fieldname": "sb1_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_service_charges_collected",
+   "fieldtype": "Data",
+   "label": "Service Charges Collected"
+  },
+  {
+   "fieldname": "cb11_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_job_status",
+   "fieldtype": "Select",
+   "label": "Job Status",
+   "options": "Complete\nNot Complete"
+  },
+  {
+   "fieldname": "sb2_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_customer_remarks",
+   "fieldtype": "Long Text",
+   "label": "Customer Remarks"
+  },
+  {
+   "fieldname": "cb2_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_customer_feedback",
+   "fieldtype": "Select",
+   "label": "Customer Feedback",
+   "options": "Excellent\nGood\nAverage\nPoor"
+  },
+  {
+   "fieldname": "sb3_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_cse_remarks",
+   "fieldtype": "Long Text",
+   "label": "CSE Remarks"
+  },
+  {
+   "fieldname": "cb3_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_cse_feedback",
+   "fieldtype": "Select",
+   "label": "CSE Feedback",
+   "options": "Excellent\nGood\nAverage\nPoor"
+  },
+  {
+   "fieldname": "sb10_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_cse_signature",
+   "fieldtype": "Signature",
+   "label": " CSE Signature"
+  },
+  {
+   "fieldname": "selco_signature_of_the_cse",
+   "fieldtype": "HTML",
+   "label": "Signature of the CSE",
+   "options": "Signature of CSE"
+  },
+  {
+   "default": "Today",
+   "fieldname": "selco_cse_date",
+   "fieldtype": "Date",
+   "label": "CSE Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb5_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_customer_signature",
+   "fieldtype": "Signature",
+   "label": "Customer Signature"
+  },
+  {
+   "fieldname": "selco_signature_of_the_customer",
+   "fieldtype": "HTML",
+   "label": "Signature of the ",
+   "options": "Signature of Customer"
+  },
+  {
+   "default": "Today",
+   "fieldname": "selco_customer_date",
+   "fieldtype": "Date",
+   "label": "Customer Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb5_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "selco_cse_location",
+   "fieldtype": "Geolocation",
+   "label": "CSE Location"
+  },
+  {
+   "default": "2020-21",
+   "fieldname": "selco_fiscal_year",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Fiscal Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Service Record",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "icon": "fa fa-wrench",
+ "is_submittable": 1,
+ "modified": "2020-10-10 21:52:13.357094",
+ "modified_by": "Administrator",
+ "module": "SELCO",
+ "name": "Service Record",
+ "owner": "poorvi@selco-india.com",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "set_user_permissions": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
