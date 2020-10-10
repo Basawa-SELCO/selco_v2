@@ -32,6 +32,7 @@ def execute(filters=None):
 			var2=0
 		#row = [d.name,d.selco_customer_full_name,d.selco_service_person,d.selco_service_record_number_1,d.service_amount,var1,var2,d.selco_remarks]
 		row = [d.name,
+			d.selco_service_branch_email_id,
 			d.selco_customer_full_name,
 			d.service_person, 
 			d.service_record_number, 
@@ -48,7 +49,7 @@ def execute(filters=None):
 
 def get_columns():
 	return [
-		_("Complaint ID ") + ":Link/Issue:180", _("Customer Name") + ":Data:180",_("Service Person Name") + ":Link/Service Person:180",_("Service Record Number") + ":Data:180",_("Service Charges Collected") + ":Currency:180",_("Budget Approved within warranty") + ":Currency:180",_("Budget Approved 35%") + ":Currency:180",_("CSD Remarks") + ":Data:180"
+		_("Complaint ID ") + ":Link/Issue:180", _("Service Branch Mail ID") + ":Data:180", _("Customer Name") + ":Data:180",_("Service Person Name") + ":Link/Service Person:180",_("Service Record Number") + ":Data:180",_("Service Charges Collected") + ":Currency:180",_("Budget Approved within warranty") + ":Currency:180",_("Budget Approved 35%") + ":Currency:180",_("CSD Remarks") + ":Data:180"
 		]
 
 
@@ -75,4 +76,4 @@ def get_sr_details(filters):
 	selco_branch = filters.get("branch")
 	# return frappe.db.sql("""select name, date, customer_full_name, ics_date, complaint_handled_by,special_budget,service_charges_collected,service_record_number,remarks from `tabIssue` where (workflow_state="Complaint Closed By Branch") AND service_branch_email_id = %s AND complaint_closed_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)
 	# return frappe.db.sql("""SELECT A.name,A.selco_customer_full_name,A.selco_ics_date,A.selco_remarks,B.service_record_number,B.service_person,B.service_record_date,B.service_amount,B.within_warranty,B.approve_budget FROM `tabIssue` AS A INNER JOIN `tabService Record Details Issue` AS B ON A.name=B.parent WHERE A.workflow_state = "Complaint Closed By Branch" AND A.name="COMP/TUM/16-17/00014" AND A.selco_service_branch_email_id = %s AND B.service_record_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)
-	return frappe.db.sql("""SELECT A.name, A.selco_complaint_received_date, A.selco_customer_full_name, A.selco_ics_date, A.selco_remarks, B.service_record_number, B.service_person, B.service_record_date, B.service_amount, B.within_warranty, B.special_budget_approved_by_csd, B.approve_budget, B.csd_remarks FROM `tabIssue` AS A INNER JOIN `tabService Record Details Issue` AS B ON A.name=B.parent WHERE selco_service_branch_email_id = %s AND B.service_record_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)
+	return frappe.db.sql("""SELECT A.name, A.selco_service_branch_email_id, A.selco_complaint_received_date, A.selco_customer_full_name, A.selco_ics_date, A.selco_remarks, B.service_record_number, B.service_person, B.service_record_date, B.service_amount, B.within_warranty, B.special_budget_approved_by_csd, B.approve_budget, B.csd_remarks FROM `tabIssue` AS A INNER JOIN `tabService Record Details Issue` AS B ON A.name=B.parent WHERE selco_service_branch_email_id = %s AND B.service_record_date BETWEEN %s AND %s""", (selco_branch,msd,med),as_dict=1)

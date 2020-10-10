@@ -12,6 +12,9 @@ app_email = "basawaraj@selco-india.com"
 app_license = "MIT"
 
 doc_events = {
+    "*": {
+         "validate": "selco.selco.selco_customizations.validate_back_dated_entries"
+    },
     "Issue": {
          "before_insert":"selco.selco.selco_customizations.selco_issue_before_insert",
          "validate": "selco.selco.selco_customizations.selco_issue_validate1"
@@ -58,7 +61,7 @@ doc_events = {
              "validate":"selco.selco.selco_customizations.selco_purchase_invoice_validate"
      },
      "Stock Entry":{
-         "before_validate": "selco.selco.selco_customizations.selco_stock_entry_updates",
+         "before_insert": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "validate": "selco.selco.selco_customizations.selco_stock_entry_validate",
          "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "on_submit": "selco.selco.selco_customizations.stock_entry_reference_qty_update",

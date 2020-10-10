@@ -11,7 +11,7 @@ import operator
 from erpnext.accounts.party import get_party_account, get_due_date
 from datetime import datetime
 from datetime import timedelta
-from frappe.utils import cint, getdate, add_days, add_months, date_diff
+from frappe.utils import cint, getdate, add_days, add_months, date_diff, today
 from erpnext.hr.doctype.employee.employee import get_holiday_list_for_employee
 
 class SelcoCustomizations(Document):
@@ -180,8 +180,11 @@ def selco_material_approved_and_dispatched(doc,method):
 
 @frappe.whitelist()
 def selco_purchase_receipt_before_insert(doc,method):
-    doc.naming_series = frappe.get_cached_value("Warehouse",
-        doc.selco_godown, "selco_mrn_naming_series")
+    if doc.is_return == 1:
+        doc.naming_series = frappe.db.get_value("Warehouse", doc.selco_godown, "selco_purchase_receipt_return_naming_series")
+    else:
+        doc.naming_series = frappe.get_cached_value("Warehouse",
+            doc.selco_godown, "selco_mrn_naming_series")
 
 @frappe.whitelist()
 def selco_purchase_order_before_insert(doc,method):
@@ -277,7 +280,7 @@ def selco_stock_entry_updates(doc,method):
     branch_data = frappe.get_cached_value("Branch", doc.selco_branch,
         ['supplier_replaceable', 'defective_warehouse', 'selco_cost_center', 'selco_warehouse', 'selco_repair_warehouse', 
             'selco_receipt_note_naming_series','selco_stock_entry_naming_series', 'selco_rejection_in_naming_series', 
-            'selco_rejection_out_naming_series', 'selco_bill_of_material_naming_series'], as_dict=1)
+            'selco_rejection_out_naming_series', 'selco_bill_of_material_naming_series', 'selco_other_stock_entry_naming_series'], as_dict=1)
 
     for label in ["Cost Center", "Warehouse", "Repair Warehouse"]:
         field = 'selco_{0}'.format(frappe.scrub(label))
@@ -285,9 +288,9 @@ def selco_stock_entry_updates(doc,method):
             frappe.throw(_("Please set {0} in the selected Branch {1}")
                 .format(label, doc.selco_branch))
 
-    if doc.purpose in ['Receive at Warehouse', 'Send to Warehouse']:
+    if doc.stock_entry_type in ['Outward DC', 'GRN']:
         doc.naming_series = (branch_data.selco_receipt_note_naming_series
-                if doc.stock_entry_type=="Receive at Warehouse" else branch_data.selco_stock_entry_naming_series)
+                if doc.purpose=="Receive at Warehouse" else branch_data.selco_stock_entry_naming_series)
 
         warehouse = (branch_data.selco_warehouse
             if doc.selco_type_of_material=="Good Stock" else branch_data.selco_repair_warehouse)
@@ -314,14 +317,13 @@ def selco_stock_entry_updates(doc,method):
                 d.s_warehouse = (git_warehouse
                     if doc.purpose=="Receive at Warehouse" else warehouse)
 
-            if not d.t_warehouse:
-                d.t_warehouse = (warehouse
-                    if doc.purpose=="Receive at Warehouse" else git_warehouse)
+            d.t_warehouse = (warehouse
+                if doc.purpose=="Receive at Warehouse" else git_warehouse)
 
         if doc.selco_type_of_material != "Good Stock" and git_warehouse != "Demo Warehouse - SELCO":
                 d.is_sample_item = 1
 
-    elif doc.purpose in ["Material Receipt", "Material Issue"]:
+    elif doc.stock_entry_type in ["Rejection In", "Rejection Out"]:
         if doc.is_new():
             doc.naming_series = (branch_data.selco_rejection_in_naming_series
                 if doc.purpose == 'Material Receipt' else branch_data.selco_rejection_out_naming_series)
@@ -334,19 +336,25 @@ def selco_stock_entry_updates(doc,method):
                 d.set(warehouse_field, branch_data.selco_repair_warehouse)
             d.is_sample_item = 1
 
-    if doc.stock_entry_type == "Send to Warehouse":
+    elif doc.stock_entry_type == "BOM":
+        doc.naming_series = branch_data.selco_bill_of_material_naming_series
+
+    else:
+        doc.naming_series = branch_data.selco_other_stock_entry_naming_series
+
+    if doc.purpose == "Send to Warehouse":
         doc.selco_recipient_email_id = frappe.get_cached_value("Branch",doc.selco_being_dispatched_to,"selco_branch_email_id")
 
 @frappe.whitelist()
 def selco_stock_entry_validate(doc,method):
     from frappe.contacts.doctype.address.address import get_address_display, get_default_address
-    if doc.stock_entry_type == "Send to Warehouse":
+    if doc.purpose == "Send to Warehouse":
         local_warehouse = frappe.get_cached_value("Branch",doc.selco_being_dispatched_to,"selco_warehouse")
         doc.selco_recipient_address_link = get_default_address("Warehouse", local_warehouse) #frappe.get_cached_value("Warehouse",local_warehouse,"address")
         doc.selco_recipient_address = "<b>" + doc.selco_being_dispatched_to.upper() + " BRANCH</b><br>"
         doc.selco_recipient_address+= "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.selco_recipient_address+= str(get_address_display(doc.selco_recipient_address_link))
-    elif doc.stock_entry_type=="Receive at Warehouse":
+    elif doc.purpose=="Receive at Warehouse":
         sender = frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"selco_branch")
         sender_warehouse = frappe.get_cached_value("Branch",sender,"selco_warehouse")
         doc.sender_address_link = get_default_address("Warehouse", sender_warehouse) #frappe.get_cached_value("Warehouse",sender_warehouse,"address")
@@ -422,7 +430,7 @@ def make_maintenance_schedule(doc):
 
 		return
 
-	ms_doc = frappe.get_cached_doc("Accounts Settings", "Accounts Settings")
+	ms_doc = frappe.get_cached_doc("Maintenance Settings", "Maintenance Settings")
 	if (ms_doc.auto_create_maintenance_schedule and doc.start_date
 		and doc.end_date and doc.periodicity and (doc.selco_type_of_invoice == "System Sales Invoice" or
 		ms_doc.role_to_make_maintenance_schedule in frappe.get_roles(frappe.session.user))):
@@ -438,7 +446,9 @@ def make_maintenance_schedule(doc):
 				'transaction_date': from_date,
 				'sales_invoice': doc.name,
 				'customer_address': doc.shipping_address_name,
-				'address_display': doc.shipping_address
+				'address_display': doc.shipping_address,
+				'naming_series': frappe.get_cached_value("Branch",
+					doc.selco_branch, "selco_maintenance_schedule_naming_series")
 			})
 
 			end_date = from_date
@@ -579,6 +589,9 @@ def selco_payment_entry_before_insert(doc,method):
             and doc.selco_amount_credited_to_platinum_account):
             doc.paid_to = frappe.get_cached_value("Branch","Head Office","selco_collection_account")
 
+        elif doc.mode_of_payment == "Cash":
+            doc.paid_to = frappe.db.get_value("Branch",doc.selco_branch,"selco_collection_account_cash")
+
     elif doc.payment_type == "Pay":
         if doc.mode_of_payment == "Bank":
             data = frappe.get_cached_value("Branch", doc.selco_branch,
@@ -591,7 +604,7 @@ def selco_payment_entry_validate(doc,method):
     if doc.payment_type == "Receive":
         if doc.selco_money_received_by == "Cash":
             doc.mode_of_payment = "Cash"
-            doc.paid_to = frappe.get_cached_value("Branch",doc.selco_branch,"selco_collection_account")
+            doc.paid_to = frappe.get_cached_value("Branch",doc.selco_branch,"selco_collection_account_cash")
         else:
             doc.mode_of_payment = "Bank"
             doc.paid_to = frappe.get_cached_value("Branch",doc.selco_branch,"selco_collection_account")
@@ -609,6 +622,11 @@ def selco_payment_entry_before_delete(doc,method):
         frappe.throw("You cannot delete Payment Entries")
 
 def selco_journal_entry_before_insert(doc, method):
+    if not doc.selco_branch:
+        for d in doc.get("accounts"):
+            if d.reference_type in ["Sales Invoice"]:
+                doc.selco_branch = frappe.db.get_value(d.reference_type, d.reference_name, "selco_branch")
+
     naming_series_dict = {
         'Contra Entry': 'selco_contra_naming_series', 'Cash Entry': 'selco_cash_payment_naming_series',
         'Debit Note': 'selco_debit_note__naming_series', 'Credit Note': 'selco_credit_note_naming_series',
@@ -638,9 +656,9 @@ def selco_journal_entry_validate(doc,method):
 @frappe.whitelist()
 def selco_purchase_invoice_before_insert(doc,method):
     if doc.is_return == 1:
-        doc.naming_series = "DN/HO/18-19/"
-
-    doc.naming_series = frappe.get_cached_value("Warehouse", doc.selco_godown, "selco_purchase_invoice_naming_series")
+        doc.naming_series = frappe.db.get_value("Warehouse",doc.selco_godown,"selco_purchase_invoice_return_naming_series")
+    else:
+        doc.naming_series = frappe.get_cached_value("Warehouse", doc.selco_godown, "selco_purchase_invoice_naming_series")
 
 
 @frappe.whitelist()
@@ -653,7 +671,7 @@ def selco_purchase_invoice_validate(doc, method):
 def selco_lead_before_insert(doc,method):
     doc.naming_series = frappe.get_cached_value("Branch",doc.selco_branch,"selco_lead_naming_series")
     if doc.selco_project_enquiry == 1:
-        doc.naming_series = "ENQ/18-19/"
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_project_enquiry_naming_series")
 
 @frappe.whitelist()
 def selco_lead_validate(doc,method):
@@ -718,8 +736,16 @@ def stock_entry_reference_qty_update(doc, method):
     if doc.docstatus == 1 and doc.purpose == 'Send to Warehouse':
       make_stock_receive_entry(doc)
 
+    itemwise_count_dict = {}
+    if doc.stock_entry_type in ["Rejection In", "Rejection Out"]:
+        for row in doc.items:
+            itemwise_count_dict.setdefault(row.item_code, []).append(row.idx)
+
+            if len(itemwise_count_dict[row.item_code]) > 1:
+                frappe.throw(_("The item code {0} has been added multiple times").format(row.item_code))
+
     for item in doc.items:
-        if doc.stock_entry_type=="Receive at Warehouse" and doc.outgoing_stock_entry:
+        if (doc.stock_entry_type=="Receive at Warehouse" or doc.purpose=="Receive at Warehouse") and doc.outgoing_stock_entry:
             item.reference_rej_in_or_rej_ot = doc.outgoing_stock_entry
         elif doc.stock_entry_type=="Rejection Out" and doc.selco_rejection_in_id:
             item.reference_rej_in_or_rej_ot = doc.selco_rejection_in_id
@@ -744,8 +770,12 @@ def stock_entry_reference_qty_update(doc, method):
                         .format(item.idx, frappe.bold(item.item_code), get_link_to_form("Stock Entry", item.reference_rej_in_or_rej_ot)))
 
                 else:
-                    frappe.throw(_("Row {0}: For the item {1}, already outward the all quantity against the rejection in {2}")
-                        .format(item.idx, frappe.bold(item.item_code), get_link_to_form("Stock Entry", item.reference_rej_in_or_rej_ot)))
+                    if doc.stock_entry_type=="Rejection Out":
+                        frappe.throw(_("Row {0}: For the item {1}, already outward the all quantity against the rejection in {2}")
+                            .format(item.idx, frappe.bold(item.item_code), get_link_to_form("Stock Entry", item.reference_rej_in_or_rej_ot)))
+                    if doc.stock_entry_type == "GRN":
+                        frappe.throw(_("Row {0}: For the item {1}, the GRN quantity is more than the outward dc quantity in {2}")
+                            .format(item.idx, frappe.bold(item.item_code), get_link_to_form("Stock Entry", item.reference_rej_in_or_rej_ot)))
 
             frappe.db.set_value('Stock Entry Detail', name,
                 'reference_rej_in_or_rej_quantity', reference_qty)
@@ -850,3 +880,16 @@ def get_incompleted_rejection_in_or_rejection_out(doctype, txt, searchfield, sta
         se.selco_supplier_or_customer_id = %(selco_supplier_or_customer_id)s
         and se.name like %(txt)s limit %(start)s, %(page_len)s
     """, new_filters)
+
+
+def validate_back_dated_entries(doc, method):
+        if frappe.session.user == "Administrator":
+                return
+        no_of_days = cint(frappe.db.get_single_value("Accounts Settings", "no_of_days"))
+        allow_to_edit_role = frappe.db.get_single_value("Accounts Settings", "allow_to_edit_role") or "SELCO Edit Posting Date"
+        if doc.doctype in ["Stock Entry", "Payment Entry", "Journal Entry", "Sales Invoice", "Delivery Note"] and no_of_days:
+                if allow_to_edit_role in frappe.get_roles() and getdate(doc.posting_date) < getdate(add_days(today(), -1 * no_of_days)):
+                        frappe.throw(_("User don't have permission to submit the back dated {0}, please contact to administrator").format(doc.doctype))
+        if (doc.doctype in ["Stock Entry", "Payment Entry", "Journal Entry", "Sales Invoice", "Delivery Note"]
+                and allow_to_edit_role not in frappe.get_roles() and getdate(doc.posting_date) < getdate(add_days(today(), -1))):
+                frappe.throw(_("User don't have permission to submit the back dated {0}, please contact to administrator").format(doc.doctype))
