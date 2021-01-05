@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import frappe, json
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import now,now_datetime, get_link_to_form
+from frappe.utils import now,now_datetime, get_link_to_form, round_based_on_smallest_currency_fraction
 import operator
 from erpnext.accounts.party import get_party_account, get_due_date
 from datetime import datetime
@@ -128,7 +128,17 @@ def selco_delivery_note_before_insert(doc,method):
         doc.naming_series = "DC-RET/"
     else:
         doc.naming_series = frappe.get_cached_value("Branch",
-            doc.selco_branch, "selco_stock_entry_naming_series")
+            doc.selco_branch, "selco_delivery_note_naming_series")
+
+    selco_warehouse, selco_cost_center = frappe.get_cached_value("Branch",
+        doc.selco_branch, ["selco_warehouse", "selco_cost_center"])
+
+    for d in doc.get('items'):
+        d.warehouse = selco_warehouse
+        d.cost_center = selco_cost_center
+        if not d.rate:
+            d.rate = frappe.get_cached_value("Item Price",
+                {"price_list": "Branch Sales", "item_code":d.item_code}, "price_list_rate")
 
 @frappe.whitelist()
 def selco_material_request_before_insert(doc,method):
@@ -268,7 +278,6 @@ def selco_purchase_receipt_validate(doc,method):
             if not d.purchase_order :
                 frappe.throw("Purchase Order Is Mandatory")
 
-@frappe.whitelist()
 def selco_stock_entry_updates(doc,method):
     if not doc.selco_branch and doc.get("items"):
         warehouse = doc.items[0].s_warehouse
@@ -304,13 +313,15 @@ def selco_stock_entry_updates(doc,method):
             doc.selco_branch, 'selco_git_warehouse')
 
         if doc.selco_being_dispatched_to:
+            branch_selco_being_dispatched_to = doc.selco_being_dispatched_to
+
             if doc.selco_type_of_material in ["Good Stock", "Repair Stock"]:
                 git_warehouse = frappe.get_cached_value("Branch",
-                    doc.selco_being_dispatched_to, 'selco_git_warehouse' if doc.selco_type_of_material=="Good Stock" else 'repair_git_warehouse')
+                    branch_selco_being_dispatched_to, 'selco_git_warehouse' if doc.selco_type_of_material=="Good Stock" else 'repair_git_warehouse')
 
             else:
                 git_warehouse = frappe.get_cached_value("Branch",
-                    doc.selco_being_dispatched_to, 'common_git')
+                    branch_selco_being_dispatched_to, 'common_git')
 
         for d in doc.get('items'):
             d.cost_center = branch_data.selco_cost_center
@@ -332,8 +343,7 @@ def selco_stock_entry_updates(doc,method):
 
         for d in doc.get('items'):
             d.cost_center = branch_data.selco_cost_center
-            if not d.get(warehouse_field):
-                d.set(warehouse_field, branch_data.selco_repair_warehouse)
+            d.set(warehouse_field, branch_data.selco_repair_warehouse)
             d.is_sample_item = 1
 
     elif doc.is_new() and doc.stock_entry_type == "BOM":
@@ -348,6 +358,7 @@ def selco_stock_entry_updates(doc,method):
             row.s_warehouse = ''
             row.t_warehouse = ''
 
+            row.cost_center = branch_data.selco_cost_center
             if row.idx == total_count:
                 row.t_warehouse = branch_data.selco_warehouse
             else:
@@ -372,6 +383,9 @@ def selco_stock_entry_validate(doc,method):
         doc.sender_address = "<b>" + str(sender) + " SELCO BRANCH</b><br>"
         doc.sender_address += "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.sender_address += str(get_address_display(doc.sender_address_link))
+
+        if frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"purpose") != 'Send to Warehouse':
+            frappe.throw(_("Stock Entry (Outward GIT) should be outward dc."))
 
 @frappe.whitelist()
 def get_items_from_outward_stock_entry(selco_doc_num,selco_branch):
@@ -407,10 +421,24 @@ def selco_customer_validate(doc,method):
         selco_validate_if_customer_contact_number_exists(doc.selco_landline_mobile_2,doc.name)
 
 def selco_validate_if_customer_contact_number_exists(contact_number,customer_id):
-	pass
+	for field in ["selco_customer_contact_number", "selco_landline_mobile_2"]:
+		duplicate_customer = frappe.db.get_value("Customer", 
+			{field: contact_number, "name": ("!=", customer_id)}, "name")
+
+		if duplicate_customer:
+			frappe.throw(_("Same contact no {0} already exists for the customer {1}")
+				.format(contact_number, duplicate_customer))
 
 @frappe.whitelist()
 def selco_sales_invoice_before_insert(doc,method):
+    selco_cost_center = frappe.get_cached_value("Branch", doc.selco_branch, "selco_cost_center")
+    for d in doc.get('items'):
+        d.cost_center = selco_cost_center
+        d.income_account = doc.selco_sales_account
+
+    for d in doc.get('taxes'):
+        d.cost_center = selco_cost_center
+
     customer_data = frappe.get_cached_value("Customer",
         doc.customer, ["selco_customer_contact_number", "selco_customer_tin_number"], as_dict=1)
 
@@ -428,6 +456,13 @@ def selco_sales_invoice_before_insert(doc,method):
         elif doc.selco_type_of_invoice == "Bill of Sale":
             doc.naming_series = frappe.get_cached_value("Branch",doc.selco_branch,"selco_bill_of_sales_naming_series")
 
+
+def selco_sales_invoice_cancel(doc, method=None):
+	delete_auto_created_maintenance_schedule(doc)
+
+def delete_auto_created_maintenance_schedule(doc):
+	for row in frappe.get_all("Maintenance Schedule", filters={"docstatus": 0, "sales_invoice": doc.name}):
+		frappe.delete_doc("Maintenance Schedule", row.name)
 
 def selco_sales_invoice_submit(doc, method):
 	make_maintenance_schedule(doc)
@@ -456,8 +491,8 @@ def make_maintenance_schedule(doc):
 				'customer': doc.customer,
 				'transaction_date': from_date,
 				'sales_invoice': doc.name,
-				'customer_address': doc.shipping_address_name,
-				'address_display': doc.shipping_address,
+				'customer_address': doc.shipping_address_name or doc.customer_address,
+				'address_display': doc.shipping_address or doc.address_display,
 				'naming_series': frappe.get_cached_value("Branch",
 					doc.selco_branch, "selco_maintenance_schedule_naming_series")
 			})
@@ -473,7 +508,8 @@ def make_maintenance_schedule(doc):
 					'start_date': start_date,
 					'end_date':end_date,
 					'no_of_visits': 1,
-					'sales_person': doc.sales_person
+					'service_person': doc.service_person,
+					'sales_person': doc.sales_team[0].sales_person
 				})
 
 			m_doc.generate_schedule()
@@ -491,17 +527,17 @@ def create_schedule_list(start_date, end_date, no_of_visit, doc):
 			if (getdate(start_date_copy) <= getdate(end_date)):
 				start_date_copy = add_days(start_date_copy, add_by)
 				if len(schedule_list) < no_of_visit:
-					schedule_date = validate_schedule_date_for_holiday_list(getdate(start_date_copy), doc.sales_person, doc.company)
+					schedule_date = validate_schedule_date_for_holiday_list(getdate(start_date_copy), doc.service_person, doc.company)
 					if schedule_date > getdate(end_date):
 						schedule_date = getdate(end_date)
 					schedule_list.append(schedule_date)
 
 		return schedule_list
 
-def validate_schedule_date_for_holiday_list(schedule_date, sales_person, company):
+def validate_schedule_date_for_holiday_list(schedule_date, service_person, company):
 		validated = False
 
-		employee = frappe.db.get_value("Sales Person", sales_person, "employee")
+		employee = frappe.db.get_value("Service Person", service_person, "employee")
 		if employee:
 			holiday_list = get_holiday_list_for_employee(employee)
 		else:
@@ -529,45 +565,6 @@ def selco_sales_invoice_validate(doc,method):
     doc.total_sales_person_incentive, doc.total_budget_value = 0.0, 0.0
     doc.total_commission = 0.0
 
-    # Check Commission Rate present in the sales partner or not, if not then check in the item group
-    for d in doc.get('items'):
-        commission_rate_for_sales_person = 0.0
-        commission_rate_for_sales_partner = 0.0
-        commission_rate_for_budget = 0.0
-
-        if doc.sales_partner:
-            budget_data = frappe.db.get_value("Sales Partner Budget", 
-                    {"parent": doc.sales_partner, "item_group": d.item_group}, ["commission_rate_for_sales_person", 
-                        "commission_rate_for_sales_partner", "commission_rate_for_budget"])
-
-            if budget_data:
-                commission_rate_for_sales_person = budget_data[0] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person")
-                commission_rate_for_sales_partner = budget_data[1] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner")
-                commission_rate_for_budget = budget_data[2] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget")
-
-        d.commission_rate_for_sales_person = commission_rate_for_sales_person or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person")
-
-        d.commission_rate_for_sales_partner = commission_rate_for_sales_partner or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner")
-
-        d.commission_rate_for_budget = commission_rate_for_budget or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget")
-
-        d.cost_center = selco_cost_center
-        d.income_account = doc.selco_sales_account
-        d.commission_value_of_sales_person = (d.amount * d.commission_rate_for_sales_person) / 100
-        d.commission_value_of_sales_partner = (d.amount * d.commission_rate_for_sales_partner) / 100
-        d.value_of_budget = (d.amount * d.commission_rate_for_budget) / 100
-
-        doc.total_sales_person_incentive += d.commission_value_of_sales_person
-        doc.total_budget_value += d.value_of_budget
-        doc.total_commission += d.commission_value_of_sales_partner
-
-    for d in doc.sales_team:
-        if doc.total_sales_person_incentive:
-            d.incentives = (doc.total_sales_person_incentive * d.allocated_percentage) / 100
-
-        if doc.total_budget_value:
-            d.budget = (doc.total_budget_value * d.allocated_percentage) / 100
-
     for d in doc.get('taxes'):
         d.cost_center = selco_cost_center
 
@@ -584,6 +581,51 @@ def selco_sales_invoice_validate(doc,method):
         else:
             days = 7 if doc.periodicity == 'Weekly' else 2
             doc.end_date = add_days(doc.start_date, days)
+
+    if doc.selco_type_of_invoice not in ["System Sales Invoice", "Spare Sales Invoice", "Service Bill"]:
+        return
+
+    if doc.selco_type_of_invoice == "Spare Sales Invoice" and doc.grand_total < 1000:
+        return
+
+    # Check Commission Rate present in the sales partner or not, if not then check in the item group
+    for d in doc.get('items'):
+        commission_rate_for_sales_person = 0.0
+        commission_rate_for_sales_partner = 0.0
+        commission_rate_for_budget = 0.0
+
+        if doc.sales_partner:
+            budget_data = frappe.db.get_value("Sales Partner Budget", 
+                    {"parent": doc.sales_partner, "item_group": d.item_group}, ["commission_rate_for_sales_person", 
+                        "commission_rate_for_sales_partner", "commission_rate_for_budget"])
+
+            if budget_data:
+                commission_rate_for_sales_person = budget_data[0] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person")
+                commission_rate_for_sales_partner = budget_data[1] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner")
+                commission_rate_for_budget = budget_data[2] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget")
+
+        d.commission_rate_for_sales_person = round_based_on_smallest_currency_fraction(commission_rate_for_sales_person or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person"), doc.currency)
+
+        d.commission_rate_for_sales_partner = round_based_on_smallest_currency_fraction(commission_rate_for_sales_partner or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner"), doc.currency)
+
+        d.commission_rate_for_budget = round_based_on_smallest_currency_fraction(commission_rate_for_budget or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget"), doc.currency)
+
+        d.cost_center = selco_cost_center
+        d.income_account = doc.selco_sales_account
+        d.commission_value_of_sales_person = (d.net_amount * d.commission_rate_for_sales_person) / 100
+        d.commission_value_of_sales_partner = (d.net_amount * d.commission_rate_for_sales_partner) / 100
+        d.value_of_budget = (d.net_amount * d.commission_rate_for_budget) / 100
+
+        doc.total_sales_person_incentive += round_based_on_smallest_currency_fraction(d.commission_value_of_sales_person, doc.currency)
+        doc.total_budget_value += round_based_on_smallest_currency_fraction(d.value_of_budget, doc.currency)
+        doc.total_commission += round_based_on_smallest_currency_fraction(d.commission_value_of_sales_partner, doc.currency)
+
+    for d in doc.sales_team:
+        if doc.total_sales_person_incentive:
+            d.incentives = (doc.total_sales_person_incentive * d.allocated_percentage) / 100
+
+        if doc.total_budget_value:
+            d.budget = (doc.total_budget_value * d.allocated_percentage) / 100
 
     if not doc.sales_partner and doc.total_commission:
         doc.total_commission = 0.0
@@ -696,15 +738,15 @@ def selco_lead_validate(doc,method):
         selco_validate_if_lead_contact_number_exists(doc.selco_customer_contact_number__mobile_2_landline,doc.name)
 
 def selco_validate_if_lead_contact_number_exists(contact_number,lead_id):
-    var4 = frappe.get_cached_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)})
+    var4 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)})
     var5 = unicode(var4) or u''
-    var6 = frappe.get_cached_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)}, "lead_name")
+    var6 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)}, "lead_name")
     if var5 != "None" and lead_id != var5:
         frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var5 + "\n Lead Name : " + var6)
 
-    var14 = frappe.get_cached_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)})
+    var14 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)})
     var15 = unicode(var14) or u''
-    var16 = frappe.get_cached_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)}, "lead_name")
+    var16 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)}, "lead_name")
     if var15 != "None" and lead_id != var15:
         frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var15 + "\n Lead Name : " + var16)
 
@@ -748,7 +790,7 @@ def stock_entry_reference_qty_update(doc, method):
       make_stock_receive_entry(doc)
 
     itemwise_count_dict = {}
-    if doc.stock_entry_type in ["Rejection In", "Rejection Out"]:
+    if doc.stock_entry_type in ["Rejection In", "Rejection Out", "Outward DC", "GRN"]:
         for row in doc.items:
             itemwise_count_dict.setdefault(row.item_code, []).append(row.idx)
 

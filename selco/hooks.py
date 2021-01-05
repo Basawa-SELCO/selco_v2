@@ -54,7 +54,8 @@ doc_events = {
      "Sales Invoice":{
              "before_insert": "selco.selco.selco_customizations.selco_sales_invoice_before_insert",
              "validate": "selco.selco.selco_customizations.selco_sales_invoice_validate",
-             "on_submit": "selco.selco.selco_customizations.selco_sales_invoice_submit"
+             "on_submit": "selco.selco.selco_customizations.selco_sales_invoice_submit",
+             "on_cancel": "selco.selco.selco_customizations.selco_sales_invoice_cancel"
      },
      "Purchase Invoice":{
              "before_insert":"selco.selco.selco_customizations.selco_purchase_invoice_before_insert",
@@ -64,7 +65,6 @@ doc_events = {
          "before_insert": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "before_validate": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "validate": ["selco.selco.selco_customizations.selco_stock_entry_validate"],
-         "before_save": "selco.selco.selco_customizations.selco_stock_entry_updates",
          "on_submit": "selco.selco.selco_customizations.stock_entry_reference_qty_update",
          "on_cancel": "selco.selco.selco_customizations.stock_entry_reference_qty_update"
    },
