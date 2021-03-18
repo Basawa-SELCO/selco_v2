@@ -229,8 +229,9 @@ scheduler_events = {
 # 	"frappe.desk.doctype.event.event.get_events": "selco.event.get_events"
 # }
 
+'''
 fixtures = ["Custom Field", "Property Setter", "Custom Script", "Print Format"]
-
+'''
 
 '''
 fixtures = [

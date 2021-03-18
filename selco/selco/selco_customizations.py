@@ -582,10 +582,28 @@ def selco_sales_invoice_validate(doc,method):
             days = 7 if doc.periodicity == 'Weekly' else 2
             doc.end_date = add_days(doc.start_date, days)
 
+    no_commission = False
     if doc.selco_type_of_invoice not in ["System Sales Invoice", "Spare Sales Invoice", "Service Bill"]:
-        return
+        no_commission = True
 
     if doc.selco_type_of_invoice == "Spare Sales Invoice" and doc.grand_total < 1000:
+        no_commission = True
+
+    if no_commission:
+        for d in doc.get('items'):
+            d.commission_rate_for_sales_person = 0.0
+            d.commission_rate_for_sales_partner = 0.0
+            d.commission_rate_for_budget = 0.0
+            d.commission_value_of_sales_person = 0.0
+            d.commission_value_of_sales_partner = 0.0
+            d.value_of_budget = 0.0
+        doc.total_sales_person_incentive = 0.0
+        doc.total_budget_value = 0.0
+
+        for row in doc.sales_team:
+            row.budget = 0.0
+            row.incentives = 0.0
+
         return
 
     # Check Commission Rate present in the sales partner or not, if not then check in the item group
@@ -604,17 +622,20 @@ def selco_sales_invoice_validate(doc,method):
                 commission_rate_for_sales_partner = budget_data[1] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner")
                 commission_rate_for_budget = budget_data[2] or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget")
 
-        d.commission_rate_for_sales_person = round_based_on_smallest_currency_fraction(commission_rate_for_sales_person or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person"), doc.currency)
+        if doc.selco_skdrdp_staff == "Yes":
+            commission_rate_for_sales_partner = 0.0
 
-        d.commission_rate_for_sales_partner = round_based_on_smallest_currency_fraction(commission_rate_for_sales_partner or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner"), doc.currency)
+        d.commission_rate_for_sales_person = commission_rate_for_sales_person or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_person")
 
-        d.commission_rate_for_budget = round_based_on_smallest_currency_fraction(commission_rate_for_budget or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget"), doc.currency)
+        d.commission_rate_for_sales_partner = commission_rate_for_sales_partner or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_sales_partner")
+
+        d.commission_rate_for_budget = commission_rate_for_budget or frappe.db.get_value("Item Group", d.item_group, "commission_rate_for_budget")
 
         d.cost_center = selco_cost_center
         d.income_account = doc.selco_sales_account
-        d.commission_value_of_sales_person = (d.net_amount * d.commission_rate_for_sales_person) / 100
-        d.commission_value_of_sales_partner = (d.net_amount * d.commission_rate_for_sales_partner) / 100
-        d.value_of_budget = (d.net_amount * d.commission_rate_for_budget) / 100
+        d.commission_value_of_sales_person = round_based_on_smallest_currency_fraction((d.net_amount * d.commission_rate_for_sales_person) / 100, doc.currency)
+        d.commission_value_of_sales_partner = round_based_on_smallest_currency_fraction((d.net_amount * d.commission_rate_for_sales_partner) / 100, doc.currency)
+        d.value_of_budget = round_based_on_smallest_currency_fraction((d.net_amount * d.commission_rate_for_budget) / 100, doc.currency)
 
         doc.total_sales_person_incentive += round_based_on_smallest_currency_fraction(d.commission_value_of_sales_person, doc.currency)
         doc.total_budget_value += round_based_on_smallest_currency_fraction(d.value_of_budget, doc.currency)
