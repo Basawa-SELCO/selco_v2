@@ -125,7 +125,7 @@ def selco_delivery_note_validates(doc,method):
 @frappe.whitelist()
 def selco_delivery_note_before_insert(doc,method):
     if doc.is_return:
-        doc.naming_series = "DC-RET/"
+        doc.naming_series = frappe.db.get_value("Branch",doc.selco_branch,"selco_delivery_note_return_naming_series")
     else:
         doc.naming_series = frappe.get_cached_value("Branch",
             doc.selco_branch, "selco_delivery_note_naming_series")
