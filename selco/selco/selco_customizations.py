@@ -300,7 +300,7 @@ def selco_stock_entry_updates(doc,method):
     if doc.stock_entry_type in ['Outward DC', 'GRN']:
         if doc.is_new():
             doc.naming_series = (branch_data.selco_receipt_note_naming_series
-                if doc.purpose=="Receive at Warehouse" else branch_data.selco_stock_entry_naming_series)
+                if (doc.purpose=="Material Transfer" and doc.outgoing_stock_entry) else branch_data.selco_stock_entry_naming_series)
 
         warehouse = (branch_data.selco_warehouse
             if doc.selco_type_of_material=="Good Stock" else branch_data.selco_repair_warehouse)
@@ -326,10 +326,10 @@ def selco_stock_entry_updates(doc,method):
         for d in doc.get('items'):
             d.cost_center = branch_data.selco_cost_center
             d.s_warehouse = (git_warehouse
-                if doc.purpose=="Receive at Warehouse" else warehouse)
+                if (doc.purpose=="Material Transfer" and doc.outgoing_stock_entry) else warehouse)
 
             d.t_warehouse = (warehouse
-                if doc.purpose=="Receive at Warehouse" else git_warehouse)
+                if (doc.purpose=="Material Transfer" and doc.outgoing_stock_entry) else git_warehouse)
 
         if doc.selco_type_of_material != "Good Stock" and git_warehouse != "Demo Warehouse - SELCO":
                 d.is_sample_item = 1
@@ -364,19 +364,19 @@ def selco_stock_entry_updates(doc,method):
             else:
                 row.s_warehouse = branch_data.selco_warehouse
 
-    if doc.purpose == "Send to Warehouse":
+    if doc.purpose == "Material Transfer" and doc.add_to_transit:
         doc.selco_recipient_email_id = frappe.get_cached_value("Branch",doc.selco_being_dispatched_to,"selco_branch_email_id")
 
 @frappe.whitelist()
 def selco_stock_entry_validate(doc,method):
     from frappe.contacts.doctype.address.address import get_address_display, get_default_address
-    if doc.purpose == "Send to Warehouse":
+    if doc.purpose == "Material Transfer" and doc.add_to_transit:
         local_warehouse = frappe.get_cached_value("Branch",doc.selco_being_dispatched_to,"selco_warehouse")
         doc.selco_recipient_address_link = get_default_address("Warehouse", local_warehouse) #frappe.get_cached_value("Warehouse",local_warehouse,"address")
         doc.selco_recipient_address = "<b>" + doc.selco_being_dispatched_to.upper() + " BRANCH</b><br>"
         doc.selco_recipient_address+= "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.selco_recipient_address+= str(get_address_display(doc.selco_recipient_address_link))
-    elif doc.purpose=="Receive at Warehouse":
+    elif doc.purpose == "Material Transfer" and doc.outgoing_stock_entry:
         sender = frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"selco_branch")
         sender_warehouse = frappe.get_cached_value("Branch",sender,"selco_warehouse")
         doc.sender_address_link = get_default_address("Warehouse", sender_warehouse) #frappe.get_cached_value("Warehouse",sender_warehouse,"address")
@@ -384,7 +384,7 @@ def selco_stock_entry_validate(doc,method):
         doc.sender_address += "SELCO SOLAR LIGHT PVT. LTD.<br>"
         doc.sender_address += str(get_address_display(doc.sender_address_link))
 
-        if frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"purpose") != 'Send to Warehouse':
+        if frappe.get_cached_value("Stock Entry",doc.outgoing_stock_entry,"add_to_transit") != 1:
             frappe.throw(_("Stock Entry (Outward GIT) should be outward dc."))
 
 @frappe.whitelist()
@@ -760,16 +760,14 @@ def selco_lead_validate(doc,method):
 
 def selco_validate_if_lead_contact_number_exists(contact_number,lead_id):
     var4 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)})
-    var5 = unicode(var4) or u''
     var6 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_2_landline": (contact_number)}, "lead_name")
-    if var5 != "None" and lead_id != var5:
-        frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var5 + "\n Lead Name : " + var6)
+    if var4 is not None and lead_id != var4:
+        frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var4 + "\n Lead Name : " + var6)
 
     var14 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)})
-    var15 = unicode(var14) or u''
     var16 = frappe.db.get_value("Lead", {"selco_customer_contact_number__mobile_1": (contact_number)}, "lead_name")
-    if var15 != "None" and lead_id != var15:
-        frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var15 + "\n Lead Name : " + var16)
+    if var14 is not None and lead_id != var14:
+        frappe.throw("Lead with contact no " + contact_number + " already exists \n Lead ID : " + var14 + "\n Lead Name : " + var16)
 
 @frappe.whitelist()
 def send_birthday_wishes():
@@ -807,7 +805,7 @@ def send_po_reminder():
             message=po_reminder)
 
 def stock_entry_reference_qty_update(doc, method):
-    if doc.docstatus == 1 and doc.purpose == 'Send to Warehouse':
+    if doc.docstatus == 1 and doc.purpose == "Material Transfer" and doc.add_to_transit:
       make_stock_receive_entry(doc)
 
     itemwise_count_dict = {}
@@ -819,7 +817,7 @@ def stock_entry_reference_qty_update(doc, method):
                 frappe.throw(_("The item code {0} has been added multiple times").format(row.item_code))
 
     for item in doc.items:
-        if (doc.stock_entry_type=="Receive at Warehouse" or doc.purpose=="Receive at Warehouse") and doc.outgoing_stock_entry:
+        if (doc.purpose=="Material Transfer") and doc.outgoing_stock_entry:
             item.reference_rej_in_or_rej_ot = doc.outgoing_stock_entry
         elif doc.stock_entry_type=="Rejection Out" and doc.selco_rejection_in_id:
             item.reference_rej_in_or_rej_ot = doc.selco_rejection_in_id
@@ -859,10 +857,10 @@ def make_stock_receive_entry(doc):
 
 	new_doc = make_stock_in_entry(doc.name)
 	new_doc.selco_branch = doc.selco_being_dispatched_to
-	new_doc.purpose = 'Receive at Warehouse'
-	new_doc.set_stock_entry_type()
 	selco_stock_entry_updates(new_doc, '')
+	new_doc.stock_entry_type = 'GRN'
 	new_doc.save(ignore_permissions=True)
+	frappe.db.set_value('Stock Entry', new_doc.name, 'stock_entry_type', 'GRN')
 	frappe.msgprint(_("Receive at warehouse entry {0} created").format(new_doc.name))
 
 @frappe.whitelist()
