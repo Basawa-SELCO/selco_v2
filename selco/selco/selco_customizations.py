@@ -94,7 +94,7 @@ def selco_get_items_from_rejection_in_or_out(stock_entry, branch):
 			'serial_no': d.serial_no,
 			'batch_no': d.batch_no
 		})
-	
+
 	return items
 
 @frappe.whitelist()
@@ -287,8 +287,8 @@ def selco_stock_entry_updates(doc,method):
         frappe.throw(_("Select branch for stock entry {0}").format(doc.name))
 
     branch_data = frappe.get_cached_value("Branch", doc.selco_branch,
-        ['supplier_replaceable', 'defective_warehouse', 'selco_cost_center', 'selco_warehouse', 'selco_repair_warehouse', 
-            'selco_receipt_note_naming_series','selco_stock_entry_naming_series', 'selco_rejection_in_naming_series', 
+        ['supplier_replaceable', 'defective_warehouse', 'selco_cost_center', 'selco_warehouse', 'selco_repair_warehouse',
+            'selco_receipt_note_naming_series','selco_stock_entry_naming_series', 'selco_rejection_in_naming_series',
             'selco_rejection_out_naming_series', 'selco_bill_of_material_naming_series', 'selco_other_stock_entry_naming_series'], as_dict=1)
 
     for label in ["Cost Center", "Warehouse", "Repair Warehouse"]:
@@ -422,7 +422,7 @@ def selco_customer_validate(doc,method):
 
 def selco_validate_if_customer_contact_number_exists(contact_number,customer_id):
 	for field in ["selco_customer_contact_number", "selco_landline_mobile_2"]:
-		duplicate_customer = frappe.db.get_value("Customer", 
+		duplicate_customer = frappe.db.get_value("Customer",
 			{field: contact_number, "name": ("!=", customer_id)}, "name")
 
 		if duplicate_customer:
@@ -470,7 +470,7 @@ def selco_sales_invoice_submit(doc, method):
 def make_maintenance_schedule(doc):
 	if doc.is_return:
 		if doc.return_against:
-			for d in frappe.get_all('Maintenance Schedule', 
+			for d in frappe.get_all('Maintenance Schedule',
 				filters={'sales_invoice': doc.return_against, 'docstatus': 0}):
 				frappe.delete_doc("Maintenance Schedule", d.name)
 
@@ -613,8 +613,8 @@ def selco_sales_invoice_validate(doc,method):
         commission_rate_for_budget = 0.0
 
         if doc.sales_partner:
-            budget_data = frappe.db.get_value("Sales Partner Budget", 
-                    {"parent": doc.sales_partner, "item_group": d.item_group}, ["commission_rate_for_sales_person", 
+            budget_data = frappe.db.get_value("Sales Partner Budget",
+                    {"parent": doc.sales_partner, "item_group": d.item_group}, ["commission_rate_for_sales_person",
                         "commission_rate_for_sales_partner", "commission_rate_for_budget"])
 
             if budget_data:
@@ -832,9 +832,16 @@ def stock_entry_reference_qty_update(doc, method):
 
             reference_qty = data[0].qty if data else 0
 
-            name, ste_qty = frappe.db.get_value('Stock Entry Detail',
-               {'parent': item.reference_rej_in_or_rej_ot,
-                    'item_code': item.item_code}, ['name', 'qty'])
+            reference_entry_data = frappe.db.get_value(
+                'Stock Entry Detail',
+                {'parent': item.reference_rej_in_or_rej_ot, 'item_code': item.item_code},
+                ['name', 'qty'])
+
+            if not reference_entry_data:
+                msg = f"Row #{item.idx}: Item {item.item_code} does not exist in Reference Stock Entry {item.reference_rej_in_or_rej_ot}"
+                frappe.throw(_(msg), title=_("Invalid Reference"))
+
+            name, ste_qty = reference_entry_data.name, reference_entry_data.qty
 
             if reference_qty and reference_qty > ste_qty:
                 if doc.stock_entry_type=="Rejection In" and item.reference_rej_in_or_rej_ot:
@@ -948,7 +955,7 @@ def get_incompleted_rejection_in_or_rejection_out(doctype, txt, searchfield, sta
 
     return frappe.db.sql(""" SELECT distinct se.name from `tabStock Entry` se, `tabStock Entry Detail` sei
         where se.stock_entry_type = %(stock_entry_type)s and se.name = sei.parent and ifnull(sei.reference_rej_in_or_rej_quantity,0) < sei.qty
-        and se.docstatus = 1 and se.selco_branch = %(selco_branch)s and 
+        and se.docstatus = 1 and se.selco_branch = %(selco_branch)s and
         se.selco_supplier_or_customer_id = %(selco_supplier_or_customer_id)s
         and se.name like %(txt)s limit %(start)s, %(page_len)s
     """, new_filters)
