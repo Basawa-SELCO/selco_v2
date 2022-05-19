@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "creation": "2022-04-27 16:11:19.116246",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "selco_item_code",
+  "selco_item_name",
+  "selco_make",
+  "cb1_column",
+  "selco_serial_number",
+  "selco_specs",
+  "selco_collected_amount",
+  "selco_within_warranty",
+  "selco_remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "selco_item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "selco_item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "selco_make",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Make",
+   "options": "Supplier",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "cb1_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "selco_serial_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial Number",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "selco_specs",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Specs",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "selco_collected_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Collected Amount",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "selco_within_warranty",
+   "fieldtype": "Select",
+   "label": "Within Warranty",
+   "options": "Yes\nNo",
+   "permlevel": 2
+  },
+  {
+   "fieldname": "selco_remarks",
+   "fieldtype": "Long Text",
+   "label": "Remarks",
+   "permlevel": 2
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2022-05-07 17:10:42.352607",
+ "modified_by": "Administrator",
+ "module": "SELCO",
+ "name": "Service Record Item Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
