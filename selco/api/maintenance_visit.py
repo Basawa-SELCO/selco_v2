@@ -46,7 +46,7 @@ def get_maintenance_visit():
 		data = frappe.get_list("Maintenance Visit",{'docstatus':['!=',2]})
 
 	data_list = []
-	parent_fields = ['name','selco_branch','customer','customer_name','address_display','selco_customer_contact_number','selco_customer_landline_number','selco_payment_entry_number','mntc_date','completion_status','maintenance_type','status','selco_total_component_charges_collected','selco_service_charges_collected','selco_total_amount','selco_cse_remarks','selco_cse_feedback','selco_signature_of_the_customer','selco_cse_signature','selco_signature_of_the_cse','selco_cse_location','selco_customer_remarks','selco_customer_feedback','customer_address','selco_customers_signature','naming_series','maintenance_schedule','maintenance_schedule_detail','mntc_time','company','customer_group']	
+	parent_fields = ['name','selco_branch','customer','customer_name','address_display','selco_customer_contact_number','selco_customer_landline_number','selco_payment_entry_number','mntc_date','completion_status','maintenance_type','status','selco_total_component_charges_collected','selco_service_charges_collected','selco_total_amount','selco_cse_remarks','selco_cse_feedback','selco_signature_of_the_customer','selco_cse_signature','selco_signature_of_the_cse','selco_cse_location','selco_customer_remarks','selco_customer_feedback','customer_address','selco_customers_signature','naming_series','maintenance_schedule','maintenance_schedule_detail','mntc_time','company','customer_group','selco_taluk','selco_sales_person','selco_service_person']	
 	child_fields = ['name','idx','parent','parenttype','item_code','selco_item_group','item_name','selco_make','selco_quantity','selco_serial_number','selco_specs','selco_specs','service_person','description','work_done','selco_collected_amount']
  
 	for row in data:
@@ -73,16 +73,18 @@ def update_maintenance_visit():
 			frappe.throw("Maintenance Visit {} is Submitted.Can not edit submitted document".format(request_data.get("name")))
 		if doc.docstatus == 2:
 			frappe.throw("Maintenance Visit {} is Cancelled.Can not edit cancelled document".format(request_data.get("name")))
-		if doc.completion_status == "Fully Completed":
-			frappe.throw("Maintenance Visit {} is Fully Completed.".format(request_data.get("name")))
-		parent_field_list = ['completion_status','selco_customer_contact_number','selco_customer_landline_number','selco_service_charges_collected','selco_cse_remarks','selco_cse_feedback','selco_cse_signature','selco_cse_location','selco_customer_remarks','selco_customer_feedback','selco_customers_signature']
+		# if doc.completion_status == "Fully Completed":
+		# 	frappe.throw("Maintenance Visit {} is Fully Completed.".format(request_data.get("name")))
+		parent_field_list = ['completion_status','selco_customer_contact_number','selco_customer_landline_number','selco_service_charges_collected','selco_cse_remarks','selco_cse_feedback','selco_cse_signature','selco_cse_location','selco_customer_remarks','selco_customer_feedback','selco_customers_signature','submitted']
 		for field in parent_field_list:
-				if request_data.get(field):
-					#frappe.db.set_value(doc.doctype, doc.name, field, request_data.get(field))
+			if request_data.get(field):
+				if field == "submitted":
+					doc.submitted = request_data.get(field)
+				else:
 					doc.db_set(field, request_data.get(field))
 		update_child_records(request_data,doc)
 		doc.save()
-		if doc.completion_status == "Fully Completed":
+		if doc.get('submitted'):
 			doc.submit()
 		frappe.db.commit()
 		doc.reload()

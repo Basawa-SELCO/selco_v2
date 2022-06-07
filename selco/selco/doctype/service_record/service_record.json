@@ -152,7 +152,7 @@
    "fieldname": "selco_type_of_service_attended",
    "fieldtype": "Select",
    "label": "Type of Service Attended",
-   "options": "Complaint",
+   "options": "\nScheduled\nComplaint Based\nAMC Based",
    "permlevel": 1,
    "read_only": 1
   },
@@ -328,7 +328,7 @@
  "icon": "fa fa-wrench",
  "is_submittable": 1,
  "links": [],
- "modified": "2022-05-16 11:03:03.247446",
+ "modified": "2022-05-30 15:10:56.592984",
  "modified_by": "Administrator",
  "module": "SELCO",
  "name": "Service Record",

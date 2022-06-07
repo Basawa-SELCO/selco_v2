@@ -130,11 +130,23 @@ def autocreate_service_record(doc):
 		service_record.auto_created = 1
 		service_record.save()
 
+def selco_service_record_validate(doc,method):
+	add_child_table_blank_row(doc)
+
 def selco_service_record_submit(doc,method):
 	update_issue(doc)
 
 def selco_service_record_cancel(doc,method):
 	delete_service_record_from_issue_child_table(doc)
+
+def add_child_table_blank_row(self):
+	is_child_exists = [row.selco_is_auto_created for row in self.selco_fault_rectified_and_replacement_detail if row.selco_is_auto_created]
+	if not is_child_exists:
+		for i in range(1,6):
+			self.append('selco_fault_rectified_and_replacement_detail',{
+				'selco_is_auto_created': 1
+			})
+		
 
 def update_issue(doc):
 	if doc.selco_complaint_number:

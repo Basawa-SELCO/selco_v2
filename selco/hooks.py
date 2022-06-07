@@ -83,6 +83,7 @@ doc_events = {
 		 "on_submit": "selco.selco.selco_customizations.selco_delivery_note_submit"
 	 },
 	 "Service Record":{
+		 "validate": "selco.selco.selco_customizations.selco_service_record_validate",
 		 "on_submit": "selco.selco.selco_customizations.selco_service_record_submit",
 		 "on_cancel": "selco.selco.selco_customizations.selco_service_record_cancel"
 	 },
