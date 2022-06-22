@@ -129,9 +129,12 @@ def autocreate_service_record(doc):
 		service_record.selco_complaint_number = doc.name
 		service_record.auto_created = 1
 		service_record.save()
+		frappe.msgprint(_("Service Record {0} created").format(get_link_to_form("Service Record", service_record.name)))
+
 
 def selco_service_record_validate(doc,method):
 	add_child_table_blank_row(doc)
+	calculate_total(doc)
 
 def selco_service_record_submit(doc,method):
 	update_issue(doc)
@@ -147,16 +150,26 @@ def add_child_table_blank_row(self):
 				'selco_is_auto_created': 1
 			})
 		
+def calculate_total(doc):
+	total = 0
+	for row in doc.selco_fault_rectified_and_replacement_detail:
+			total += flt(row.selco_collected_amount)
+	doc.selco_total_component_charges_collected = total
+	doc.selco_total_amount = flt(doc.selco_total_component_charges_collected) + flt(doc.selco_service_charge_collected)
 
 def update_issue(doc):
 	if doc.selco_complaint_number:
 		issue_doc = frappe.get_doc("Issue",doc.selco_complaint_number)
 		if not frappe.db.exists("Service Record Details Issue",{'parent':doc.selco_complaint_number,'service_record_no':doc.name}):
 			issue_doc.append("selco_service_record",{
-				'service_record_number': doc.name,
+				'service_record_no': doc.name,
 				'service_person': doc.selco_cse_name,
 				'service_record_date': doc.selco_posting_date,
-				'service_amount': flt(doc.selco_service_charges_collected)
+				'service_amount': flt(doc.selco_service_charge_collected),
+				'type_of_service': doc.selco_type_of_service_attended,
+				'selco_total_component_charges_collected': doc.selco_total_component_charges_collected,
+				'selco_total_amount': doc.selco_total_amount		
+
 			})
 			issue_doc.save(ignore_permissions=True)
 
@@ -207,7 +220,7 @@ def selco_material_request_before_insert(doc,method):
 	local_warehouse = frappe.get_cached_value("Branch",doc.selco_branch,"selco_git_warehouse")
 	for d in doc.get('items'):
 		if not d.warehouse:
-			   d.warehouse = local_warehouse
+				 d.warehouse = local_warehouse
 
 @frappe.whitelist()
 def selco_material_request_validate(doc,method):
@@ -310,20 +323,20 @@ def selco_purchase_receipt_validate(doc,method):
 		if (i != 0):
 			for j,rowj in enumerate(doc.get('selco_purchase_receipt_item_print')):
 				if (doc.items[i].item_code == doc.selco_purchase_receipt_item_print[j].selco_item_code and doc.items[i].item_name == doc.selco_purchase_receipt_item_print[j].selco_item_name):
-				   flag=1
-				   doc.selco_purchase_receipt_item_print[j].selco_received_quantity = doc.selco_purchase_receipt_item_print[j].selco_received_quantity+doc.items[i].received_qty
-				   doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity = doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity+doc.items[i].qty
-				   doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity = doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity+doc.items[i].rejected_qty
+					 flag=1
+					 doc.selco_purchase_receipt_item_print[j].selco_received_quantity = doc.selco_purchase_receipt_item_print[j].selco_received_quantity+doc.items[i].received_qty
+					 doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity = doc.selco_purchase_receipt_item_print[j].selco_accepted_quantity+doc.items[i].qty
+					 doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity = doc.selco_purchase_receipt_item_print[j].selco_rejected_quantity+doc.items[i].rejected_qty
 
 			if(flag!= 1):
-			   r = doc.append('selco_purchase_receipt_item_print', {})
-			   r.selco_item_code = doc.items[i].item_code
-			   r.selco_item_name = doc.items[i].item_name
-			   r.selco_received_quantity = doc.items[i].received_qty
-			   r.selco_accepted_quantity = doc.items[i].qty
-			   r.selco_rejected_quantity = doc.items[i].rejected_qty
-			   r.selco_rate = doc.items[i].rate
-			   #frappe.msgprint(str(flag))
+				 r = doc.append('selco_purchase_receipt_item_print', {})
+				 r.selco_item_code = doc.items[i].item_code
+				 r.selco_item_name = doc.items[i].item_name
+				 r.selco_received_quantity = doc.items[i].received_qty
+				 r.selco_accepted_quantity = doc.items[i].qty
+				 r.selco_rejected_quantity = doc.items[i].rejected_qty
+				 r.selco_rate = doc.items[i].rate
+				 #frappe.msgprint(str(flag))
 			flag=0
 	po_list = []
 	po_list_date = []
@@ -645,10 +658,12 @@ def selco_delivery_note_submit(doc, method):
 	create_installation_note(doc)
 
 def create_installation_note(doc):
-	installation_note = make_installation_note(doc.name)
-	installation_note.inst_date = doc.posting_date
-	installation_note.save()
-	frappe.msgprint(_("Installation Note {0} created").format(get_link_to_form("Installation Note", installation_note.name)))
+	if doc.selco_type_of_service == "System Sales Invoice":
+		installation_note = make_installation_note(doc.name)
+		installation_note.inst_date = doc.posting_date
+		installation_note.selco_terms_and_conditions = frappe.db.get_value("Terms and Conditions",doc.selco_type_of_system,'terms')
+		installation_note.save()
+		frappe.msgprint(_("Installation Note {0} created").format(get_link_to_form("Installation Note", installation_note.name)))
 
 
 # def create_schedule_list(start_date, end_date, no_of_visit, doc):
@@ -940,7 +955,7 @@ def send_po_reminder():
 
 def stock_entry_reference_qty_update(doc, method):
 	if doc.docstatus == 1 and doc.purpose == "Material Transfer" and doc.add_to_transit:
-	  make_stock_receive_entry(doc)
+		make_stock_receive_entry(doc)
 
 	itemwise_count_dict = {}
 	if doc.stock_entry_type in ["Rejection In", "Rejection Out", "Outward DC", "GRN"]:
@@ -1106,3 +1121,13 @@ def validate_back_dated_entries(doc, method):
 		if (doc.doctype in ["Stock Entry", "Payment Entry", "Journal Entry", "Sales Invoice", "Delivery Note"]
 				and allow_to_edit_role not in frappe.get_roles() and getdate(doc.posting_date) < getdate(add_days(today(), -1))):
 				frappe.throw(_("User don't have permission to submit the back dated {0}, please contact to administrator").format(doc.doctype))
+
+def selco_maintenance_visit_validate(doc, method):
+	calc_total_mv(doc)
+
+def calc_total_mv(doc):
+	total = 0
+	for row in doc.purposes:
+		total += flt(row.selco_collected_amount)
+	doc.selco_total_component_charges_collected = total
+	doc.selco_total_amount = flt(doc.selco_total_component_charges_collected) + flt(doc.selco_service_charges_collected)

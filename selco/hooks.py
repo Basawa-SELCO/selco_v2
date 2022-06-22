@@ -72,6 +72,9 @@ doc_events = {
 		 "on_submit": "selco.selco.selco_customizations.selco_maintenance_schedule_submit",
 		 "on_cancel": "selco.selco.selco_customizations.selco_maintenance_schedule_cancel"
 	 },
+	 "Maintenance Visit":{
+		 "validate": "selco.selco.selco_customizations.selco_maintenance_visit_validate",
+	 },
 	 # "Address":{
 	 #      "before_insert": "selco.selco.selco_customizations.selco_address_before_insert"
 	 # },

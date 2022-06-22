@@ -46,8 +46,8 @@ def get_maintenance_visit():
 		data = frappe.get_list("Maintenance Visit",{'docstatus':['!=',2]})
 
 	data_list = []
-	parent_fields = ['name','selco_branch','customer','customer_name','address_display','selco_customer_contact_number','selco_customer_landline_number','selco_payment_entry_number','mntc_date','completion_status','maintenance_type','status','selco_total_component_charges_collected','selco_service_charges_collected','selco_total_amount','selco_cse_remarks','selco_cse_feedback','selco_signature_of_the_customer','selco_cse_signature','selco_signature_of_the_cse','selco_cse_location','selco_customer_remarks','selco_customer_feedback','customer_address','selco_customers_signature','naming_series','maintenance_schedule','maintenance_schedule_detail','mntc_time','company','customer_group','selco_taluk','selco_sales_person','selco_service_person']	
-	child_fields = ['name','idx','parent','parenttype','item_code','selco_item_group','item_name','selco_make','selco_quantity','selco_serial_number','selco_specs','selco_specs','service_person','description','work_done','selco_collected_amount']
+	parent_fields = ['name','selco_branch','customer','customer_name','address_display','selco_customer_contact_number','selco_customer_landline_number','selco_payment_entry_number','mntc_date','completion_status','maintenance_type','status','selco_total_component_charges_collected','selco_service_charges_collected','selco_total_amount','selco_cse_remarks','selco_cse_feedback','selco_signature_of_the_customer','selco_cse_signature','selco_signature_of_the_cse','selco_cse_location','selco_customer_remarks','selco_customer_feedback','customer_address','selco_customers_signature','naming_series','maintenance_schedule','maintenance_schedule_detail','mntc_time','company','customer_group','selco_taluk','selco_sales_person','selco_service_person','selco_customer_date','selco_cse_date']	
+	child_fields = ['name','idx','parent','parenttype','item_code','selco_item_group','item_name','selco_make','selco_quantity','selco_serial_number','selco_specs','service_person','description','work_done','selco_collected_amount']
  
 	for row in data:
 		parent_dict = frappe.db.get_value("Maintenance Visit",row.name,parent_fields, as_dict=True)
@@ -92,7 +92,7 @@ def update_maintenance_visit():
 
 def update_child_records(request_data,doc):
 	if request_data.get("purposes"):
-		child_field_list = ['selco_serial_number','description','work_done','selco_collected_amount']
+		child_field_list = ['selco_make','selco_specs','selco_serial_number','description','work_done','selco_collected_amount']
 		for row in request_data.get("purposes"):
 			if not row.get('name'):
 				frappe.throw('Define name in purposes to update child record.')
