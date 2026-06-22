@@ -1068,7 +1068,7 @@ def stock_entry_reference_qty_update(doc, method):
 
 		if item.reference_rej_in_or_rej_ot:
 			data = frappe.get_all('Stock Entry Detail',
-				fields = ["sum(qty) as qty"],
+				fields=[{"SUM": "qty", "as": "qty"}],
 				filters = {'docstatus': 1, 'reference_rej_in_or_rej_ot': item.reference_rej_in_or_rej_ot,
 					'item_code': item.item_code})
 
